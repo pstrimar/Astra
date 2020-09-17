@@ -18,7 +18,7 @@ public class Sound
 
     public bool loop = false;
 
-    private AudioSource source;
+    public AudioSource source;
 
     public void SetSource (AudioSource _source) 
     {
@@ -32,6 +32,13 @@ public class Sound
         source.volume = volume * (1 + Random.Range(-randomVolume/2f, randomVolume/2f));
         source.pitch = pitch * (1 + Random.Range(-randomPitch/2f, randomPitch/2f));
         source.Play();
+    }
+
+    public void PlayOneShot()
+    {
+        source.volume = volume * (1 + Random.Range(-randomVolume / 2f, randomVolume / 2f));
+        source.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
+        source.PlayOneShot(source.clip);
     }
 
     public void Stop()
@@ -81,6 +88,24 @@ public class AudioManager : MonoBehaviour
             if (sounds[i].name == _name)
             {
                 sounds[i].Play();
+                return;
+            }
+        }
+
+        // no sound with _name
+        Debug.LogWarning("AudioManage: Sound not found in list: " + _name);
+    }
+
+    public void PlaySoundOnce(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                if (!sounds[i].source.isPlaying)
+                {
+                    sounds[i].PlayOneShot();
+                }
                 return;
             }
         }

@@ -23,8 +23,7 @@ public class Obstacle : MonoBehaviour
             {
                 Vector2 direction = other.transform.position - transform.position;
 
-                rb.AddForce(direction.normalized * knockbackStrength, ForceMode2D.Impulse);
-                Debug.Log(direction);
+                player.AddKnockbackForce(knockbackStrength, direction);
             }
 
             if (onHitPlayer != null)

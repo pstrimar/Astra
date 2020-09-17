@@ -135,3 +135,10 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0
     loop: 0
+  - name: Thruster
+    clip: {fileID: 8300000, guid: ca76c938adf8c404494a13a90a984a8d, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0
+    loop: 0

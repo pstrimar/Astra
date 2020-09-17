@@ -12,6 +12,7 @@ public class PlayerMotor : MonoBehaviour
     private PlayerStats stats;
 
     [SerializeField] string landingSoundName = "LandingFootsteps";
+    [SerializeField] string thrusterSoundName = "Thruster";
 
     private Transform groundCheck;    // A position marking where to check if the player is grounded.
     const float groundedRadius = .2f; // Radius to determine if grounded
@@ -110,6 +111,11 @@ public class PlayerMotor : MonoBehaviour
             grounded = false;
             anim.SetBool("Ground", grounded);
             rb.AddForce(Vector2.up * _thrusterForce * Time.fixedDeltaTime);
+            audioManager.PlaySoundOnce(thrusterSoundName);
+        }
+        else
+        {
+            audioManager.StopSound(thrusterSoundName);
         }
 
         if (onLadder)
@@ -154,7 +160,7 @@ public class PlayerMotor : MonoBehaviour
         {
             grounded = true;
             anim.SetBool("Ground", grounded);
-            audioManager.PlaySound(landingSoundName);            
+            audioManager.PlaySound(landingSoundName);
         }
     }
 

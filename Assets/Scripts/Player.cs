@@ -158,6 +158,20 @@ public class Player : MonoBehaviour, ISaveable
         }
     }
 
+    public void AddKnockbackForce(float force, Vector2 direction)
+    {
+        StartCoroutine(DisableMovementAndApplyForce(force, direction));        
+    }
+
+    private IEnumerator DisableMovementAndApplyForce(float force, Vector2 direction)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        GetComponent<PlayerController>().enabled = false;
+        rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.5f);
+        GetComponent<PlayerController>().enabled = true;
+    }
+
     [System.Serializable]
     struct PlayerData
     {
