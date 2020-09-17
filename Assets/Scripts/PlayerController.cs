@@ -25,10 +25,8 @@ public class PlayerController : MonoBehaviour
         {
             motor.Use();
         }
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            motor.Action();
-        }        
+
+        motor.Action(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
     }
 
 

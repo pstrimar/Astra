@@ -1480,7 +1480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8297922732887768172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.657238, y: 0.6722767, z: -2.082561}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7644667977492089038}
@@ -2099,6 +2099,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3568013181555147258, guid: d657e54f422d1b043ab51dec28db2232,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: playerSave
+      objectReference: {fileID: 0}
     - target: {fileID: 3568013181653508672, guid: d657e54f422d1b043ab51dec28db2232,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2107,7 +2112,7 @@ PrefabInstance:
     - target: {fileID: 3568013181653508672, guid: d657e54f422d1b043ab51dec28db2232,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadFromButton
+      value: playerLoad
       objectReference: {fileID: 0}
     - target: {fileID: 3568013181653508672, guid: d657e54f422d1b043ab51dec28db2232,
         type: 3}
@@ -2348,12 +2353,12 @@ PrefabInstance:
     - target: {fileID: 3483215191265222729, guid: 1a42addb8e223814c9fe149aa89766db,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.27
+      value: -85.84
       objectReference: {fileID: 0}
     - target: {fileID: 3483215191265222729, guid: 1a42addb8e223814c9fe149aa89766db,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.68
+      value: 1.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a42addb8e223814c9fe149aa89766db, type: 3}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SavingWrapper : MonoBehaviour
 {
-    const string defaultSaveFile = "save";
+    const string defaultSaveFile = "autoSave";
+    const string playerSaveFile = "playerSave";
     [SerializeField] float fadeInTime = .2f;
 
     private void Awake()
@@ -14,7 +15,7 @@ public class SavingWrapper : MonoBehaviour
 
     IEnumerator LoadLastScene()
     {
-        yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+        yield return GetComponent<SavingSystem>().LoadLastScene(playerSaveFile);
         Fader fader = FindObjectOfType<Fader>();
         fader.FadeOutImmediate();
         yield return fader.FadeIn(fadeInTime);
@@ -24,11 +25,11 @@ public class SavingWrapper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            LoadFromButton();
+            playerLoad();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Save();
+            playerSave();
         }
         if (Input.GetKeyDown(KeyCode.Delete))
         {
@@ -36,23 +37,29 @@ public class SavingWrapper : MonoBehaviour
         }
     }
 
-    public void Load()
+    public void autoLoad()
     {
         GetComponent<SavingSystem>().Load(defaultSaveFile);
     }
 
-    public void LoadFromButton()
+    public void playerLoad()
     {
         StartCoroutine(LoadLastScene());
     }
 
-    public void Save()
+    public void autoSave()
     {
         GetComponent<SavingSystem>().Save(defaultSaveFile);
+    }
+
+    public void playerSave()
+    {
+        GetComponent<SavingSystem>().playerSave(playerSaveFile);
     }
 
     public void Delete()
     {
         GetComponent<SavingSystem>().Delete(defaultSaveFile);
+        GetComponent<SavingSystem>().Delete(playerSaveFile);
     }
 }

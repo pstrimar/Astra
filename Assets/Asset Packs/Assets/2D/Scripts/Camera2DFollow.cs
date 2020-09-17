@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets._2D
 {
-    public class Camera2DFollow : MonoBehaviour
+    public class Camera2DFollow : MonoBehaviour, ISaveable
     {
         public Transform target;
         public float damping = 1;
@@ -73,6 +73,21 @@ namespace UnityStandardAssets._2D
                 }
                 nextTimeToSearch = Time.time + 0.5f;
             }
+        }
+
+        public object CaptureState()
+        {
+            float[] position = new float[3];
+            position[0] = transform.position.x;
+            position[1] = transform.position.y;
+            position[2] = transform.position.z;
+            return position;
+        }
+
+        public void RestoreState(object state)
+        {
+            float[] position = (float[])state;
+            transform.position = new Vector3(position[0], position[1], position[2]);
         }
     }
 }

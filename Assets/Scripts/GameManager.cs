@@ -77,6 +77,22 @@ public class GameManager : MonoBehaviour, ISaveable
         }
     }
 
+    private void OnEnable()
+    {
+        if (gameOverUI.GetComponent<GameOverUI>() != null)
+        {
+            gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
+        }
+    }    
+
+    private void OnDisable()
+    {
+        if (gameOverUI.GetComponent<GameOverUI>() != null)
+        {
+            gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
+        }
+    }
+
     private void ToggleUpgradeMenu()
     {
         upgradeMenu.SetActive(!upgradeMenu.activeSelf);
@@ -84,6 +100,13 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             onToggleMenu(upgradeMenu.activeSelf);
         }        
+    }
+
+    private void HandleRetry()
+    {
+        _remainingLives = maxLives;
+
+        Crystals = startingCrystals;
     }
 
     public void EndGame()

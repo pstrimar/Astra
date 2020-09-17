@@ -20,9 +20,9 @@ public class PlayerMotor : MonoBehaviour
     private Rigidbody2D rb;
     private bool facingRight = true;  // For determining which way the player is currently facing.
 
-    Transform playerGraphics;           // Reference to the graphics so we can change direction
+    private Transform playerGraphics;           // Reference to the graphics so we can change direction
 
-    AudioManager audioManager;
+    private AudioManager audioManager;
 
     public event Action<float> onFuelUsed;
 
@@ -144,9 +144,9 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-    public void Action()
+    public void Action(bool act)
     {
-        anim.SetTrigger("Action");
+        anim.SetBool("Action", act);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

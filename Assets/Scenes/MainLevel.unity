@@ -712,6 +712,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike Block
       objectReference: {fileID: 0}
+    - target: {fileID: 1483133844654998288, guid: 6b52dcb5ebbc968479f14e25af95d46f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
         type: 3}
       propertyPath: m_Constraints
@@ -1073,8 +1078,8 @@ PlatformEffector2D:
   m_UseOneWayGrouping: 0
   m_SurfaceArc: 180
   m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
+  m_UseSideBounce: 1
+  m_SideArc: 0
 --- !u!1001 &691346021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1618,6 +1623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1006315055}
   - component: {fileID: 1006315054}
+  - component: {fileID: 1006315056}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1658,6 +1664,19 @@ Transform:
   m_Father: {fileID: 2142942483}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006315056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006315053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7f12fe5e4a27a44be94cc49fff25b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: b9e00a33-57d3-4a07-991e-845c8699951f
 --- !u!1 &1078749559
 GameObject:
   m_ObjectHideFlags: 0

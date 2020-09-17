@@ -45,19 +45,19 @@ public class Portal : MonoBehaviour
 
         yield return fader.FadeOut(fadeOutTime);
 
-        wrapper.Save();
+        wrapper.autoSave();
 
         yield return SceneManager.LoadSceneAsync(sceneToLoad);
 
         PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         newPlayerController.enabled = false;
 
-        wrapper.Load();
+        wrapper.autoLoad();
 
         Portal otherPortal = GetOtherPortal();
         UpdatePlayer(otherPortal);
 
-        wrapper.Save();
+        wrapper.autoSave();
 
         yield return new WaitForSeconds(fadeWaitTime);
         fader.FadeIn(fadeInTime);

@@ -44,6 +44,13 @@ public class SavingSystem : MonoBehaviour
         SaveFile(saveFile, state);
     }
 
+    public void playerSave(string saveFile)
+    {
+        Dictionary<string, object> state = LoadFile(saveFile);
+        CaptureStateWithLevel(state);
+        SaveFile(saveFile, state);
+    }
+
     public void Load(string saveFile)
     {
         RestoreState(LoadFile(saveFile));
@@ -80,6 +87,14 @@ public class SavingSystem : MonoBehaviour
     }
 
     private void CaptureState(Dictionary<string, object> state)
+    {
+        foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
+        {
+            state[saveable.GetUniqueIdentifier()] = saveable.CaptureState();
+        }
+    }
+
+    private void CaptureStateWithLevel(Dictionary<string, object> state)
     {
         foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
         {
