@@ -26,7 +26,7 @@ public class UpgradeMenu : MonoBehaviour
     void UpdateValues()
     {
         healthText.text = "Health: " + stats.maxHealth;
-        fuelText.text = "Fuel: " + stats.thrusterFuelAmount;
+        fuelText.text = "Fuel: " + stats.currentFuelAmount;
     }
 
     public void UpgradeHealth() 
@@ -53,12 +53,12 @@ public class UpgradeMenu : MonoBehaviour
             return;
         }
 
-        stats.thrusterFuelAmount *= fuelAmountMultiplier;
+        stats.currentFuelAmount *= fuelAmountMultiplier;
 
         GameManager.Crystals -= upgradeCost;
         AudioManager.Instance.PlaySound("Crystals");
 
         UpdateValues();
-        Debug.Log("thruster fuel amount: " + stats.thrusterFuelAmount);
+        Debug.Log("thruster fuel amount: " + stats.currentFuelAmount);
     }
 }

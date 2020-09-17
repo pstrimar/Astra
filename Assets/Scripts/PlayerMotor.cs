@@ -84,26 +84,25 @@ public class PlayerMotor : MonoBehaviour
         }
 
         Vector2 _thrusterForce = Vector2.zero;
-        if (thrustersOn && stats.thrusterFuelAmount > 0f)
+        if (thrustersOn && stats.currentFuelAmount > 0f)
         {
-            stats.thrusterFuelAmount -= stats.thrusterFuelBurnSpeed * Time.fixedDeltaTime;
+            stats.currentFuelAmount -= stats.thrusterFuelBurnSpeed * Time.fixedDeltaTime;
 
-            if (stats.thrusterFuelAmount >= 0.01f)
+            if (stats.currentFuelAmount >= 0.01f)
             {
                 _thrusterForce = Vector2.up * stats.thrusterForce;
             }
 
-            UseFuel(stats.thrusterFuelAmount);  
+            UseFuel(stats.currentFuelAmount);  
 
         }
         else
         {
-            stats.thrusterFuelAmount += stats.thrusterFuelRegenSpeed * Time.fixedDeltaTime;
+            stats.currentFuelAmount += stats.thrusterFuelRegenSpeed * Time.fixedDeltaTime;
 
-            UseFuel(stats.thrusterFuelAmount);
+            UseFuel(stats.currentFuelAmount);
         }
 
-        stats.thrusterFuelAmount = Mathf.Clamp(stats.thrusterFuelAmount, 0f, 1f);
         // If the player can use thrusters...
         if (_thrusterForce != Vector2.zero)
         {

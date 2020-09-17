@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour, ISaveable
 {
-    private int fallBoundary = -20;
+    private int fallBoundary = -10;
 
     [SerializeField] string deathSoundName = "DeathVoice";
     [SerializeField] string damageSoundName = "Grunt";
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, ISaveable
     {
         stats = PlayerStats.Instance;
         stats.currentHealth = stats.maxHealth;
+        stats.currentFuelAmount = stats.maxFuelAmount;
     }
 
     private void Start() 
@@ -37,8 +38,8 @@ public class Player : MonoBehaviour, ISaveable
         else 
         {
             statusIndicator.SetMaxHealth(stats.maxHealth);
-            statusIndicator.SetMaxFuel(stats.thrusterFuelAmount);
-        }        
+            statusIndicator.SetMaxFuel(stats.maxFuelAmount);
+        }
 
         audioManager = AudioManager.Instance;
         if (audioManager == null) 
@@ -172,7 +173,7 @@ public class Player : MonoBehaviour, ISaveable
 
         data.currentHealth = stats.currentHealth;
         data.maxHealth = stats.maxHealth;
-        data.fuel = stats.thrusterFuelAmount;
+        data.fuel = stats.currentFuelAmount;
         data.position = new float[2];
         data.position[0] = transform.position.x;
         data.position[1] = transform.position.y;
@@ -186,7 +187,7 @@ public class Player : MonoBehaviour, ISaveable
 
         stats.currentHealth = data.currentHealth;
         stats.maxHealth = data.maxHealth;
-        stats.thrusterFuelAmount = data.fuel;
+        stats.currentFuelAmount = data.fuel;
         transform.position = new Vector2(data.position[0], data.position[1]);        
     }
 }
