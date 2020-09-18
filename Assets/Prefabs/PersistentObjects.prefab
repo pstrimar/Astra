@@ -1099,8 +1099,8 @@ CanvasGroup:
   m_GameObject: {fileID: 436611616552524602}
   m_Enabled: 1
   m_Alpha: 0.3
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!222 &4071172267756085391
 CanvasRenderer:
@@ -2290,6 +2290,11 @@ PrefabInstance:
       propertyPath: upgradeMenu
       value: 
       objectReference: {fileID: 7842966911812335058}
+    - target: {fileID: 1059784761533371248, guid: 1a42addb8e223814c9fe149aa89766db,
+        type: 3}
+      propertyPath: UIOverlay
+      value: 
+      objectReference: {fileID: 862409699}
     - target: {fileID: 1059784761533371249, guid: 1a42addb8e223814c9fe149aa89766db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2349,16 +2354,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _GM
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483215191265222729, guid: 1a42addb8e223814c9fe149aa89766db,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -85.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483215191265222729, guid: 1a42addb8e223814c9fe149aa89766db,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a42addb8e223814c9fe149aa89766db, type: 3}

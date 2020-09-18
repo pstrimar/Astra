@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] string pressButtonSound = "ButtonPress";
 
     AudioManager audioManager;
+
+    public event Action onGameStart;
 
     private void Start() 
     {
@@ -19,7 +22,14 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (onGameStart != null)
+        {
+            onGameStart();
+        }
+
+        audioManager.StopAllSounds();
         audioManager.PlaySound(pressButtonSound);
+        audioManager.PlaySound("AboveGround");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

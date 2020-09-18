@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, ISaveable
     [SerializeField] CameraShake cameraShake;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] GameObject upgradeMenu;
+    [SerializeField] GameObject uiOverlay;
 
     public event Action<bool> onToggleMenu;
 
@@ -83,6 +84,11 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
         }
+        if (FindObjectOfType<MenuManager>() != null)
+        {
+            Debug.Log("menu manager found");
+            FindObjectOfType<MenuManager>().onGameStart += ToggleUIOverlay;
+        }
     }    
 
     private void OnDisable()
@@ -91,7 +97,11 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
         }
-    }
+        if (FindObjectOfType<MenuManager>() != null)
+        {
+            FindObjectOfType<MenuManager>().onGameStart -= ToggleUIOverlay;
+        }
+    }    
 
     private void ToggleUpgradeMenu()
     {
@@ -100,6 +110,12 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             onToggleMenu(upgradeMenu.activeSelf);
         }        
+    }
+
+    private void ToggleUIOverlay()
+    {
+        Debug.Log("toggling UI");
+        uiOverlay.SetActive(true);
     }
 
     private void HandleRetry()

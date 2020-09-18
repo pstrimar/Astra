@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Sound 
@@ -45,7 +46,6 @@ public class Sound
     {
         source.Stop();
     }
-
 }
 
 public class AudioManager : MonoBehaviour
@@ -67,18 +67,39 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
 
-    private void Start() 
-    {
         for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
             _go.transform.SetParent(this.transform);
-            sounds[i].SetSource( _go.AddComponent<AudioSource>());
+            sounds[i].SetSource(_go.AddComponent<AudioSource>());
         }
+        PlaySound("MenuMusic");
+    }
 
-        PlaySound("Music");
+    private void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("level " + level + " was loaded");
+        if (FindObjectOfType<Portal>() != null)
+        {
+            foreach (Portal portal in FindObjectsOfType<Portal>())
+            {
+                portal.onSceneLoaded -= PlaySceneMusic;
+                portal.onSceneLoaded += PlaySceneMusic;
+            }
+            PlaySceneMusic(level);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (FindObjectOfType<Portal>() != null)
+        {
+            foreach (Portal portal in FindObjectsOfType<Portal>())
+            {
+                portal.onSceneLoaded -= PlaySceneMusic;
+            }
+        }
     }
 
     public void PlaySound(string _name)
@@ -123,6 +144,46 @@ public class AudioManager : MonoBehaviour
                 sounds[i].Stop();
                 return;
             }
+        }
+    }
+
+    public void StopAllSounds()
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.Stop();
+        }
+    }
+
+    private void PlaySceneMusic(int scene)
+    {
+        Debug.Log("PlaySceneMusic was called.");
+        switch (scene)
+        {
+            case 0:
+                StopAllSounds();
+                PlaySound("MenuMusic");
+                break;
+            case 1:
+                StopAllSounds();
+                PlaySound("AboveGround");
+                break;
+            case 2:
+                StopAllSounds();
+                PlaySound("BasicCave");
+                break;
+            case 3:
+                StopAllSounds();
+                PlaySound("BasicCave");
+                break;
+            case 4:
+                StopAllSounds();
+                PlaySound("CrystalCave");
+                break;
+            default:
+                StopAllSounds();
+                PlaySound("MenuMusic");
+                break;
         }
     }
 }

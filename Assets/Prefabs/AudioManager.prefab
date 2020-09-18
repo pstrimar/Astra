@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3853193621325886981}
   - component: {fileID: 954659989140457446}
+  - component: {fileID: 5676759395640995369}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -51,13 +52,15 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
-  - name: Music
+    source: {fileID: 0}
+  - name: MenuMusic
     clip: {fileID: 8300000, guid: 673ed84c4a0ba0f47bd1388ec95ce951, type: 3}
     volume: 0.4
     pitch: 1
     randomVolume: 0
     randomPitch: 0
     loop: 1
+    source: {fileID: 0}
   - name: ButtonHover
     clip: {fileID: 8300000, guid: ef8b54c484dc0bb47a55c28e2b0ccf61, type: 3}
     volume: 0.55
@@ -65,6 +68,7 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0.1
     loop: 0
+    source: {fileID: 0}
   - name: ButtonPress
     clip: {fileID: 8300000, guid: d76fc98479fe0da478fc1e555887655d, type: 3}
     volume: 0.45
@@ -72,6 +76,7 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: DefaultShot
     clip: {fileID: 8300000, guid: 26cceac0103edfa43a6fca1ca9eaa2cb, type: 3}
     volume: 0.7
@@ -79,6 +84,7 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0.1
     loop: 0
+    source: {fileID: 0}
   - name: Explosion
     clip: {fileID: 8300000, guid: 47a760c426e10524c99eadaee7883c25, type: 3}
     volume: 0.7
@@ -86,6 +92,7 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0.1
     loop: 0
+    source: {fileID: 0}
   - name: Grunt
     clip: {fileID: 8300000, guid: e0ef76be4506cdf42ab8905a85781131, type: 3}
     volume: 0.4
@@ -93,6 +100,7 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: DeathVoice
     clip: {fileID: 8300000, guid: 045331bcb1a053e41a5fca9b4a4f54f2, type: 3}
     volume: 0.5
@@ -100,6 +108,7 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: Spawn
     clip: {fileID: 8300000, guid: 8048b701441ad4e49b7c8bc566ede9e0, type: 3}
     volume: 0.6
@@ -107,6 +116,7 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: GameOver
     clip: {fileID: 8300000, guid: 22c472055f208c0408cfc96a1d1f280e, type: 3}
     volume: 0.7
@@ -114,6 +124,7 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: LandingFootsteps
     clip: {fileID: 8300000, guid: 2fb591c9b8479284ab07205c8e3647dd, type: 3}
     volume: 0.5
@@ -121,6 +132,7 @@ MonoBehaviour:
     randomVolume: 0.2
     randomPitch: 0.1
     loop: 0
+    source: {fileID: 0}
   - name: NoCrystals
     clip: {fileID: 8300000, guid: fe906badf22e76048977f05535f9789c, type: 3}
     volume: 0.4
@@ -128,6 +140,7 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: Crystals
     clip: {fileID: 8300000, guid: d8a77ff5f9bf4f248bf6e3a503479b74, type: 3}
     volume: 0.4
@@ -135,6 +148,7 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
   - name: Thruster
     clip: {fileID: 8300000, guid: ca76c938adf8c404494a13a90a984a8d, type: 3}
     volume: 0.4
@@ -142,3 +156,41 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0
     loop: 0
+    source: {fileID: 0}
+  - name: AboveGround
+    clip: {fileID: 8300000, guid: f14e8bfdac498dd4f82766090b48e582, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: BasicCave
+    clip: {fileID: 8300000, guid: 517dbd5357d36724c9ff71219172b9f6, type: 3}
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: CrystalCave
+    clip: {fileID: 8300000, guid: c9031348bbca49344821727c334ae4ae, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+    source: {fileID: 0}
+--- !u!114 &5676759395640995369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8075102176732130663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7f12fe5e4a27a44be94cc49fff25b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 

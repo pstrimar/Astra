@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,8 @@ public class Portal : MonoBehaviour
     [SerializeField] float fadeOutTime = 2f;
     [SerializeField] float fadeInTime = 1f;
     [SerializeField] float fadeWaitTime = 0.5f;
+
+    public event Action<int> onSceneLoaded;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,6 +63,12 @@ public class Portal : MonoBehaviour
         wrapper.autoSave();
 
         yield return new WaitForSeconds(fadeWaitTime);
+
+        if (onSceneLoaded != null)
+        {
+            onSceneLoaded(sceneToLoad);
+        }
+
         fader.FadeIn(fadeInTime);
 
         newPlayerController.enabled = true;
