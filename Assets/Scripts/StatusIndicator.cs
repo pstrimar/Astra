@@ -7,7 +7,7 @@ public class StatusIndicator : MonoBehaviour
     [SerializeField] Slider fuelBarSlider;
     [SerializeField] Text healthText;
 
-    private PlayerStats stats;
+    public PlayerStats stats;
 
     private void Awake()
     {

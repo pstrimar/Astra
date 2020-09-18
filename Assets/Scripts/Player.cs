@@ -68,13 +68,6 @@ public class Player : MonoBehaviour, ISaveable
         {
             DialogueManager.Instance.onDialogue += HandleDialogue;
         }
-        if (FindObjectOfType<Obstacle>() !=null)
-        {
-            foreach (Obstacle obstacle in FindObjectsOfType<Obstacle>())
-            {
-                obstacle.onHitPlayer += SetInvincibility;
-            }
-        }
     }    
 
     private void OnDisable() 
@@ -87,22 +80,12 @@ public class Player : MonoBehaviour, ISaveable
         {
             DialogueManager.Instance.onDialogue -= HandleDialogue;
         }
-        if (FindObjectOfType<Obstacle>() != null)
-        {
-            foreach (Obstacle obstacle in FindObjectsOfType<Obstacle>())
-            {
-                obstacle.onHitPlayer -= SetInvincibility;
-            }
-        }
     }
 
     void RegenHealth() 
     {
         stats.currentHealth += 1;
-        if (onHealthChanged != null)
-        {
-            onHealthChanged(stats.currentHealth);
-        }
+        onHealthChanged?.Invoke(stats.currentHealth);
     }
 
     void HandleMenuToggle(bool active)
@@ -121,11 +104,6 @@ public class Player : MonoBehaviour, ISaveable
     {
         // Disables the PlayerController during dialogue and re-enables once complete
         GetComponent<PlayerController>().enabled = enabled;
-    }
-
-    private void SetInvincibility()
-    {
-        StartCoroutine(BecomeInvincible());
     }
 
     private IEnumerator BecomeInvincible()
@@ -148,14 +126,13 @@ public class Player : MonoBehaviour, ISaveable
         }
         else 
         {
+            StartCoroutine(BecomeInvincible());
+
             // Play damage sound
             audioManager.PlaySound(damageSoundName);
         }
 
-        if (onHealthChanged != null)
-        {
-            onHealthChanged(stats.currentHealth);
-        }
+        onHealthChanged?.Invoke(stats.currentHealth);
     }
 
     public void AddKnockbackForce(float force, Vector2 direction)

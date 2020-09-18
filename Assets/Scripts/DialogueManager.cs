@@ -37,6 +37,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log("Dialogue started");
         if (onDialogue != null)
         {
             // Disable any controller scripts

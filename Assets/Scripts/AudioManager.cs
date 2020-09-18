@@ -100,6 +100,7 @@ public class AudioManager : MonoBehaviour
                 portal.onSceneLoaded -= PlaySceneMusic;
             }
         }
+        StopAllSounds();
     }
 
     public void PlaySound(string _name)

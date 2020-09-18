@@ -25,11 +25,11 @@ public class SavingWrapper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            playerLoad();
+            PlayerLoad();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            playerSave();
+            PlayerSave();
         }
         if (Input.GetKeyDown(KeyCode.Delete))
         {
@@ -37,22 +37,22 @@ public class SavingWrapper : MonoBehaviour
         }
     }
 
-    public void autoLoad()
+    public void AutoLoad()
     {
         GetComponent<SavingSystem>().Load(defaultSaveFile);
     }
 
-    public void playerLoad()
+    public void PlayerLoad()
     {
         StartCoroutine(LoadLastScene());
     }
 
-    public void autoSave()
+    public void AutoSave()
     {
         GetComponent<SavingSystem>().Save(defaultSaveFile);
     }
 
-    public void playerSave()
+    public void PlayerSave()
     {
         GetComponent<SavingSystem>().playerSave(playerSaveFile);
     }

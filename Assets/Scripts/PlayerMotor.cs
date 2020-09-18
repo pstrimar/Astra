@@ -9,7 +9,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] float distance;                                    // Raycast distance
     public bool onLadder;
     private IUseable useable;
-    private PlayerStats stats;
+    public PlayerStats stats;
 
     [SerializeField] string landingSoundName = "LandingFootsteps";
     [SerializeField] string thrusterSoundName = "Thruster";
@@ -135,10 +135,7 @@ public class PlayerMotor : MonoBehaviour
 
     private void UseFuel(float thrusterFuelAmount)
     {
-        if (onFuelUsed != null)
-        {
-            onFuelUsed(thrusterFuelAmount);
-        }
+        onFuelUsed?.Invoke(thrusterFuelAmount);
     }
 
     public void Use()

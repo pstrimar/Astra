@@ -6,9 +6,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] int damage = 20;
-    [SerializeField] float knockbackStrength;
-
-    public event Action onHitPlayer;
+    [SerializeField] float knockbackStrength = 2f;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -18,18 +16,11 @@ public class Obstacle : MonoBehaviour
             player.DamagePlayer(damage);
 
             Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-
             if (rb != null)
             {
                 Vector2 direction = other.transform.position - transform.position;
-
                 player.AddKnockbackForce(knockbackStrength, direction);
-            }
-
-            if (onHitPlayer != null)
-            {
-                onHitPlayer();
-            }
+            }            
         }
     }
 }

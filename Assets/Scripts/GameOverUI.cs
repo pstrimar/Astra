@@ -33,10 +33,7 @@ public class GameOverUI : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        if (onRetry != null)
-        {
-            onRetry();
-        }
+        onRetry?.Invoke();
         gameObject.SetActive(false);
     }
 

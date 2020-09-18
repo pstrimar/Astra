@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/PlayerStats")]
 public class PlayerStats : SingletonScriptableObject<PlayerStats>

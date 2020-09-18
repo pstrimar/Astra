@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,42 +7,44 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] string hoverOverSound = "ButtonHover";
     [SerializeField] string pressButtonSound = "ButtonPress";
-
-    AudioManager audioManager;
-
-    public event Action onGameStart;
-
-    private void Start() 
-    {
-        audioManager = AudioManager.Instance;
-        if (audioManager == null) 
-        {
-            Debug.LogError("No AudioManager found!");
-        }
-    }
+    [SerializeField] float fadeOutTime = 2f;
+    [SerializeField] float fadeInTime = 2f;
+    [SerializeField] float fadeWaitTime = 1f;
 
     public void StartGame()
     {
-        if (onGameStart != null)
-        {
-            onGameStart();
-        }
+        AudioManager.Instance.PlaySound(pressButtonSound);
 
-        audioManager.StopAllSounds();
-        audioManager.PlaySound(pressButtonSound);
-        audioManager.PlaySound("AboveGround");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadFirstLevel());        
+    }
+
+    private IEnumerator LoadFirstLevel()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        Fader fader = FindObjectOfType<Fader>();
+
+        yield return fader.FadeOut(fadeOutTime);
+
+        SceneManager.LoadScene(1);
+
+        yield return new WaitForSeconds(fadeWaitTime);
+
+        fader = FindObjectOfType<Fader>();
+        fader.FadeIn(fadeInTime);
+        AudioManager.Instance.PlaySound("AboveGround");
+        Destroy(gameObject);
     }
 
     public void QuitGame() 
     {
-        audioManager.PlaySound(pressButtonSound);
+        AudioManager.Instance.PlaySound(pressButtonSound);
         Debug.Log("WE QUIT THE GAME!");
         Application.Quit();
     }
 
     public void OnMouseOver() 
     {
-        audioManager.PlaySound(hoverOverSound);
+        AudioManager.Instance.PlaySound(hoverOverSound);
     }
 }

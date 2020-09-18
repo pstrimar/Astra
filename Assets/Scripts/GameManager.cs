@@ -27,14 +27,11 @@ public class GameManager : MonoBehaviour, ISaveable
     [SerializeField] CameraShake cameraShake;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] GameObject upgradeMenu;
-    [SerializeField] GameObject uiOverlay;
 
     public event Action<bool> onToggleMenu;
 
     [SerializeField] int startingCrystals;
-    public static int Crystals;
-
-    private AudioManager audioManager;    
+    public static int Crystals;   
 
     private void Awake() 
     {
@@ -61,13 +58,6 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             Debug.LogError("No camera shake referenced in GameMaster.");
         }
-
-        audioManager = AudioManager.Instance;
-
-        if (audioManager == null)
-        {
-            Debug.LogError("FREAK OUT! No AudioManager found in the scene");
-        }        
     }
 
     private void Update() 
@@ -84,11 +74,6 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
         }
-        if (FindObjectOfType<MenuManager>() != null)
-        {
-            Debug.Log("menu manager found");
-            FindObjectOfType<MenuManager>().onGameStart += ToggleUIOverlay;
-        }
     }    
 
     private void OnDisable()
@@ -97,25 +82,12 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
         }
-        if (FindObjectOfType<MenuManager>() != null)
-        {
-            FindObjectOfType<MenuManager>().onGameStart -= ToggleUIOverlay;
-        }
     }    
 
     private void ToggleUpgradeMenu()
     {
         upgradeMenu.SetActive(!upgradeMenu.activeSelf);
-        if (onToggleMenu != null)
-        {
-            onToggleMenu(upgradeMenu.activeSelf);
-        }        
-    }
-
-    private void ToggleUIOverlay()
-    {
-        Debug.Log("toggling UI");
-        uiOverlay.SetActive(true);
+        onToggleMenu?.Invoke(upgradeMenu.activeSelf);
     }
 
     private void HandleRetry()
@@ -127,17 +99,17 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public void EndGame()
     {
-        audioManager.PlaySound(gameOverSoundName);
+        AudioManager.Instance.PlaySound(gameOverSoundName);
         Debug.Log("GAME OVER");
         gameOverUI.SetActive(true);
     }
 
     public IEnumerator _RespawnPlayer() 
     {
-        audioManager.PlaySound(respawnCountdownSoundName);
+        AudioManager.Instance.PlaySound(respawnCountdownSoundName);
         yield return new WaitForSeconds(spawnDelay);
 
-        audioManager.PlaySound(spawnSoundName);
+        AudioManager.Instance.PlaySound(spawnSoundName);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
         Destroy(clone.gameObject, 3f);
@@ -166,11 +138,11 @@ public class GameManager : MonoBehaviour, ISaveable
     public void _KillEnemy(Enemy _enemy) 
     {
         // Play sounds
-        audioManager.PlaySound(_enemy.deathSoundName);
+        AudioManager.Instance.PlaySound(_enemy.deathSoundName);
 
         // Gain some crystals
         Crystals += _enemy.moneyDrop;
-        audioManager.PlaySound("Money");
+        AudioManager.Instance.PlaySound("Money");
 
         // Add particles
         Transform _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
