@@ -5223,6 +5223,7 @@ MonoBehaviour:
   healthBarSlider: {fileID: 2614564761164041590}
   fuelBarSlider: {fileID: 2794207646897876608}
   healthText: {fileID: 3896175248784297524}
+  stats: {fileID: 0}
 --- !u!1 &3896175248760851444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5526,7 +5527,7 @@ MonoBehaviour:
     type: 3}
   Invincible: 0
   statusIndicator: {fileID: 3896175247283481665}
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 0def2e26b8424aa48a393b9a5c170fa2, type: 2}
 --- !u!114 &1715772825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5561,7 +5562,9 @@ MonoBehaviour:
     m_Bits: 2048
   distance: 0
   onLadder: 0
+  stats: {fileID: 0}
   landingSoundName: LandingFootsteps
+  thrusterSoundName: Thruster
 --- !u!114 &41278019
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class Tiling : MonoBehaviour
 
     [SerializeField] bool reverseScale = false;     // Used if the object is not tileable
 
-    private float spriteWidth = 0f;                 // The width of our element
+    private float repeatWidth = 0f;                 // The width of our element
+    private float centerPos = 0f;                   // The center position of our element
     private Camera cam;
     private Transform myTransform;
 
@@ -25,8 +26,8 @@ public class Tiling : MonoBehaviour
 
     void Start()
     {
-        SpriteRenderer sRenderer = GetComponent<SpriteRenderer>();
-        spriteWidth = sRenderer.sprite.bounds.size.x;
+        repeatWidth = GetComponent<BoxCollider2D>().bounds.size.x;
+        centerPos = GetComponent<BoxCollider2D>().bounds.center.x;
     }
 
     void Update()
@@ -34,12 +35,12 @@ public class Tiling : MonoBehaviour
         // Does it still need buddies? If not, do nothing
         if (hasALeftBuddy == false || hasARightBuddy == false)
         {
-            // Calculate the cameras extend (half the width) of what the camera can see in world coordinates
-            float camHorizontalExtend = cam.orthographicSize * Screen.width/Screen.height;
+            // Calculate half the width of what the camera can see in world coordinates
+            float camHalfWidth = cam.orthographicSize * Screen.width/Screen.height;
 
-            // Calculate the x position where the camera can see the edge of the sprite (element)
-            float edgeVisiblePositionRight = (myTransform.position.x + spriteWidth / 2) - camHorizontalExtend;
-            float edgeVisiblePositionLeft = (myTransform.position.x - spriteWidth / 2) + camHorizontalExtend;
+            // Calculate the x position where the camera can see the edge of the element
+            float edgeVisiblePositionRight = (centerPos + repeatWidth / 2) - camHalfWidth;
+            float edgeVisiblePositionLeft = (centerPos - repeatWidth / 2) + camHalfWidth;
 
             // Checking if we can see the edge of the element and then calling MakeNewBuddy if we can
             if (cam.transform.position.x >= edgeVisiblePositionRight - offsetX && !hasARightBuddy) 
@@ -57,9 +58,9 @@ public class Tiling : MonoBehaviour
 
     // A function that creates a buddy on the side required
     void MakeNewBuddy(int rightOrLeft) 
-    {
+    {               
         // Calculating the new position for our new buddy
-        Vector3 newPosition = new Vector3(myTransform.position.x + spriteWidth * rightOrLeft, myTransform.position.y, myTransform.position.z);
+        Vector3 newPosition = new Vector3(myTransform.position.x + repeatWidth * rightOrLeft, myTransform.position.y, myTransform.position.z);
         // Instantiating our new buddy and storing him in a variable
         Transform newBuddy = Instantiate(myTransform, newPosition, myTransform.rotation) as Transform;
 

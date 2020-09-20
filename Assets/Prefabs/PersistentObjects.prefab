@@ -1833,6 +1833,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 862409703}
     m_Modifications:
+    - target: {fileID: 3874661147936215804, guid: 778c178b621274f439cf9892c96e196a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 151
+      objectReference: {fileID: 0}
     - target: {fileID: 3874661148877204267, guid: 778c178b621274f439cf9892c96e196a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1942,6 +1947,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874661148877204268, guid: 778c178b621274f439cf9892c96e196a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874661149520034307, guid: 778c178b621274f439cf9892c96e196a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874661149790671120, guid: 778c178b621274f439cf9892c96e196a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 778c178b621274f439cf9892c96e196a, type: 3}

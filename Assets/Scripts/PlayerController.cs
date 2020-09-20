@@ -26,11 +26,6 @@ public class PlayerController : MonoBehaviour
             motor.Use();
         }
 
-        if (Input.GetKeyDown("f"))
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-5, 5), ForceMode2D.Impulse);
-        }
-
         motor.Action(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
     }
 
