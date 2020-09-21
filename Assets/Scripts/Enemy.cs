@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     [Header("Optional: ")]
     [SerializeField] StatusIndicator statusIndicator;    
 
-    private void Start() 
+    private void Awake() 
     {
         stats.Init();
         
@@ -78,16 +78,6 @@ public class Enemy : MonoBehaviour
         if (statusIndicator != null)
         {
             //statusIndicator.UpdateHealth(stats.currentHealth, stats.maxHealth);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) 
-    {
-        Player player = other.collider.GetComponent<Player>();
-        if (player != null) 
-        {
-            player.DamagePlayer(stats.damage);
-            DamageEnemy(999999);
         }
     }
 }

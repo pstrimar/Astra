@@ -1,151 +1,219 @@
 ﻿using UnityEngine;
-using Pathfinding;
-using System;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Seeker))]
 public class EnemyAI : MonoBehaviour
 {
-    // What to chase
-    [SerializeField] Transform target;
+    private enum State
+    {
+        Patrolling,
+        Attacking,
+        Knockback,
+        Dead
+    }
 
-    // How many times each second we will update our path
-    [SerializeField] float updateRate = 2f;
+    public Enemy.EnemyStats stats;
 
+    [SerializeField] Transform groundCheck, wallCheck;
+    [SerializeField] LayerMask whatIsGround;
+    [SerializeField] float groundCheckDistance, wallCheckDistance, movementSpeed;
 
-    // Caching
-    private Seeker seeker;
+    private State currentState;
+    private bool groundDetected, wallDetected;
+    private Vector2 movement;
+    private int facingDirection = 1;
+    private int damageDirection;
+    private Transform enemyGraphics;
     private Rigidbody2D rb;
+    private Animator anim;
 
-    // The calculated path
-    public Path path;
-
-    // The AI's speed per second
-    [SerializeField]
-    float speed = 300f;
-    [SerializeField]
-    ForceMode2D fMode;
-    
-    [HideInInspector]
-    public bool pathIsEnded = false;
-
-    // The max distance from the AI to a wayupoint for it to continue to the next waypoint
-    [SerializeField] float nextWaypointDistance = 3f;
-
-    // The waypoint we are currently moving towards
-    private int currentWaypoint = 0;
-
-    [SerializeField] bool searchingForPlayer = false;
-
-    void Start()
+    private void Start()
     {
-        seeker = GetComponent<Seeker>();
+        enemyGraphics = transform.Find("Graphics");
         rb = GetComponent<Rigidbody2D>();
-
-        if (target == null) 
-        {
-            if (!searchingForPlayer)
-            {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            return;
-        }
-
-        // Start a new path to the target position, return the result to the OnPathComplete method
-        seeker.StartPath(transform.position, target.position, OnPathComplete);
-
-        StartCoroutine(UpdatePath());
+        stats = GetComponent<Enemy>().stats;
+        anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        if (target == null) 
+        switch (currentState)
         {
-            if (!searchingForPlayer)
-            {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            return;
-        }
-
-        //TODO: Always look at player?
-
-        if (path == null) return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            if (pathIsEnded) return;
-
-            //Debug.Log("End of path reached.");
-            pathIsEnded = true;
-            return; 
-        }
-        
-        pathIsEnded = false;
-
-        // Direction to the next waypoint
-        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-        dir *= speed * Time.fixedDeltaTime;
-
-        // Move the AI
-        rb.AddForce(dir, fMode);
-
-        float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
-
-        if (dist < nextWaypointDistance) 
-        {
-            currentWaypoint++;
-            return;
+            case State.Patrolling:
+                UpdatePatrollingState();
+                break;
+            case State.Attacking:
+                UpdateAttackingState();
+                break;
+            case State.Knockback:
+                UpdateKnockbackState();
+                break;
+            case State.Dead:
+                UpdateDeadState();
+                break;
         }
     }
 
-    private IEnumerator SearchForPlayer()
+    #region Patrolling State
+    private void EnterPatrollingState()
     {
-        GameObject sResult = GameObject.FindWithTag("Player");
-        if (sResult == null) 
-        {
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(SearchForPlayer());
-        }
-        else 
-        {
-            target = sResult.transform;
-            searchingForPlayer = false;
-            StartCoroutine(UpdatePath());
-            yield return false;
-        }
+
     }
 
-    private IEnumerator UpdatePath()
+    private void UpdatePatrollingState()
     {
-        if (target == null) 
+        groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, whatIsGround);
+
+        if (!groundDetected || wallDetected)
         {
-            if (!searchingForPlayer)
-            {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            yield return false;
+            Flip();
         }
         else
         {
-            seeker.StartPath(transform.position, target.position, OnPathComplete);
-
-            yield return new WaitForSeconds(1 / updateRate);
-            StartCoroutine(UpdatePath());
-        }        
-    }
-
-    public void OnPathComplete(Path p)
-    {
-        //Debug.Log("We got a path. Did it have an error? " + p.error);
-        if (!p.error) 
-        {
-            path = p;
-            currentWaypoint = 0;
+            movement.Set(movementSpeed * facingDirection, rb.velocity.y);
+            rb.velocity = movement;
+            anim.SetFloat("hSpeed", movementSpeed);
         }
     }
+
+    private void ExitPatrollingState()
+    {
+
+    }
+
+    #endregion
+
+    #region Attacking State
+
+    private void EnterAttackingState()
+    {
+
+    }
+
+    private void UpdateAttackingState()
+    {
+
+    }
+
+    private void ExitAttackingState()
+    {
+
+    }
+    #endregion
+
+    #region Knockback State
+
+    private void EnterKnockbackState()
+    {
+        anim.SetBool("Knockback", true);
+    }
+
+    private void UpdateKnockbackState()
+    {
+        // TODO
+    }
+
+    private void ExitKnockbackState()
+    {
+        anim.SetBool("Knockback", false);
+    }
+    #endregion
+
+    #region Dead State
+
+    private void EnterDeadState()
+    {
+        anim.SetBool("Dead", true);
+    }
+
+    private void UpdateDeadState()
+    {
+
+    }
+
+    private void ExitDeadState()
+    {
+
+    }
+    #endregion
+
+    #region Other Functions
+
+    private void Damage(int damage, float xPos)
+    {
+        stats.currentHealth -= damage;
+
+        if (xPos > enemyGraphics.position.x)
+        {
+            damageDirection = -1;
+        }
+        else
+        {
+            damageDirection = 1;
+        }
+
+        // Hit particle
+
+        if (stats.currentHealth > 0)
+        {
+            SwitchState(State.Knockback);
+        }
+        else if (stats.currentHealth <= 0)
+        {
+            SwitchState(State.Dead);
+        }
+    }
+
+    private void SwitchState(State state)
+    {
+        switch (currentState)
+        {
+            case State.Patrolling:
+                ExitPatrollingState();
+                break;
+            case State.Attacking:
+                ExitAttackingState();
+                break;
+            case State.Knockback:
+                ExitKnockbackState();
+                break;
+            case State.Dead:
+                ExitDeadState();
+                break;
+        }
+
+        switch (state)
+        {
+            case State.Patrolling:
+                EnterPatrollingState();
+                break;
+            case State.Attacking:
+                EnterAttackingState();
+                break;
+            case State.Knockback:
+                EnterKnockbackState();
+                break;
+            case State.Dead:
+                EnterDeadState();
+                break;
+        }
+
+        currentState = state;
+    }
+
+    private void Flip()
+    {
+        facingDirection *= -1;
+
+        Vector3 theScale = enemyGraphics.localScale;
+        theScale.x *= -1;
+        enemyGraphics.localScale = theScale;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+    }
+    #endregion
 }
