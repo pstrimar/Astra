@@ -137,7 +137,8 @@ public class Player : MonoBehaviour, ISaveable
 
     public void AddKnockbackForce(float force, Vector2 direction)
     {
-        StartCoroutine(DisableMovementAndApplyForce(force, direction));        
+        StartCoroutine(DisableMovementAndApplyForce(force, direction));
+        GetComponent<Flicker>().startBlinking = true;
     }
 
     private IEnumerator DisableMovementAndApplyForce(float force, Vector2 direction)

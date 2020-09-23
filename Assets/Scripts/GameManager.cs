@@ -140,10 +140,6 @@ public class GameManager : MonoBehaviour, ISaveable
         // Play sounds
         AudioManager.Instance.PlaySound(_enemy.deathSoundName);
 
-        // Gain some crystals
-        Crystals += _enemy.moneyDrop;
-        AudioManager.Instance.PlaySound("Money");
-
         // Add particles
         Transform _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
         Destroy(_clone.gameObject, 5f);

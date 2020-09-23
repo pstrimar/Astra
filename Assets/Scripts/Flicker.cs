@@ -18,14 +18,6 @@ public class Flicker : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            startBlinking = true;
-        }
-    }
-
     private void SpriteBlinkingEffect()
     {
         spriteBlinkingTotalTimer += Time.deltaTime;

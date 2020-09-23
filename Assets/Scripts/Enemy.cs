@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAI))]
 public class Enemy : MonoBehaviour
 {
     [System.Serializable]
     public class EnemyStats 
     {
-        public int maxHealth = 100;
+        [SerializeField] int maxHealth = 100;
         private int _currentHealth;
         public int damage = 40;
+        public float walkSpeed = 3f;
+        public float runSpeed = 15f;
+        public float aggroRange = 15f;
+        public float attackRange = 2f;
+        public float knockbackStrength = 2f;
 
         public int currentHealth
         {
@@ -27,12 +32,22 @@ public class Enemy : MonoBehaviour
     public EnemyStats stats = new EnemyStats();
 
     public Transform deathParticles;
+
+    //What to chase
+    public Transform target;
+    public Transform groundCheck;
+    public Transform wallCheck;
+    [SerializeField] bool searchingForPlayer = false;
+
+    public bool isFlipped = false;
     public float shakeAmount = 0.1f;
     public float shakeLength = 0.1f;
 
     public string deathSoundName = "Explosion";
 
-    public int moneyDrop = 10;
+    public int facingDirection = 1;
+
+    public event Action<Transform> onPlayerFound;
 
     [Header("Optional: ")]
     [SerializeField] StatusIndicator statusIndicator;    
@@ -52,9 +67,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnEnable() 
+    private void Start()
     {
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
+
+        if (target == null)
+        {
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchForPlayer());
+            }
+            return;
+        }
+    }
+
+    private void Update()
+    {
+        if (target == null)
+        {
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchForPlayer());
+            }
+            return;
+        }        
     }
 
     private void OnDisable() 
@@ -64,7 +102,7 @@ public class Enemy : MonoBehaviour
 
     void OnUpgradeMenuToggle(bool active)
     {
-        GetComponent<EnemyAI>().enabled = !active;        
+        // TODO: disable enemy behaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
@@ -79,5 +117,66 @@ public class Enemy : MonoBehaviour
         {
             //statusIndicator.UpdateHealth(stats.currentHealth, stats.maxHealth);
         }
+    }
+
+    public void Attack()
+    {
+        Player player = target.GetComponent<Player>();
+
+        if (player != null && !player.Invincible)
+        {
+            Vector2 direction = player.transform.position - transform.position;
+            player.AddKnockbackForce(stats.knockbackStrength, direction);
+            player.DamagePlayer(stats.damage);
+        }
+    }
+
+    private IEnumerator SearchForPlayer()
+    {
+        GameObject sResult = GameObject.FindWithTag("Player");
+        if (sResult == null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(SearchForPlayer());
+        }
+        else
+        {
+            target = sResult.transform;
+            
+            searchingForPlayer = false;
+            onPlayerFound?.Invoke(target);
+            yield return false;            
+        }
+    }
+
+    public void LookAtPlayer()
+    {
+        if (target == null) return;
+
+        Vector2 flipped = transform.localScale;
+        flipped.x *= -1;
+
+        if (transform.position.x > target.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            isFlipped = true;
+            facingDirection *= -1;
+        }
+        else if (transform.position.x < target.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            isFlipped = false;
+            facingDirection *= -1;
+        }
+    }
+
+    public void Flip()
+    {
+        facingDirection *= -1;
+        isFlipped = !isFlipped;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
