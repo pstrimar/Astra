@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1923722461
 Transform:
   m_ObjectHideFlags: 0
@@ -4709,7 +4709,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6211c72099a43b44cad1270ff67a5467, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -5026,7 +5026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3896175247105070489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.368, z: 0}
   m_LocalScale: {x: 0.56448287, y: 0.5644837, z: 1}
   m_Children: []
   m_Father: {fileID: 3896175246835059672}
@@ -5273,7 +5273,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5291,8 +5291,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 748583343
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7147553b1e72eec449c5ace4f9f4d13a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5459,9 +5459,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.45}
+  m_Offset: {x: 0, y: -0.37}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.25
 --- !u!50 &3896175248830569190
 Rigidbody2D:
   serializedVersion: 4
@@ -5496,7 +5496,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.041428566, y: 0.13355303}
+  m_Offset: {x: -0.022001266, y: 0.21213484}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5507,7 +5507,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4893651, y: 0.82736874}
+  m_Size: {x: 0.5627556, y: 0.6702051}
   m_EdgeRadius: 0
 --- !u!114 &3896175248830569187
 MonoBehaviour:
@@ -5556,15 +5556,21 @@ MonoBehaviour:
   airControl: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 13827
+    m_Bits: 13312
+  groundCheck: {fileID: 3896175247105070488}
+  groundCheckRadius: 0.3
   whatIsLadder:
     serializedVersion: 2
     m_Bits: 2048
   distance: 0
-  onLadder: 0
-  stats: {fileID: 0}
+  slopeCheckDistance: 0.5
+  maxSlopeAngle: 50
+  noFriction: {fileID: 6200000, guid: c46aafbc32c7174499fafb6797f09dd6, type: 2}
+  fullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
   landingSoundName: LandingFootsteps
   thrusterSoundName: Thruster
+  onLadder: 0
+  stats: {fileID: 0}
 --- !u!114 &41278019
 MonoBehaviour:
   m_ObjectHideFlags: 0

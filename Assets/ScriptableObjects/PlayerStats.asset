@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth: 100
+  maxFuelAmount: 1
   crystals: 0
   healthRegenRate: 2
-  movementSpeed: 10
+  movementSpeed: 6
   climbSpeed: 6
   thrusterForce: 500
   thrusterFuelBurnSpeed: 1
   thrusterFuelRegenSpeed: 0.3
-  thrusterFuelAmount: 1
