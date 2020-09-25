@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Player player = target.GetComponent<Player>();
+        PlayerOld player = target.GetComponent<PlayerOld>();
 
         if (player != null && !player.Invincible)
         {

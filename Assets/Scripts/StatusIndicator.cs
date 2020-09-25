@@ -7,17 +7,17 @@ public class StatusIndicator : MonoBehaviour
     [SerializeField] Slider fuelBarSlider;
     [SerializeField] Text healthText;
 
-    public PlayerStats stats;
+    public PlayerData stats;
 
     private void Awake()
     {
-        stats = PlayerStats.Instance;
+        stats = PlayerData.Instance;
     }
 
     private void OnEnable()
     {
         PlayerMotor motor = FindObjectOfType<PlayerMotor>();
-        Player player = FindObjectOfType<Player>();
+        PlayerOld player = FindObjectOfType<PlayerOld>();
         if (motor != null)
         {
             motor.onFuelUsed += UpdateFuel;
@@ -31,7 +31,7 @@ public class StatusIndicator : MonoBehaviour
     private void OnDisable()
     {
         PlayerMotor motor = FindObjectOfType<PlayerMotor>();
-        Player player = FindObjectOfType<Player>();
+        PlayerOld player = FindObjectOfType<PlayerOld>();
         if (motor != null)
         {
             motor.onFuelUsed -= UpdateFuel;

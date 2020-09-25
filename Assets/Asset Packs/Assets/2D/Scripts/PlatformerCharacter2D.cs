@@ -89,7 +89,7 @@ namespace UnityStandardAssets._2D
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*PlayerStats.Instance.movementSpeed, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = new Vector2(move*PlayerData.Instance.movementVelocity, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
@@ -115,7 +115,7 @@ namespace UnityStandardAssets._2D
 
             if (onLadder)
             {
-                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, climb * PlayerStats.Instance.climbSpeed);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, climb * PlayerData.Instance.climbSpeed);
                 m_Rigidbody2D.gravityScale = 0;
                 m_Anim.SetBool("Climb", true);
                 m_Anim.speed = Mathf.Abs(climb);

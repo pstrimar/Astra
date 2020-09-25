@@ -40,7 +40,7 @@ public class Portal : MonoBehaviour
         Fader fader = FindObjectOfType<Fader>();
         SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
 
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        PlayerOld player = GameObject.FindWithTag("Player").GetComponent<PlayerOld>();
         PlayerController playerController = player.GetComponent<PlayerController>();
         player.enabled = false;
         player.GetComponent<Rigidbody2D>().isKinematic = true;

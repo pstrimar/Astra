@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.U) && !PlayerStats.Instance.isDead)
+        if (Input.GetKeyDown(KeyCode.U) && !PlayerData.Instance.isDead)
         {
             ToggleUpgradeMenu();
         }
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour, ISaveable
         Destroy(clone.gameObject, 3f);
     }
 
-    public static void KillPlayer(Player player) 
+    public static void KillPlayer(PlayerOld player) 
     {
         Instantiate(player.deathParticles, player.transform.position, Quaternion.identity);
         Destroy(player.gameObject);

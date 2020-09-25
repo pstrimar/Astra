@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b776976cf970d41bd2d266cd30f770, type: 3}
-  m_Name: PlayerStats
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
+  movementVelocity: 6
+  thrusterForce: 400
+  thrusterFuelBurnSpeed: 1
+  thrusterFuelRegenSpeed: 0.3
+  groundCheckRadius: 0.3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 13312
   maxHealth: 100
   maxFuelAmount: 1
   crystals: 0
   healthRegenRate: 2
-  movementSpeed: 6
   climbSpeed: 6
-  thrusterForce: 500
-  thrusterFuelBurnSpeed: 1
-  thrusterFuelRegenSpeed: 0.3

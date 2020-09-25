@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
@@ -19,7 +18,7 @@ public class PlayerMotor : MonoBehaviour
 
     public bool onLadder;
     public event Action<float> onFuelUsed;
-    public PlayerStats stats;
+    public PlayerData stats;
 
     private float slopeSideAngle;
     private float slopeDownAngleOld;
@@ -54,7 +53,7 @@ public class PlayerMotor : MonoBehaviour
             Debug.LogError("There is no 'Graphics' object as a child of the player");
         }
 
-        stats = PlayerStats.Instance;
+        stats = PlayerData.Instance;
     }
 
     private void Start()
@@ -141,7 +140,7 @@ public class PlayerMotor : MonoBehaviour
 
         if (onLadder)
         {
-            rb.velocity = new Vector2(rb.velocity.x, climb * PlayerStats.Instance.climbSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, climb * PlayerData.Instance.climbSpeed);
             rb.gravityScale = 0;
             isClimbing = true;
             anim.speed = Mathf.Abs(climb);
@@ -158,16 +157,16 @@ public class PlayerMotor : MonoBehaviour
     {
         if (isGrounded && !isOnSlope && !thrustersOn)
         {
-            rb.velocity = new Vector2(move * PlayerStats.Instance.movementSpeed, 0f);
+            rb.velocity = new Vector2(move * PlayerData.Instance.movementVelocity, 0f);
         }
         else if (isGrounded && isOnSlope && !thrustersOn && canWalkOnSlope)
         {
-            rb.velocity = new Vector2(move * PlayerStats.Instance.movementSpeed * -slopeNormalPerp.x, move * PlayerStats.Instance.movementSpeed * -slopeNormalPerp.y);
+            rb.velocity = new Vector2(move * PlayerData.Instance.movementVelocity * -slopeNormalPerp.x, move * PlayerData.Instance.movementVelocity * -slopeNormalPerp.y);
         }
         else if (!isGrounded)
         {
             isWalking = false;
-            rb.velocity = new Vector2(move * PlayerStats.Instance.movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(move * PlayerData.Instance.movementVelocity, rb.velocity.y);
         }
 
         if (isGrounded && Mathf.Abs(move) > Mathf.Epsilon)

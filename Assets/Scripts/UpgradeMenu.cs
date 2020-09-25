@@ -15,11 +15,11 @@ public class UpgradeMenu : MonoBehaviour
 
     [SerializeField] int upgradeCost = 50;
 
-    private PlayerStats stats;
+    private PlayerData stats;
 
     private void OnEnable() 
     {
-        stats = PlayerStats.Instance;
+        stats = PlayerData.Instance;
         UpdateValues();
     }
 

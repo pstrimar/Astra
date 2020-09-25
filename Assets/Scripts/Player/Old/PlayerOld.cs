@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(PlayerController))]
-public class Player : MonoBehaviour, ISaveable
+public class PlayerOld : MonoBehaviour, ISaveable
 {
     private int fallBoundary = -10;
 
@@ -19,12 +19,12 @@ public class Player : MonoBehaviour, ISaveable
     [SerializeField] StatusIndicator statusIndicator;
 
     [Header("Static Data")]
-    public PlayerStats stats;
+    public global::PlayerData stats;
     public event Action<int> onHealthChanged;
 
     private void Awake()
     {
-        stats = PlayerStats.Instance;
+        stats = global::PlayerData.Instance;
         stats.currentHealth = stats.maxHealth;
         stats.currentFuelAmount = stats.maxFuelAmount;
     }
