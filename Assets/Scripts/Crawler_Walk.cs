@@ -17,10 +17,10 @@ public class Crawler_Walk : StateMachineBehaviour
 
     private void OnDisable()
     {
-        if (enemy != null)
-        {
-            enemy.onPlayerFound -= HandlePlayerFound;
-        }
+        //if (enemy != null)
+        //{
+        //    enemy.onPlayerFound -= HandlePlayerFound;
+        //}
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -31,7 +31,7 @@ public class Crawler_Walk : StateMachineBehaviour
         player = enemy.target;
         stats = enemy.stats;
 
-        enemy.onPlayerFound += HandlePlayerFound;
+        //enemy.onPlayerFound += HandlePlayerFound;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

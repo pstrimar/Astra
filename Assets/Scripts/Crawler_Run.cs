@@ -7,13 +7,13 @@ public class Crawler_Run : StateMachineBehaviour
     Enemy enemy;
     Enemy.EnemyStats stats;
 
-    private void OnDisable()
-    {
-        if (enemy != null)
-        {
-            enemy.onPlayerFound -= HandlePlayerFound;
-        }
-    }
+    //private void OnDisable()
+    //{
+    //    if (enemy != null)
+    //    {
+    //        enemy.onPlayerFound -= HandlePlayerFound;
+    //    }
+    //}
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,7 +23,7 @@ public class Crawler_Run : StateMachineBehaviour
         player = enemy.target;
         stats = enemy.stats;
 
-        enemy.onPlayerFound += HandlePlayerFound;
+        //enemy.onPlayerFound += HandlePlayerFound;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -31,7 +31,7 @@ public class Crawler_Run : StateMachineBehaviour
     {
         enemy.LookAtPlayer();
 
-        if (player == null || Vector2.Distance(player.position, rb.position) > stats.aggroRange)
+        if (Vector2.Distance(player.position, rb.position) > stats.aggroRange || !player.gameObject.activeSelf)
         { 
             animator.SetFloat("hSpeed", stats.walkSpeed);
             return;

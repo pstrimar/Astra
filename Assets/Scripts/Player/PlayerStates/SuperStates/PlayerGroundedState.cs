@@ -8,6 +8,8 @@ public class PlayerGroundedState : PlayerState
 
     private bool jumpInput;
 
+    private bool isGrounded;
+
     public PlayerGroundedState(Player playerMotor, PlayerStateMachine stateMachine, string animBoolName) : base(playerMotor, stateMachine, animBoolName)
     {
     }
@@ -15,11 +17,14 @@ public class PlayerGroundedState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
+
+        isGrounded = player.CheckIfGrounded();
+        player.SlopeCheck(xInput);
     }
 
     public override void Enter()
     {
-        base.Enter();
+        base.Enter();        
     }
 
     public override void Exit()
@@ -36,6 +41,8 @@ public class PlayerGroundedState : PlayerState
 
         if (jumpInput)
             stateMachine.ChangeState(player.ThrustState);
+        else if (!isGrounded)
+            stateMachine.ChangeState(player.InAirState);
     }
 
     public override void PhysicsUpdate()

@@ -2157,7 +2157,7 @@ PrefabInstance:
     - target: {fileID: 3568013182613385466, guid: d657e54f422d1b043ab51dec28db2232,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0016479492
+      value: -0.0015869141
       objectReference: {fileID: 0}
     - target: {fileID: 3568013182613385466, guid: d657e54f422d1b043ab51dec28db2232,
         type: 3}
@@ -2435,6 +2435,12 @@ PrefabInstance:
       propertyPath: pressUforUpgradeText
       value: 
       objectReference: {fileID: 1403401589}
+    - target: {fileID: 1059784761533371248, guid: 1a42addb8e223814c9fe149aa89766db,
+        type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+        type: 3}
     - target: {fileID: 1059784761533371249, guid: 1a42addb8e223814c9fe149aa89766db,
         type: 3}
       propertyPath: m_LocalPosition.x

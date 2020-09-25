@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        PlayerOld player = other.collider.GetComponent<PlayerOld>();
+        Player player = other.collider.GetComponent<Player>();
         if (player != null && !player.Invincible)
         {
             player.DamagePlayer(damage);

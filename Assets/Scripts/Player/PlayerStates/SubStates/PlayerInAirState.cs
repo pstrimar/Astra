@@ -16,7 +16,7 @@ public class PlayerInAirState : PlayerAbilityState
         xInput = player.InputHandler.NormalizedInputX;
         jumpInput = player.InputHandler.JumpInput;
 
-        if (jumpInput)
+        if (jumpInput && playerData.currentFuelAmount > 0.2f)
             stateMachine.ChangeState(player.ThrustState);
         else if (isGrounded && player.CurrentVelocity.y < Mathf.Epsilon)
             stateMachine.ChangeState(player.IdleState);
@@ -24,6 +24,6 @@ public class PlayerInAirState : PlayerAbilityState
         {
             player.CheckIfShouldFlip(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);
-        }            
+        }
     }
 }

@@ -7,6 +7,10 @@ public class PlayerState
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
+    protected string landingSoundName = "LandingFootsteps";
+    protected string thrusterSoundName = "Thruster";
+
+    protected bool isAnimationFinished;
 
     protected float startTime;
 
@@ -26,6 +30,8 @@ public class PlayerState
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         Debug.Log(animBoolName);
+
+        isAnimationFinished = false;
     }
 
     public virtual void Exit()
@@ -33,18 +39,16 @@ public class PlayerState
         player.Anim.SetBool(animBoolName, false);
     }
 
-    public virtual void LogicUpdate()
-    {
-
-    }
+    public virtual void LogicUpdate() { }
 
     public virtual void PhysicsUpdate()
     {
         DoChecks();
     }
 
-    public virtual void DoChecks()
-    {
+    public virtual void DoChecks() { }
 
-    }
+    public virtual void AnimationTrigger() { }
+
+    public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
 }

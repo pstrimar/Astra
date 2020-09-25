@@ -16,13 +16,13 @@ public class PlayerThrustState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-        // Play thruster sounds
+        AudioManager.Instance.PlaySound(thrusterSoundName);
     }
 
     public override void Exit()
     {
         base.Exit();
-        // stop thruster sounds
+        AudioManager.Instance.StopSound(thrusterSoundName);
     }
 
     public override void LogicUpdate()
@@ -35,6 +35,18 @@ public class PlayerThrustState : PlayerAbilityState
         {
             player.CheckIfShouldFlip(xInput);
             player.SetVelocityX(playerData.movementVelocity * xInput);
+        }
+
+        if (playerData.currentFuelAmount > 0f)
+        {
+            playerData.currentFuelAmount -= playerData.thrusterFuelBurnSpeed * Time.deltaTime;
+
+            player.UseFuel(playerData.currentFuelAmount);
+
+        }
+        else
+        {
+            stateMachine.ChangeState(player.InAirState);
         }
     }
 

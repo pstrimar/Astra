@@ -104,21 +104,23 @@ public class GameManager : MonoBehaviour, ISaveable
         gameOverUI.SetActive(true);
     }
 
-    public IEnumerator _RespawnPlayer() 
+    public IEnumerator _RespawnPlayer(GameObject player) 
     {
         AudioManager.Instance.PlaySound(respawnCountdownSoundName);
         yield return new WaitForSeconds(spawnDelay);
 
         AudioManager.Instance.PlaySound(spawnSoundName);
-        Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        player.transform.position = spawnPoint.position;
+        player.transform.rotation = spawnPoint.rotation;
+        player.SetActive(true);
         Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
         Destroy(clone.gameObject, 3f);
     }
 
-    public static void KillPlayer(PlayerOld player) 
-    {
+    public static void KillPlayer(Player player) 
+    {        
         Instantiate(player.deathParticles, player.transform.position, Quaternion.identity);
-        Destroy(player.gameObject);
+        player.gameObject.SetActive(false);
         _remainingLives --;
         if (_remainingLives <= 0)
         {
@@ -126,7 +128,7 @@ public class GameManager : MonoBehaviour, ISaveable
         }
         else 
         {
-            Instance.StartCoroutine(Instance._RespawnPlayer());
+            Instance.StartCoroutine(Instance._RespawnPlayer(player.gameObject));
         }        
     }
 

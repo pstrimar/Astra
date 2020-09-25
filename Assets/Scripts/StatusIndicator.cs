@@ -7,37 +7,29 @@ public class StatusIndicator : MonoBehaviour
     [SerializeField] Slider fuelBarSlider;
     [SerializeField] Text healthText;
 
-    public PlayerData stats;
+    private PlayerData playerData;
 
     private void Awake()
     {
-        stats = PlayerData.Instance;
+        playerData = PlayerData.Instance;
     }
 
     private void OnEnable()
     {
-        PlayerMotor motor = FindObjectOfType<PlayerMotor>();
-        PlayerOld player = FindObjectOfType<PlayerOld>();
-        if (motor != null)
-        {
-            motor.onFuelUsed += UpdateFuel;
-        }
+        Player player = FindObjectOfType<Player>();
         if (player != null)
         {
+            player.onFuelUsed += UpdateFuel;
             player.onHealthChanged += UpdateHealth;
         }
     }    
 
     private void OnDisable()
     {
-        PlayerMotor motor = FindObjectOfType<PlayerMotor>();
-        PlayerOld player = FindObjectOfType<PlayerOld>();
-        if (motor != null)
-        {
-            motor.onFuelUsed -= UpdateFuel;
-        }
+        Player player = FindObjectOfType<Player>();
         if (player != null)
         {
+            player.onFuelUsed -= UpdateFuel;
             player.onHealthChanged -= UpdateHealth;
         }
     }
@@ -51,7 +43,7 @@ public class StatusIndicator : MonoBehaviour
     {
         healthBarSlider.value = currentHealth;
 
-        healthText.text = currentHealth + "/" + stats.maxHealth + " HP";
+        healthText.text = currentHealth + "/" + playerData.maxHealth + " HP";
     }
 
     public void SetMaxHealth(int maxHealth)

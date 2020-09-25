@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     public int facingDirection = 1;
 
-    public event Action<Transform> onPlayerFound;
+    //public event Action<Transform> onPlayerFound;
 
     [Header("Optional: ")]
     [SerializeField] StatusIndicator statusIndicator;    
@@ -71,29 +71,30 @@ public class Enemy : MonoBehaviour
     {
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
 
-        if (target == null)
-        {
-            if (!searchingForPlayer)
-            {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            return;
-        }
+        target = GameObject.FindWithTag("Player").transform;
+        //if (target == null)
+        //{
+        //    if (!searchingForPlayer)
+        //    {
+        //        searchingForPlayer = true;
+        //        StartCoroutine(SearchForPlayer());
+        //    }
+        //    return;
+        //}
     }
 
-    private void Update()
-    {
-        if (target == null)
-        {
-            if (!searchingForPlayer)
-            {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            return;
-        }        
-    }
+    //private void Update()
+    //{
+    //    if (target == null)
+    //    {
+    //        if (!searchingForPlayer)
+    //        {
+    //            searchingForPlayer = true;
+    //            StartCoroutine(SearchForPlayer());
+    //        }
+    //        return;
+    //    }        
+    //}
 
     private void OnDisable() 
     {
@@ -121,9 +122,9 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        PlayerOld player = target.GetComponent<PlayerOld>();
+        Player player = target.GetComponent<Player>();
 
-        if (player != null && !player.Invincible)
+        if (player.isActiveAndEnabled && !player.Invincible && Vector2.Distance(transform.position, target.position) <= stats.attackRange)
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
@@ -131,23 +132,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator SearchForPlayer()
-    {
-        GameObject sResult = GameObject.FindWithTag("Player");
-        if (sResult == null)
-        {
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(SearchForPlayer());
-        }
-        else
-        {
-            target = sResult.transform;
+    //private IEnumerator SearchForPlayer()
+    //{
+    //    GameObject sResult = GameObject.FindWithTag("Player");
+    //    if (sResult == null)
+    //    {
+    //        yield return new WaitForSeconds(0.5f);
+    //        StartCoroutine(SearchForPlayer());
+    //    }
+    //    else
+    //    {
+    //        target = sResult.transform;
             
-            searchingForPlayer = false;
-            onPlayerFound?.Invoke(target);
-            yield return false;            
-        }
-    }
+    //        searchingForPlayer = false;
+    //        onPlayerFound?.Invoke(target);
+    //        yield return false;            
+    //    }
+    //}
 
     public void LookAtPlayer()
     {

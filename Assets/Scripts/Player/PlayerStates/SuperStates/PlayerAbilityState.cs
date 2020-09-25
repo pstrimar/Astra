@@ -43,8 +43,6 @@ public class PlayerAbilityState : PlayerState
         {
             if (jumpInput)
                 stateMachine.ChangeState(player.ThrustState);
-            //else if (isGrounded && player.CurrentVelocity.y < Mathf.Epsilon)
-            //    stateMachine.ChangeState(player.IdleState);
             else
                 stateMachine.ChangeState(player.InAirState);
         }
