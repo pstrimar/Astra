@@ -131,7 +131,7 @@
                     "name": "",
                     "id": "1f15b11d-3401-466b-9250-d7dfaae26c01",
                     "path": "<Keyboard>/shift",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Action",

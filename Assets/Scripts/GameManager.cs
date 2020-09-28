@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, ISaveable
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour, ISaveable
         AudioManager.Instance.PlaySound(spawnSoundName);
         player.transform.position = spawnPoint.position;
         player.transform.rotation = spawnPoint.rotation;
+        player.GetComponent<PlayerInput>().enabled = true;
         player.SetActive(true);
         Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
         Destroy(clone.gameObject, 3f);

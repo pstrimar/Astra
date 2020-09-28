@@ -2,18 +2,14 @@
 
 public class Crawler_Run : StateMachineBehaviour
 {
-    Transform player;
-    Rigidbody2D rb;
-    Enemy enemy;
-    Enemy.EnemyStats stats;
-
-    //private void OnDisable()
-    //{
-    //    if (enemy != null)
-    //    {
-    //        enemy.onPlayerFound -= HandlePlayerFound;
-    //    }
-    //}
+    [SerializeField] LayerMask playerLayer;
+    private Transform player;
+    private Rigidbody2D rb;
+    private Enemy enemy;
+    private Enemy.EnemyStats stats;
+    private bool playerDetectedAhead;
+    private bool playerDetectedBehind;
+    private bool playerInAttackRange;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,31 +18,40 @@ public class Crawler_Run : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         player = enemy.target;
         stats = enemy.stats;
-
-        //enemy.onPlayerFound += HandlePlayerFound;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy.LookAtPlayer();
+        //enemy.LookAtPlayer();
 
-        if (Vector2.Distance(player.position, rb.position) > stats.aggroRange || !player.gameObject.activeSelf)
+        playerDetectedAhead = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
+        playerDetectedBehind = Physics2D.Raycast(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
+        playerInAttackRange = Physics2D.Raycast(enemy.transform.position, Vector2.right * enemy.facingDirection, stats.attackRange, playerLayer);
+        
+        Debug.DrawRay(enemy.wallCheck.position, Vector2.right * enemy.facingDirection * stats.aggroRange);
+        Debug.DrawRay(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection * stats.aggroRange);
+
+        if ((!playerDetectedAhead && !playerDetectedBehind) || !player.gameObject.activeSelf)
         { 
             animator.SetFloat("hSpeed", stats.walkSpeed);
             return;
         } 
-        else
+        else if (playerDetectedAhead)
         {
-            Vector2 target = new Vector2(player.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, stats.runSpeed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
+            rb.velocity = new Vector2(stats.runSpeed * enemy.facingDirection, rb.velocity.y);
             animator.SetFloat("hSpeed", stats.runSpeed);
         }
-        
-
-        if (Vector2.Distance(player.position, rb.position) < stats.attackRange)
+        else if (playerDetectedBehind)
         {
+            enemy.Flip();
+            rb.velocity = new Vector2(stats.runSpeed * enemy.facingDirection, rb.velocity.y);
+            animator.SetFloat("hSpeed", stats.runSpeed);
+        }
+
+        if (playerInAttackRange)
+        {
+            rb.velocity = Vector2.zero;
             animator.SetTrigger("Attack");
         }
     }
@@ -55,10 +60,5 @@ public class Crawler_Run : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("Attack");
-    }
-
-    private void HandlePlayerFound(Transform target)
-    {
-        player = target;
     }
 }

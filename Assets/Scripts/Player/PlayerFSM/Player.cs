@@ -44,10 +44,13 @@ public class Player : MonoBehaviour, ISaveable
     [SerializeField] string damageSoundName = "Grunt";
 
     private Vector2 workspace;
+    private IUseable useable;
 
     #endregion
 
     #region Check Variables
+
+    public bool OnLadder;
     public bool IsOnSlope { get; private set; }
     public bool CanWalkOnSlope { get; private set; }
     public Vector2 SlopeNormalPerp { get; private set; }
@@ -71,7 +74,7 @@ public class Player : MonoBehaviour, ISaveable
     {
         StateMachine = new PlayerStateMachine();
 
-        playerData = PlayerData.Instance;
+        playerData = PlayerData.Instance;        
         playerGraphics = transform.Find("Graphics");
 
         IdleState = new PlayerIdleState(this, StateMachine, "idle");
@@ -90,6 +93,11 @@ public class Player : MonoBehaviour, ISaveable
 
         StateMachine.Initialize(IdleState);
 
+        if (InputHandler != null)
+        {
+            InputHandler.OnActionButtonPressed += HandleAction;
+        }
+
         InvokeRepeating("RegenHealth", 1f / playerData.healthRegenRate, 1f / playerData.healthRegenRate);
     }
 
@@ -97,6 +105,8 @@ public class Player : MonoBehaviour, ISaveable
     {
         statusIndicator.SetMaxHealth(playerData.maxHealth);
         statusIndicator.SetMaxFuel(playerData.maxFuelAmount);
+        playerData.currentHealth = playerData.maxHealth;
+        playerData.currentFuelAmount = playerData.maxFuelAmount;
 
         if (GameManager.Instance != null)
         {
@@ -105,7 +115,7 @@ public class Player : MonoBehaviour, ISaveable
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.onDialogue += HandleDialogue;
-        }
+        }        
     }
 
     private void OnDisable()
@@ -117,6 +127,10 @@ public class Player : MonoBehaviour, ISaveable
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.onDialogue -= HandleDialogue;
+        }
+        if (InputHandler != null)
+        {
+            InputHandler.OnActionButtonPressed -= HandleAction;
         }
     }
 
@@ -140,6 +154,22 @@ public class Player : MonoBehaviour, ISaveable
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Useable")
+        {
+            useable = collision.GetComponent<IUseable>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Useable")
+        {
+            useable = null;
+        }
     }
 
     #endregion
@@ -259,10 +289,6 @@ public class Player : MonoBehaviour, ISaveable
 
     #region Other Functions
 
-    private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
-
-    private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-
     void HandleMenuToggle(bool active)
     {
         GetComponent<PlayerInput>().enabled = !active;
@@ -279,6 +305,12 @@ public class Player : MonoBehaviour, ISaveable
     {
         // Disables the PlayerController during dialogue and re-enables once complete
         GetComponent<PlayerInput>().enabled = enabled;
+    }
+
+    private void HandleAction()
+    {
+        if (useable != null)
+            useable.Use();
     }
 
     private IEnumerator BecomeInvincible()
@@ -319,10 +351,10 @@ public class Player : MonoBehaviour, ISaveable
     private IEnumerator DisableMovementAndApplyForce(float force, Vector2 direction)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        GetComponent<PlayerController>().enabled = false;
+        GetComponent<PlayerInput>().enabled = false;
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         yield return new WaitForSeconds(.5f);
-        GetComponent<PlayerController>().enabled = true;
+        GetComponent<PlayerInput>().enabled = true;
     }
 
     private void Flip()

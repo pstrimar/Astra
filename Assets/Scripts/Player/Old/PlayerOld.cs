@@ -122,7 +122,6 @@ public class PlayerOld : MonoBehaviour, ISaveable
             // Play death sound
         audioManager.PlaySound(deathSoundName);
 
-        //GameManager.KillPlayer(this);
         }
         else 
         {

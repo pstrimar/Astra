@@ -47,8 +47,6 @@ public class Enemy : MonoBehaviour
 
     public int facingDirection = 1;
 
-    //public event Action<Transform> onPlayerFound;
-
     [Header("Optional: ")]
     [SerializeField] StatusIndicator statusIndicator;    
 
@@ -72,29 +70,9 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
 
         target = GameObject.FindWithTag("Player").transform;
-        //if (target == null)
-        //{
-        //    if (!searchingForPlayer)
-        //    {
-        //        searchingForPlayer = true;
-        //        StartCoroutine(SearchForPlayer());
-        //    }
-        //    return;
-        //}
     }
 
-    //private void Update()
-    //{
-    //    if (target == null)
-    //    {
-    //        if (!searchingForPlayer)
-    //        {
-    //            searchingForPlayer = true;
-    //            StartCoroutine(SearchForPlayer());
-    //        }
-    //        return;
-    //    }        
-    //}
+
 
     private void OnDisable() 
     {
@@ -123,32 +101,16 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         Player player = target.GetComponent<Player>();
+        Debug.Log(Vector2.Distance(transform.position, target.position));
+        float playerWidth = .2f;
 
-        if (player.isActiveAndEnabled && !player.Invincible && Vector2.Distance(transform.position, target.position) <= stats.attackRange)
+        if (player.isActiveAndEnabled && !player.Invincible && Vector2.Distance(transform.position, target.position) - playerWidth <= stats.attackRange)
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
             player.DamagePlayer(stats.damage);
         }
     }
-
-    //private IEnumerator SearchForPlayer()
-    //{
-    //    GameObject sResult = GameObject.FindWithTag("Player");
-    //    if (sResult == null)
-    //    {
-    //        yield return new WaitForSeconds(0.5f);
-    //        StartCoroutine(SearchForPlayer());
-    //    }
-    //    else
-    //    {
-    //        target = sResult.transform;
-            
-    //        searchingForPlayer = false;
-    //        onPlayerFound?.Invoke(target);
-    //        yield return false;            
-    //    }
-    //}
 
     public void LookAtPlayer()
     {

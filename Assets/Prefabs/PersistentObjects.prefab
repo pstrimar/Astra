@@ -1554,6 +1554,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6466175706252479791}
     m_Modifications:
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[17].name
+      value: SecretDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[17].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 070779cdcfbe3ff4688691fb33bc3e4e, type: 3}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[17].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[17].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[17].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[18].name
+      value: CrystalCave
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[18].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c9031348bbca49344821727c334ae4ae, type: 3}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[18].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[18].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954659989140457446, guid: 1da221821209f194e95501992c9f9cc6,
+        type: 3}
+      propertyPath: sounds.Array.data[18].loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3853193621325886981, guid: 1da221821209f194e95501992c9f9cc6,
         type: 3}
       propertyPath: m_LocalPosition.x

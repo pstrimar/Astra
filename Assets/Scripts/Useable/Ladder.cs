@@ -3,14 +3,14 @@ using UnityStandardAssets._2D;
 
 public class Ladder : MonoBehaviour, IUseable
 {
-    PlayerMotor player;
+    Player player;
 
     [SerializeField] Collider2D platformCollider;
 
     public void Use()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotor>();
-                
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         // we need to start climbing
         UseLadder(true);
         Physics2D.IgnoreCollision(player.GetComponent<CircleCollider2D>(), platformCollider, true);
@@ -20,12 +20,12 @@ public class Ladder : MonoBehaviour, IUseable
 
     private void UseLadder(bool onLadder)
     {
-        player.onLadder = onLadder;
+        player.OnLadder = onLadder;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotor>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         if (collision.tag == "Player")
         {

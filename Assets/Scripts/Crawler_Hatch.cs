@@ -8,13 +8,6 @@ public class Crawler_Hatch : StateMachineBehaviour
     private Enemy enemy;
     private Enemy.EnemyStats stats;
 
-    private void OnDisable()
-    {
-        //if (enemy != null)
-        //{
-        //    enemy.onPlayerFound -= HandlePlayerFound;
-        //}
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,8 +15,6 @@ public class Crawler_Hatch : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         player = enemy.target;
         stats = enemy.stats;
-
-        //enemy.onPlayerFound += HandlePlayerFound;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -39,10 +30,5 @@ public class Crawler_Hatch : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("Hatch");
-    }
-
-    private void HandlePlayerFound(Transform target)
-    {
-        player = target;
     }
 }
