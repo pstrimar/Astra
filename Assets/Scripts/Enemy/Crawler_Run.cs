@@ -23,8 +23,6 @@ public class Crawler_Run : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //enemy.LookAtPlayer();
-
         playerDetectedAhead = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
         playerDetectedBehind = Physics2D.Raycast(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
         playerInAttackRange = Physics2D.Raycast(enemy.transform.position, Vector2.right * enemy.facingDirection, stats.attackRange, playerLayer);
@@ -33,7 +31,7 @@ public class Crawler_Run : StateMachineBehaviour
         Debug.DrawRay(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection * stats.aggroRange);
 
         if ((!playerDetectedAhead && !playerDetectedBehind) || !player.gameObject.activeSelf)
-        { 
+        {
             animator.SetFloat("hSpeed", stats.walkSpeed);
             return;
         } 

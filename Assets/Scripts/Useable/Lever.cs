@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.U2D;
+﻿using UnityEngine;
 
 public class Lever : MonoBehaviour, IUseable
 {
@@ -9,7 +6,7 @@ public class Lever : MonoBehaviour, IUseable
     [SerializeField] float speed = .5f;
     private Vector3 startingPos;
     private Vector3 endingPos;
-    private float targetDistance = 3f;
+    private float targetDistance = 1f;
     private Animator anim;
     private bool leverPosition = true;
     private string secretDoorSound = "SecretDoor";
@@ -44,3 +41,5 @@ public class Lever : MonoBehaviour, IUseable
         AudioManager.Instance.PlaySound(secretDoorSound);
     }
 }
+
+

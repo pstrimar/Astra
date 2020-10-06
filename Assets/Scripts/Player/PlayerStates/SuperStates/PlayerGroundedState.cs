@@ -41,7 +41,11 @@ public class PlayerGroundedState : PlayerState
 
         if (jumpInput)
             stateMachine.ChangeState(player.ThrustState);
-        else if (!isGrounded)
+
+        if (player.OnLadder)
+            stateMachine.ChangeState(player.ClimbState);
+
+        if (!isGrounded)
             stateMachine.ChangeState(player.InAirState);
     }
 

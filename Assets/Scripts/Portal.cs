@@ -40,11 +40,11 @@ public class Portal : MonoBehaviour
         Fader fader = FindObjectOfType<Fader>();
         SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
 
-        PlayerOld player = GameObject.FindWithTag("Player").GetComponent<PlayerOld>();
-        PlayerController playerController = player.GetComponent<PlayerController>();
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        PlayerInputHandler playerInputHandler = player.GetComponent<PlayerInputHandler>();
         player.enabled = false;
         player.GetComponent<Rigidbody2D>().isKinematic = true;
-        playerController.enabled = false;
+        playerInputHandler.enabled = false;
 
         yield return fader.FadeOut(fadeOutTime);
 
@@ -52,8 +52,8 @@ public class Portal : MonoBehaviour
 
         yield return SceneManager.LoadSceneAsync(sceneToLoad);
 
-        PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        newPlayerController.enabled = false;
+        PlayerInputHandler newPlayerInputHandler = GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>();
+        newPlayerInputHandler.enabled = false;
 
         wrapper.AutoLoad();
 
@@ -68,7 +68,7 @@ public class Portal : MonoBehaviour
 
         fader.FadeIn(fadeInTime);
 
-        newPlayerController.enabled = true;
+        newPlayerInputHandler.enabled = true;
         Destroy(gameObject);
     }
 

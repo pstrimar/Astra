@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, ISaveable
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour, ISaveable
     public PlayerMoveState MoveState { get; private set; }
     public PlayerThrustState ThrustState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
+    public PlayerClimbState ClimbState { get; private set; }
 
     [Header("Static Data")]
     [SerializeField] PlayerData playerData;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour, ISaveable
     public Transform deathParticles;
 
     [SerializeField] StatusIndicator statusIndicator;
+    [SerializeField] Text instructions;
 
     private Transform playerGraphics;
 
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour, ISaveable
         MoveState = new PlayerMoveState(this, StateMachine, "move");
         ThrustState = new PlayerThrustState(this, StateMachine, "thrust");
         InAirState = new PlayerInAirState(this, StateMachine, "inAir");
+        ClimbState = new PlayerClimbState(this, StateMachine, "climb");
     }
 
     private void Start()
@@ -88,6 +92,7 @@ public class Player : MonoBehaviour, ISaveable
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
+        instructions.enabled = false;
 
         FacingDirection = 1;
 
@@ -115,7 +120,11 @@ public class Player : MonoBehaviour, ISaveable
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.onDialogue += HandleDialogue;
-        }        
+        }
+        if (InputHandler != null)
+        {
+            InputHandler.OnActionButtonPressed += HandleAction;
+        }
     }
 
     private void OnDisable()
@@ -161,6 +170,7 @@ public class Player : MonoBehaviour, ISaveable
         if (collision.tag == "Useable")
         {
             useable = collision.GetComponent<IUseable>();
+            instructions.enabled = true;
         }
     }
 
@@ -169,6 +179,7 @@ public class Player : MonoBehaviour, ISaveable
         if (collision.tag == "Useable")
         {
             useable = null;
+            instructions.enabled = false;
         }
     }
 
@@ -310,7 +321,10 @@ public class Player : MonoBehaviour, ISaveable
     private void HandleAction()
     {
         if (useable != null)
+        {
             useable.Use();
+            instructions.enabled = false;
+        }            
     }
 
     private IEnumerator BecomeInvincible()
