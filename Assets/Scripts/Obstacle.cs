@@ -13,7 +13,7 @@ public class Obstacle : MonoBehaviour
         Player player = other.collider.GetComponent<Player>();
         if (player != null && !player.Invincible)
         {
-            player.DamagePlayer(damage);
+            player.Damage(damage);
 
             Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)

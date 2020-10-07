@@ -19,7 +19,10 @@ public class PlayerInAirState : PlayerAbilityState
         if (jumpInput && playerData.currentFuelAmount > 0.2f)
             stateMachine.ChangeState(player.ThrustState);
         else if (isGrounded && player.CurrentVelocity.y < Mathf.Epsilon)
+        {
+            AudioManager.Instance.PlaySound(landingSoundName);
             stateMachine.ChangeState(player.IdleState);
+        }            
         else
         {
             player.CheckIfShouldFlip(xInput);

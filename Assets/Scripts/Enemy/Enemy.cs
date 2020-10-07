@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [System.Serializable]
     public class EnemyStats 
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
-    public void DamageEnemy(int damage) 
+    public void Damage(int damage) 
     {
         stats.currentHealth -= damage;
         if (stats.currentHealth <= 0) 
@@ -102,13 +102,12 @@ public class Enemy : MonoBehaviour
     {
         Player player = target.GetComponent<Player>();
         Debug.Log(Vector2.Distance(transform.position, target.position));
-        float playerWidth = .2f;
 
-        if (player.isActiveAndEnabled && !player.Invincible && Vector2.Distance(transform.position, target.position) - playerWidth <= stats.attackRange)
+        if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
-            player.DamagePlayer(stats.damage);
+            player.Damage(stats.damage);
         }
     }
 
@@ -141,5 +140,5 @@ public class Enemy : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }
+    }    
 }

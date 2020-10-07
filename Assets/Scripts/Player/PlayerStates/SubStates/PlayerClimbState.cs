@@ -11,16 +11,6 @@ public class PlayerClimbState : PlayerAbilityState
     {
     }
 
-    public override void AnimationFinishTrigger()
-    {
-        base.AnimationFinishTrigger();
-    }
-
-    public override void AnimationTrigger()
-    {
-        base.AnimationTrigger();
-    }
-
     public override void DoChecks()
     {
         base.DoChecks();

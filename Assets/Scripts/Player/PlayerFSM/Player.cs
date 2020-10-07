@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, ISaveable
+public class Player : MonoBehaviour, IDamageable, ISaveable
 {
     #region State Variables    
 
@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, ISaveable
     public PlayerThrustState ThrustState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerClimbState ClimbState { get; private set; }
+    public PlayerLeverState LeverState { get; private set; }
+    public PlayerShootState ShootState { get; private set; }
 
     [Header("Static Data")]
     [SerializeField] PlayerData playerData;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour, ISaveable
     #region Check Variables
 
     public bool OnLadder;
+    public bool IsUsingLever;
     public bool IsOnSlope { get; private set; }
     public bool CanWalkOnSlope { get; private set; }
     public Vector2 SlopeNormalPerp { get; private set; }
@@ -85,6 +88,8 @@ public class Player : MonoBehaviour, ISaveable
         ThrustState = new PlayerThrustState(this, StateMachine, "thrust");
         InAirState = new PlayerInAirState(this, StateMachine, "inAir");
         ClimbState = new PlayerClimbState(this, StateMachine, "climb");
+        LeverState = new PlayerLeverState(this, StateMachine, "useLever");
+        ShootState = new PlayerShootState(this, StateMachine, "shoot");
     }
 
     private void Start()
@@ -156,7 +161,7 @@ public class Player : MonoBehaviour, ISaveable
 
         if (transform.position.y <= fallBoundary)
         {
-            DamagePlayer(999999);
+            Damage(999999);
         }
     }
 
@@ -334,7 +339,7 @@ public class Player : MonoBehaviour, ISaveable
         Invincible = false;
     }
 
-    public void DamagePlayer(int damage)
+    public void Damage(int damage)
     {
         playerData.currentHealth -= damage;
 

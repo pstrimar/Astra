@@ -4,6 +4,7 @@ public class Lever : MonoBehaviour, IUseable
 {
     [SerializeField] Transform moveableObject;
     [SerializeField] float speed = .5f;
+    private Player player;
     private Vector3 startingPos;
     private Vector3 endingPos;
     private float targetDistance = 1f;
@@ -15,6 +16,7 @@ public class Lever : MonoBehaviour, IUseable
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         anim = GetComponent<Animator>();
         startingPos = moveableObject.position;
         endingPos = startingPos + Vector3.right * targetDistance;
@@ -36,9 +38,10 @@ public class Lever : MonoBehaviour, IUseable
 
     public void Use()
     {
+        player.IsUsingLever = true;
         anim.SetBool("Switch", leverPosition);
         leverPosition = !leverPosition;
-        AudioManager.Instance.PlaySound(secretDoorSound);
+        AudioManager.Instance.PlaySound(secretDoorSound);        
     }
 }
 

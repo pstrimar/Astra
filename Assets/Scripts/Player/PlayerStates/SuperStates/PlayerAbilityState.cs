@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerAbilityState : PlayerState
 {
+    protected new string landingSoundName = "LandingFootsteps";
     protected bool isAbilityDone;
     protected bool jumpInput;
+    protected bool shootInput;
     protected int xInput;
     protected bool isGrounded;
 
@@ -38,6 +40,7 @@ public class PlayerAbilityState : PlayerState
 
         xInput = player.InputHandler.NormalizedInputX;
         jumpInput = player.InputHandler.JumpInput;
+        shootInput = player.InputHandler.ShootInput;
 
         if (isAbilityDone)
         {

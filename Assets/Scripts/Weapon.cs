@@ -17,16 +17,17 @@ public class Weapon : MonoBehaviour
     // Handle camera shaking
     [SerializeField] float camShakeAmount = 0.05f;
     [SerializeField] float camShakeLength = 0.1f;
-    CameraShake camShake;
+    //private CameraShake camShake;
 
     [SerializeField] string weaponShootSound = "DefaultShot";
 
-    float timeToFire = 0f;
-    float timeToSpawnEffect = 0f;
-    
-    Transform firePoint;
+    private float timeToFire = 0f;
+    private float timeToSpawnEffect = 0f;
 
-    AudioManager audioManager;
+    private Transform firePoint;
+
+    private AudioManager audioManager;
+    private Player player;
     
     void Awake()
     {
@@ -35,15 +36,16 @@ public class Weapon : MonoBehaviour
         {
             Debug.LogError("No firePoint");
         }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void Start() 
     {
-        camShake = GameManager.Instance.GetComponent<CameraShake>();
-        if (camShake == null)
-        {
-            Debug.LogError("No CameraShake script found on GM object");
-        }
+        //camShake = GameManager.Instance.GetComponent<CameraShake>();
+        //if (camShake == null)
+        //{
+        //    Debug.LogError("No CameraShake script found on GM object");
+        //}
 
         audioManager = AudioManager.Instance;
         if (audioManager == null) 
@@ -55,38 +57,24 @@ public class Weapon : MonoBehaviour
     
     void Update()
     {
-        if (fireRate == 0) 
+        if (fireRate == 0 && player.InputHandler.ShootInput)
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Shoot();
-            }
+            Shoot();
         }
-        else 
+        else if (player.InputHandler.ShootInput && Time.time > timeToFire)
         {
-            if (Input.GetButton("Fire1") && Time.time > timeToFire)
-            {
-                timeToFire = Time.time + 1/fireRate;
-                Shoot();
-            }
+            timeToFire = Time.time + 1 / fireRate;
+            Shoot();
         }
     }
 
     void Shoot()
     {
-        Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector2.right * player.FacingDirection, 100f, whatToHit);
 
-        RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100f, whatToHit);
-
-        if (hit.collider != null) 
+        if (hit.collider.GetComponent<IDamageable>() != null) 
         {
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null) 
-            {
-                enemy.DamageEnemy(damage);
-                //Debug.Log("We hit " + hit.collider.name + " and did " + damage + " damage");
-            }
+            hit.collider.GetComponent<IDamageable>().Damage(damage);
         }
 
         if (Time.time >= timeToSpawnEffect) 
@@ -96,7 +84,7 @@ public class Weapon : MonoBehaviour
 
             if (hit.collider == null)
             {
-                hitPos = (mousePosition - firePointPosition) * 30f;
+                hitPos = firePoint.position * 30f;
                 hitNormal = new Vector3(9999, 9999, 9999);
             }
             else
@@ -136,7 +124,7 @@ public class Weapon : MonoBehaviour
         Destroy(clone.gameObject, 0.02f);
 
         // Shake the camera
-        camShake.Shake(camShakeAmount, camShakeLength);
+        //camShake.Shake(camShakeAmount, camShakeLength);
 
         // Play shoot sound
         audioManager.PlaySound(weaponShootSound);
