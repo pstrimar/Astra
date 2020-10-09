@@ -27,7 +27,12 @@ public class PlayerThrustState : PlayerAbilityState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();        
+        base.LogicUpdate();
+
+        if (shootInput)
+            player.Anim.SetLayerWeight(1, 1);
+        else if (!shootInput)
+            player.Anim.SetLayerWeight(1, 0);
 
         if (!jumpInput)
             isAbilityDone = true;
@@ -42,7 +47,6 @@ public class PlayerThrustState : PlayerAbilityState
             playerData.currentFuelAmount -= playerData.thrusterFuelBurnSpeed * Time.deltaTime;
 
             player.UseFuel(playerData.currentFuelAmount);
-
         }
         else
         {

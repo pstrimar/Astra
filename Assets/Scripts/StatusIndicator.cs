@@ -5,32 +5,59 @@ public class StatusIndicator : MonoBehaviour
 {
     [SerializeField] Slider healthBarSlider;
     [SerializeField] Slider fuelBarSlider;
-    [SerializeField] Text healthText;
+    [SerializeField] Slider laserBarSlider;
 
-    private PlayerData playerData;
+    private Player player;
+
+    public static StatusIndicator Instance;
 
     private void Awake()
     {
-        playerData = PlayerData.Instance;
+        if (Instance != null)
+        {
+            if (Instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     private void OnEnable()
     {
-        Player player = FindObjectOfType<Player>();
+        Debug.Log("StatusIndicator enabled");
+        player = FindObjectOfType<Player>();
         if (player != null)
         {
             player.onFuelUsed += UpdateFuel;
             player.onHealthChanged += UpdateHealth;
+            player.weapon.onLaserUsed += UpdateLaser;
         }
     }    
 
     private void OnDisable()
     {
-        Player player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
         if (player != null)
         {
             player.onFuelUsed -= UpdateFuel;
             player.onHealthChanged -= UpdateHealth;
+            player.weapon.onLaserUsed -= UpdateLaser;
+        }
+    }
+
+    private void Update()
+    {
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+            player.onFuelUsed += UpdateFuel;
+            player.onHealthChanged += UpdateHealth;
+            player.weapon.onLaserUsed += UpdateLaser;
         }
     }
 
@@ -42,8 +69,11 @@ public class StatusIndicator : MonoBehaviour
     private void UpdateHealth(int currentHealth)
     {
         healthBarSlider.value = currentHealth;
+    }
 
-        healthText.text = currentHealth + "/" + playerData.maxHealth + " HP";
+    private void UpdateLaser(float laserAmount)
+    {
+        laserBarSlider.value = laserAmount;
     }
 
     public void SetMaxHealth(int maxHealth)
@@ -56,5 +86,11 @@ public class StatusIndicator : MonoBehaviour
     {
         fuelBarSlider.maxValue = maxFuel;
         fuelBarSlider.value = maxFuel;
+    }
+
+    public void SetMaxLaser(float maxLaser)
+    {
+        laserBarSlider.maxValue = maxLaser;
+        laserBarSlider.value = maxLaser;
     }
 }

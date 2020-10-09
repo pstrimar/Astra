@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -17,7 +18,6 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     public PlayerInAirState InAirState { get; private set; }
     public PlayerClimbState ClimbState { get; private set; }
     public PlayerLeverState LeverState { get; private set; }
-    public PlayerShootState ShootState { get; private set; }
 
     [Header("Static Data")]
     [SerializeField] PlayerData playerData;
@@ -29,10 +29,11 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Transform deathParticles;
+    public Weapon weapon;
 
-    [SerializeField] StatusIndicator statusIndicator;
-    [SerializeField] Text instructions;
+    [SerializeField] Text instructions;    
 
+    private StatusIndicator statusIndicator;
     private Transform playerGraphics;
 
     #endregion
@@ -81,6 +82,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         StateMachine = new PlayerStateMachine();
 
         playerData = PlayerData.Instance;        
+
         playerGraphics = transform.Find("Graphics");
 
         IdleState = new PlayerIdleState(this, StateMachine, "idle");
@@ -89,48 +91,44 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         InAirState = new PlayerInAirState(this, StateMachine, "inAir");
         ClimbState = new PlayerClimbState(this, StateMachine, "climb");
         LeverState = new PlayerLeverState(this, StateMachine, "useLever");
-        ShootState = new PlayerShootState(this, StateMachine, "shoot");
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("Player enabled");
+
+        StartCoroutine(SearchForStatusIndicator());
+        StartCoroutine(SearchForGameManager());
+        StartCoroutine(SearchForDialogueManager());
+
+        playerData.currentHealth = playerData.maxHealth;
+        playerData.currentFuelAmount = playerData.maxFuelAmount;
+
+        if (InputHandler != null)
+        {
+            InputHandler.OnActionButtonPressed += HandleAction;
+        }
     }
 
     private void Start()
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        RB = GetComponent<Rigidbody2D>();
+        RB = GetComponent<Rigidbody2D>();        
+
         instructions.enabled = false;
 
         FacingDirection = 1;
 
         StateMachine.Initialize(IdleState);
 
-        if (InputHandler != null)
-        {
-            InputHandler.OnActionButtonPressed += HandleAction;
-        }
+        //if (InputHandler != null)
+        //{
+        //    InputHandler.OnActionButtonPressed += HandleAction;
+        //}
 
         InvokeRepeating("RegenHealth", 1f / playerData.healthRegenRate, 1f / playerData.healthRegenRate);
-    }
-
-    private void OnEnable()
-    {
-        statusIndicator.SetMaxHealth(playerData.maxHealth);
-        statusIndicator.SetMaxFuel(playerData.maxFuelAmount);
-        playerData.currentHealth = playerData.maxHealth;
-        playerData.currentFuelAmount = playerData.maxFuelAmount;
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.onToggleMenu += HandleMenuToggle;
-        }
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.onDialogue += HandleDialogue;
-        }
-        if (InputHandler != null)
-        {
-            InputHandler.OnActionButtonPressed += HandleAction;
-        }
-    }
+    }    
 
     private void OnDisable()
     {
@@ -153,7 +151,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         CurrentVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
 
-        if (StateMachine.CurrentState != ThrustState)
+        if (StateMachine.CurrentState != ThrustState && playerData.currentFuelAmount != playerData.maxFuelAmount)
         {
             playerData.currentFuelAmount += playerData.thrusterFuelRegenSpeed * Time.deltaTime;
             UseFuel(playerData.currentFuelAmount);
@@ -223,6 +221,11 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     public bool CheckIfGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
+    }
+
+    public bool IsShooting()
+    {
+        return InputHandler.ShootInput;
     }
 
     public void SlopeCheck(float xInput)
@@ -309,12 +312,6 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     {
         GetComponent<PlayerInput>().enabled = !active;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Weapon _weapon = GetComponentInChildren<Weapon>();
-
-        if (_weapon != null)
-        {
-            _weapon.enabled = !active;
-        }
     }
 
     private void HandleDialogue(bool enabled)
@@ -374,6 +371,52 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         yield return new WaitForSeconds(.5f);
         GetComponent<PlayerInput>().enabled = true;
+    }
+
+    private IEnumerator SearchForGameManager()
+    {
+        if (GameManager.Instance == null)
+        {
+            yield return new WaitForSeconds(.5f);
+            StartCoroutine(SearchForGameManager());
+        }
+        else
+        {
+            GameManager.Instance.onToggleMenu += HandleMenuToggle;
+        }
+        yield return null;
+    }
+
+    private IEnumerator SearchForDialogueManager()
+    {
+        if (DialogueManager.Instance == null)
+        {
+            yield return new WaitForSeconds(.5f);
+            StartCoroutine(SearchForDialogueManager());
+        }
+        else
+        {
+            DialogueManager.Instance.onDialogue += HandleDialogue;
+        }
+        yield return null;
+    }
+
+    private IEnumerator SearchForStatusIndicator()
+    {
+        if (StatusIndicator.Instance == null)
+        {
+            yield return new WaitForSeconds(.5f);
+            StartCoroutine(SearchForStatusIndicator());
+        }
+        else
+        {
+            statusIndicator = StatusIndicator.Instance;
+
+            statusIndicator.SetMaxHealth(playerData.maxHealth);
+            statusIndicator.SetMaxFuel(playerData.maxFuelAmount);
+            statusIndicator.SetMaxLaser(weapon.maxLaserAmount);
+        }
+        yield return null;      
     }
 
     private void Flip()

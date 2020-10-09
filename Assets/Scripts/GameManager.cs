@@ -149,8 +149,8 @@ public class GameManager : MonoBehaviour, ISaveable
         Destroy(_clone.gameObject, 5f);
 
         // Camera shake
-        cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
-        Destroy(_enemy.gameObject);
+        //cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
+        //Destroy(_enemy.gameObject);
     }
 
     [System.Serializable]

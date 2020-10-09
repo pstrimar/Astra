@@ -1,16 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] float fireRate = 0f;
+    public float maxLaserAmount = 3f;
+    public float currentLaserAmount
+    {
+        get { return _currentLaserAmount; }
+        set { _currentLaserAmount = Mathf.Clamp(value, 0, maxLaserAmount); }
+    }
+
+    public float laserUseSpeed = 5f;
+    public event Action<float> onLaserUsed;
+
     [SerializeField] int damage = 10;
     [SerializeField] LayerMask whatToHit;
 
     [SerializeField] Transform bulletTrailPrefab;
-    [SerializeField] Transform muzzleFlashPrefab;
+    [SerializeField] LineRenderer lineRenderer;
     [SerializeField] Transform hitPrefab;
     [SerializeField] float effectSpawnRate = 10f;
 
@@ -21,15 +28,15 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] string weaponShootSound = "DefaultShot";
 
-    private float timeToFire = 0f;
-    private float timeToSpawnEffect = 0f;
+    private float _currentLaserAmount;
 
     private Transform firePoint;
+    private float timeToSpawnEffect = 2f;
 
     private AudioManager audioManager;
     private Player player;
-    
-    void Awake()
+
+    private void Awake()
     {
         firePoint = transform.Find("FirePoint");
         if (firePoint == null) 
@@ -37,6 +44,8 @@ public class Weapon : MonoBehaviour
             Debug.LogError("No firePoint");
         }
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        currentLaserAmount = maxLaserAmount;
     }
 
     private void Start() 
@@ -47,6 +56,8 @@ public class Weapon : MonoBehaviour
         //    Debug.LogError("No CameraShake script found on GM object");
         //}
 
+        DisableLaser();
+
         audioManager = AudioManager.Instance;
         if (audioManager == null) 
         {
@@ -54,79 +65,69 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    
-    void Update()
+
+    private void Update()
     {
-        if (fireRate == 0 && player.InputHandler.ShootInput)
+        if (player.InputHandler.ShootInput && currentLaserAmount > Mathf.Epsilon)
         {
             Shoot();
         }
-        else if (player.InputHandler.ShootInput && Time.time > timeToFire)
+        else if (player.InputHandler.ShootInput && currentLaserAmount <= Mathf.Epsilon)
         {
-            timeToFire = Time.time + 1 / fireRate;
-            Shoot();
+            DisableLaser();
+        }
+        else if (!player.InputHandler.ShootInput && currentLaserAmount != maxLaserAmount)
+        {
+            DisableLaser();
+            currentLaserAmount += laserUseSpeed * Time.deltaTime;
+            onLaserUsed?.Invoke(currentLaserAmount);
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
+        EnableLaser();
+
+        lineRenderer.SetPosition(0, firePoint.position);
+
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector2.right * player.FacingDirection, 100f, whatToHit);
 
-        if (hit.collider.GetComponent<IDamageable>() != null) 
+        if (hit)
         {
-            hit.collider.GetComponent<IDamageable>().Damage(damage);
+            lineRenderer.SetPosition(1, hit.point);
+            
+            if (Time.time >= timeToSpawnEffect)
+            {
+                SpawnImpactParticles(hit);
+                if (hit.collider.GetComponent<IDamageable>() != null)
+                {
+                    hit.collider.GetComponent<IDamageable>().Damage(damage);
+                }
+            }
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, new Vector2((30f * player.FacingDirection) + firePoint.position.x, firePoint.position.y));
         }
 
-        if (Time.time >= timeToSpawnEffect) 
-        {
-            Vector3 hitPos;
-            Vector3 hitNormal;
-
-            if (hit.collider == null)
-            {
-                hitPos = firePoint.position * 30f;
-                hitNormal = new Vector3(9999, 9999, 9999);
-            }
-            else
-            {
-                hitPos = hit.point;
-                hitNormal = hit.normal;
-            }
-
-            Effect(hitPos, hitNormal);
-            timeToSpawnEffect = Time.time + 1/effectSpawnRate;
-        }
+        currentLaserAmount -= laserUseSpeed * Time.deltaTime;
+        onLaserUsed?.Invoke(currentLaserAmount);        
     }
 
-    void Effect(Vector3 hitPos, Vector3 hitNormal)
+    private void DisableLaser()
     {
-        Transform trail = Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
-        LineRenderer lr = trail.GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
+    }
 
-        if (lr != null)
-        {
-            // Set positions
-            lr.SetPosition(0, firePoint.position);
-            lr.SetPosition(1, hitPos);
-        }
-        Destroy(trail.gameObject, 0.03f);
+    private void EnableLaser()
+    {
+        lineRenderer.enabled = true;
+    }
 
-        if (hitNormal != new Vector3(9999, 9999, 9999))
-        {
-            Transform hitParticles = Instantiate(hitPrefab, hitPos, Quaternion.FromToRotation(Vector3.right, hitNormal));
-            Destroy(hitParticles.gameObject, 1f);
-        }
-
-        Transform clone = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation);
-        clone.parent = firePoint;
-        float size = UnityEngine.Random.Range(0.6f, 0.9f);
-        clone.localScale = new Vector3(size, size, 1f);
-        Destroy(clone.gameObject, 0.02f);
-
-        // Shake the camera
-        //camShake.Shake(camShakeAmount, camShakeLength);
-
-        // Play shoot sound
-        audioManager.PlaySound(weaponShootSound);
+    private void SpawnImpactParticles(RaycastHit2D hit)
+    {
+        Transform hitParticles = Instantiate(hitPrefab, hit.point, Quaternion.FromToRotation(Vector3.right, hit.normal));
+        Destroy(hitParticles.gameObject, 1f);
+        timeToSpawnEffect = Time.time + 1 / effectSpawnRate;    
     }
 }

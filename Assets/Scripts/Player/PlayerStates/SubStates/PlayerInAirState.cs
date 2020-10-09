@@ -16,6 +16,11 @@ public class PlayerInAirState : PlayerAbilityState
         xInput = player.InputHandler.NormalizedInputX;
         jumpInput = player.InputHandler.JumpInput;
 
+        if (shootInput)
+            player.Anim.SetLayerWeight(1, 1);
+        else if (!shootInput)
+            player.Anim.SetLayerWeight(1, 0);
+
         if (jumpInput && playerData.currentFuelAmount > 0.2f)
             stateMachine.ChangeState(player.ThrustState);
         else if (isGrounded && player.CurrentVelocity.y < Mathf.Epsilon)

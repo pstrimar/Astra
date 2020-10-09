@@ -8,7 +8,6 @@ public class PlayerGroundedState : PlayerState
     protected bool shootInput;
 
     private bool jumpInput;
-
     private bool isGrounded;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
@@ -35,7 +34,9 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.ThrustState);
 
         if (shootInput)
-            stateMachine.ChangeState(player.ShootState);
+            player.Anim.SetLayerWeight(1, 1);
+        else if (!shootInput)
+            player.Anim.SetLayerWeight(1, 0);
 
         if (player.OnLadder)
             stateMachine.ChangeState(player.ClimbState);        

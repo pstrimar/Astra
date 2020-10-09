@@ -16,10 +16,12 @@ public class PlayerShootState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        player.Anim.SetLayerWeight(1, 1);
     }
 
     public override void Exit()
     {
+        player.Anim.SetLayerWeight(1, 0);
         base.Exit();
     }
 

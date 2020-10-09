@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 3
-  playerPrefab: {fileID: 3896175246835059672, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+  playerPrefab: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
     type: 3}
   spawnPoint: {fileID: 3483215191265222729}
   spawnDelay: 3
@@ -58,9 +58,10 @@ MonoBehaviour:
   spawnSoundName: Spawn
   gameOverSoundName: GameOver
   cameraShake: {fileID: 414976523}
-  gameOverUI: {fileID: 0}
-  upgradeMenu: {fileID: 0}
-  UIOverlay: {fileID: 0}
+  gameOverUI: {fileID: 3874661148877204268, guid: 778c178b621274f439cf9892c96e196a,
+    type: 3}
+  upgradeMenu: {fileID: 3568013182613385465, guid: d657e54f422d1b043ab51dec28db2232,
+    type: 3}
   startingCrystals: 0
 --- !u!82 &414976519
 AudioSource:

@@ -16,11 +16,11 @@ public class PlayerData : SingletonScriptableObject<PlayerData>
     public LayerMask whatIsGround;
     public float currentFuelAmount
     {
-        get { return _curentFuelAmount; }
-        set { _curentFuelAmount = Mathf.Clamp(value, 0, maxFuelAmount); }
+        get { return _currentFuelAmount; }
+        set { _currentFuelAmount = Mathf.Clamp(value, 0, maxFuelAmount); }
     }
 
-    private float _curentFuelAmount;
+    private float _currentFuelAmount;
 
     public int maxHealth = 100;
 

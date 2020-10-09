@@ -14,6 +14,8 @@ public class PersistentObjectSpawner : MonoBehaviour
 
         SpawnPersistentObjects();
 
+        Debug.Log("Spawned objects");
+
         hasSpawned = true;
     }
 
