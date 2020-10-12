@@ -26,8 +26,6 @@ public class Crawler_Run : StateMachineBehaviour
         playerDetectedAhead = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
         playerDetectedBehind = Physics2D.Raycast(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
         playerInAttackRange = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.attackRange, playerLayer);
-        
-        //Debug.DrawRay(enemy.transform.position, Vector2.right * enemy.facingDirection * stats.attackRange);
 
         if ((!playerDetectedAhead && !playerDetectedBehind) || !player.gameObject.activeSelf)
         {

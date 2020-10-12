@@ -139,10 +139,11 @@ public class GameManager : MonoBehaviour, ISaveable
         Instance._KillEnemy(enemy);
     }
 
-    public void _KillEnemy(Enemy _enemy) 
+    private void _KillEnemy(Enemy _enemy) 
     {
         // Play sounds
         AudioManager.Instance.PlaySound(_enemy.deathSoundName);
+        _enemy.isDead = true;
 
         // Add particles
         Transform _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);

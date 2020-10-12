@@ -99,7 +99,8 @@ public class Weapon : MonoBehaviour
             if (Time.time >= timeToSpawnEffect)
             {
                 SpawnImpactParticles(hit);
-                if (hit.collider.GetComponent<IDamageable>() != null)
+
+                if (hit.collider.GetComponent<IDamageable>() != null && !hit.collider.GetComponent<Enemy>().isDead)
                 {
                     hit.collider.GetComponent<IDamageable>().Damage(damage);
                 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, ISaveable
 {
     [System.Serializable]
     public class EnemyStats 
@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public EnemyStats stats = new EnemyStats();
 
     public Transform deathParticles;
+    public bool isDead;
 
     //What to chase
     public Transform target;
@@ -46,18 +47,11 @@ public class Enemy : MonoBehaviour, IDamageable
     public string deathSoundName = "Explosion";
 
     public int facingDirection = 1;
-
-    [Header("Optional: ")]
-    [SerializeField] StatusIndicator statusIndicator;    
+    private float hurtTimer = 0f;
 
     private void Awake() 
     {
-        stats.Init();
-        
-        if (statusIndicator != null)
-        {
-            //statusIndicator.UpdateHealth(stats.currentHealth, stats.maxHealth);
-        }        
+        stats.Init();       
 
         if (deathParticles == null)
         {
@@ -72,8 +66,6 @@ public class Enemy : MonoBehaviour, IDamageable
         target = GameObject.FindWithTag("Player").transform;
     }
 
-
-
     private void OnDisable() 
     {
         GameManager.Instance.onToggleMenu -= OnUpgradeMenuToggle;
@@ -81,29 +73,32 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void OnUpgradeMenuToggle(bool active)
     {
-        // TODO: disable enemy behaviour
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Animator>().enabled = !active;
     }
 
     public void Damage(int damage) 
     {
         stats.currentHealth -= damage;
-        if (stats.currentHealth <= 0) 
+
+        if (Time.time - hurtTimer > 1f)
+            GetComponent<Animator>().SetTrigger("hurt");
+
+        if (stats.currentHealth <= 0 && !isDead) 
         {
             GameManager.KillEnemy(this);
+            GetComponent<Animator>().SetBool("dead", true);
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), target.GetComponent<CapsuleCollider2D>());
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
         }
-        if (statusIndicator != null)
-        {
-            //statusIndicator.UpdateHealth(stats.currentHealth, stats.maxHealth);
-        }
+
+        hurtTimer = Time.time;
     }
 
     public void Attack()
     {
         Player player = target.GetComponent<Player>();
-        Debug.Log(Vector2.Distance(transform.position, target.position));
 
-        if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouchingLayers(LayerMask.GetMask("Player")))
+        if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
@@ -140,5 +135,36 @@ public class Enemy : MonoBehaviour, IDamageable
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }    
+    }
+
+    [System.Serializable]
+    struct EnemySaveData
+    {
+        public int currentHealth;
+        public bool isDead;
+        public float[] position;
+    }
+
+    public object CaptureState()
+    {
+        EnemySaveData data = new EnemySaveData();
+        data.currentHealth = stats.currentHealth;
+        data.isDead = isDead;
+        data.position = new float[2];
+        data.position[0] = transform.position.x;
+        data.position[1] = transform.position.y;
+
+        return data;
+    }
+
+    public void RestoreState(object state)
+    {
+        EnemySaveData data = (EnemySaveData)state;
+        stats.currentHealth = data.currentHealth;
+        isDead = data.isDead;
+        transform.position = new Vector2(data.position[0], data.position[1]);
+
+        if (isDead)
+            GetComponent<Animator>().SetBool("dead", true);
+    }
 }

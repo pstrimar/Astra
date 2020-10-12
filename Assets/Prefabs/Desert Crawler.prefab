@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8944902721391012961}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3000674593907108873}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231577266988922964}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg r f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ Transform:
   - {fileID: 2227023013650126846}
   m_Father: {fileID: 2231962747981925074}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 125.82331}
 --- !u!1 &2229351677767055880
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2226604884614468660}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg l  b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ Transform:
   - {fileID: 2226985087519375774}
   m_Father: {fileID: 2226561885755203934}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -128.16403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -91.78881}
 --- !u!1 &2229356446426721506
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231762439985948918}
   - component: {fileID: 2019031694336401278}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint l b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226868540278312248}
   - component: {fileID: 2019298060354255168}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg l b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226700895594867074}
   - component: {fileID: 2019816218128057272}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: bloodsquirt fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226470119713295330}
   - component: {fileID: 2019036918816620802}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg-chop-spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226879655042265636}
   - component: {fileID: 2019091649777871424}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint r add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2226561885755203934}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg joint l b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ Transform:
   - {fileID: 2231762439985948918}
   m_Father: {fileID: 2226475990729062908}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 73.94871}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 107.51351}
 --- !u!1 &2229529113369580724
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231962747981925074}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg joint r f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ Transform:
   - {fileID: 2226723993718898324}
   m_Father: {fileID: 2226475990729062908}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 64.65758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -142.68027}
 --- !u!1 &2229819361847183138
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226679159072207428}
   - component: {fileID: 2019650744987303834}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg r back add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231715932966995452}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg r b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ Transform:
   - {fileID: 2226679159072207428}
   m_Father: {fileID: 2231652301507826126}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 102.01568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 105.34223}
 --- !u!1 &2229865537492641772
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226733931943269288}
   - component: {fileID: 2019764489274072942}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: impact a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231950393244050486}
   - component: {fileID: 2019252370601684462}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg r add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2227023013650126846}
   - component: {fileID: 2018846561952622296}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg r add recover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231599901169303760}
   - component: {fileID: 2019743898519796068}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint r back add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231730058602817750}
   - component: {fileID: 2019094846685264872}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: bloodsquirt recover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231947717244296526}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg joint l f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ Transform:
   - {fileID: 2226935730280711960}
   m_Father: {fileID: 2226475990729062908}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 72.95652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 148.80501}
 --- !u!1 &2229997747234640566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231879931614185992}
   - component: {fileID: 2019621618263963336}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: slash 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226685962468342744}
   - component: {fileID: 2019781219677675296}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg r b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231880259643905676}
   - component: {fileID: 2018963189855662486}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg l add front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,7 +1400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226828009334292972}
   - component: {fileID: 2018314532266689952}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1481,7 +1481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226723993718898324}
   - component: {fileID: 2019151864140712014}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint r_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1562,7 +1562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226744873822541606}
   - component: {fileID: 2019782032071682700}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: body add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1643,7 +1643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231821233933055256}
   - component: {fileID: 2019634002478858250}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: dust 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1724,7 +1724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226985087519375774}
   - component: {fileID: 2019199031767742978}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg l add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1805,7 +1805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226964196960688934}
   - component: {fileID: 2019726675576293442}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1885,7 +1885,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231652301507826126}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg joint r b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1908,7 +1908,7 @@ Transform:
   - {fileID: 2226879655042265636}
   m_Father: {fileID: 2226475990729062908}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -130.08842}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -123.95694}
 --- !u!1 &2230242544004024604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,7 +1919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231614667883860214}
   - component: {fileID: 2019709716024945480}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1999,7 +1999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231661142337366222}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b leg l f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2021,7 +2021,7 @@ Transform:
   - {fileID: 2231880259643905676}
   m_Father: {fileID: 2231947717244296526}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -129.90105}
 --- !u!1 &2230380258534186680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +2035,8 @@ GameObject:
   - component: {fileID: 9176569902435753497}
   - component: {fileID: 8643079901749539614}
   - component: {fileID: 5374763826345905888}
-  m_Layer: 0
+  - component: {fileID: 717789129137638903}
+  m_Layer: 15
   m_Name: Desert Crawler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2150,10 +2151,11 @@ MonoBehaviour:
     walkSpeed: 3
     runSpeed: 5
     aggroRange: 6
-    attackRange: 1.5
+    attackRange: 0.4
     knockbackStrength: 4
   deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
+  isDead: 0
   target: {fileID: 0}
   groundCheck: {fileID: 8944902721391012961}
   wallCheck: {fileID: 3000674593907108873}
@@ -2163,7 +2165,19 @@ MonoBehaviour:
   shakeLength: 0.1
   deathSoundName: Explosion
   facingDirection: 1
-  statusIndicator: {fileID: 0}
+--- !u!114 &717789129137638903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230380258534186680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7f12fe5e4a27a44be94cc49fff25b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: e103410d-4404-4971-be61-7030c81ab86e
 --- !u!1 &2230690781438068444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231890887618462232}
   - component: {fileID: 2019069997636259576}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: slash 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2254,7 +2268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231601745673699532}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2277,7 +2291,7 @@ Transform:
   - {fileID: 2226744873822541606}
   m_Father: {fileID: 2226475990729062908}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -139.72246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -154.89842}
 --- !u!1 &2230752660630595082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,7 +2302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226563027507895212}
   - component: {fileID: 2019151362274365356}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2369,7 +2383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2231640355970570978}
   - component: {fileID: 2019228173129525114}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2450,7 +2464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226699879113286996}
   - component: {fileID: 2018254428579495676}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint r b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2530,7 +2544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2226475990729062908}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: b crawler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2555,7 +2569,7 @@ Transform:
   - {fileID: 2231652301507826126}
   m_Father: {fileID: 2226885070761319610}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -119.65836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -95.57293}
 --- !u!1 &2230782777798317478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,7 +2580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226935730280711960}
   - component: {fileID: 2018418840028652982}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: leg joint l front add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2647,7 +2661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3071220978107176356}
   - component: {fileID: 2398064855310504072}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SlashCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}

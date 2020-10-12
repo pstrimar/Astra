@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Lever : MonoBehaviour, IUseable
+public class Lever : MonoBehaviour, IUseable, ISaveable
 {
     [SerializeField] Transform moveableObject;
     [SerializeField] float speed = .5f;
@@ -11,10 +11,8 @@ public class Lever : MonoBehaviour, IUseable
     private Animator anim;
     private bool leverPosition = true;
     private string secretDoorSound = "SecretDoor";
-    
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         anim = GetComponent<Animator>();
@@ -41,7 +39,49 @@ public class Lever : MonoBehaviour, IUseable
         player.IsUsingLever = true;
         anim.SetBool("Switch", leverPosition);
         leverPosition = !leverPosition;
-        AudioManager.Instance.PlaySound(secretDoorSound);        
+        AudioManager.Instance.PlaySound(secretDoorSound);
+    }
+
+    [System.Serializable]
+    struct LeverSaveData
+    {
+        public bool leverPosition;
+        public float[] startingPos;
+        public float[] endingPos;
+        public float[] moveableObjectPosition;
+    }
+
+    public object CaptureState()
+    {
+        LeverSaveData data = new LeverSaveData();
+        data.leverPosition = leverPosition;
+
+        data.startingPos = new float[2];
+        data.startingPos[0] = startingPos.x;
+        data.startingPos[1] = startingPos.y;
+
+        data.endingPos = new float[2];
+        data.endingPos[0] = endingPos.x;
+        data.endingPos[1] = endingPos.y;
+
+        data.moveableObjectPosition = new float[2];
+        data.moveableObjectPosition[0] = moveableObject.position.x;
+        data.moveableObjectPosition[1] = moveableObject.position.y;
+
+        return data;
+    }
+    
+    public void RestoreState(object state)
+    {
+        LeverSaveData data = (LeverSaveData)state;
+
+        leverPosition = data.leverPosition;
+        GetComponent<Animator>().SetBool("Switch", !leverPosition);
+
+        moveableObject.position = new Vector2(data.moveableObjectPosition[0], data.moveableObjectPosition[1]);
+
+        startingPos = new Vector2(data.startingPos[0], data.startingPos[1]);
+        endingPos = new Vector2(data.endingPos[0], data.endingPos[1]);
     }
 }
 

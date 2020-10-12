@@ -4,7 +4,7 @@ public class Ladder : MonoBehaviour, IUseable
 {
     Player player;
 
-    [SerializeField] Collider2D ladderCollider;
+    [SerializeField] Collider2D groundCollider;
 
     public void Use()
     {
@@ -12,8 +12,7 @@ public class Ladder : MonoBehaviour, IUseable
 
         // we need to start climbing
         player.OnLadder = true;
-        Physics2D.IgnoreCollision(player.GetComponent<CircleCollider2D>(), ladderCollider, true);
-        Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), ladderCollider, true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -22,8 +21,7 @@ public class Ladder : MonoBehaviour, IUseable
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             player.OnLadder = false;
-            Physics2D.IgnoreCollision(player.GetComponent<CircleCollider2D>(), ladderCollider, false);
-            Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), ladderCollider, false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), false);
         }
     }
 }

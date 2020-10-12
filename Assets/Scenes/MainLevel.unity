@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5228bcba97f74464886c0b5b9d7567fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ladderCollider: {fileID: 0}
+  groundCollider: {fileID: 0}
 --- !u!61 &913438006
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1688,6 +1688,7 @@ GameObject:
   - component: {fileID: 1002185207}
   - component: {fileID: 1002185206}
   - component: {fileID: 1002185210}
+  - component: {fileID: 1002185211}
   m_Layer: 2
   m_Name: Lever
   m_TagString: Useable
@@ -1818,6 +1819,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveableObject: {fileID: 1363720250}
   speed: 0.15
+--- !u!114 &1002185211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002185205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7f12fe5e4a27a44be94cc49fff25b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 85923220-45c3-4f1e-9b14-9ca106dfea49
 --- !u!1 &1006315053
 GameObject:
   m_ObjectHideFlags: 0
@@ -7938,7 +7952,7 @@ PrefabInstance:
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.99
+      value: -4.24
       objectReference: {fileID: 0}
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}

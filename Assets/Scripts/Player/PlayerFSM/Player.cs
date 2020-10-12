@@ -122,10 +122,10 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
         StateMachine.Initialize(IdleState);
 
-        //if (InputHandler != null)
-        //{
-        //    InputHandler.OnActionButtonPressed += HandleAction;
-        //}
+        if (InputHandler != null)
+        {
+            InputHandler.OnActionButtonPressed += HandleAction;
+        }
 
         InvokeRepeating("RegenHealth", 1f / playerData.healthRegenRate, 1f / playerData.healthRegenRate);
     }    
