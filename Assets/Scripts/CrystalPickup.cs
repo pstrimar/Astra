@@ -9,7 +9,7 @@ public class CrystalPickup : MonoBehaviour, ISaveable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && !pickedUp)
+        if (collision.gameObject.tag == "Player" && collision.gameObject.activeSelf && !pickedUp)
         {
             pickedUp = true;
             GetComponent<CircleCollider2D>().enabled = false;

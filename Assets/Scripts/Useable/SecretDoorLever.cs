@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Lever : MonoBehaviour, IUseable, ISaveable
+public class SecretDoorLever : MonoBehaviour, IUseable, ISaveable
 {
     [SerializeField] Transform moveableObject;
     [SerializeField] float speed = .5f;

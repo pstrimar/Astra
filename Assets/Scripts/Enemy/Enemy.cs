@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     private void Start()
     {
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
 
         target = GameObject.FindWithTag("Player").transform;
     }
@@ -87,8 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         {
             GameManager.KillEnemy(this);
             GetComponent<Animator>().SetBool("dead", true);
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), target.GetComponent<CapsuleCollider2D>());
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), target.GetComponent<CapsuleCollider2D>());            
         }
 
         hurtTimer = Time.time;

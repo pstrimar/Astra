@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LaserMat
+  m_Name: LaserMat 1
   m_Shader: {fileID: -6465566751694194690, guid: 4df7198dff30e1245adc525914f3b58b,
     type: 3}
   m_ShaderKeywords: 
@@ -25,5 +25,5 @@ Material:
     - Vector1_961C029A: 5
     - Vector1_F2845CE1: 10
     m_Colors:
-    - Color_F8568A80: {r: 7.6724925, g: 7.6724925, b: 0, a: 1}
+    - Color_F8568A80: {r: 10.24338, g: 0, b: 0.77699465, a: 1}
     - Vector2_D72436D: {r: -1, g: 0, b: 0, a: 0}

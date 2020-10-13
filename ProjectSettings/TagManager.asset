@@ -11,6 +11,8 @@ TagManager:
   - Obstacle
   - UpgradeMenu
   - SceneManager
+  - LaserToBeTurnedOff
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

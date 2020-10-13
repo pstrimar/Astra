@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour, ISaveable
     }
 
     [SerializeField] Transform playerPrefab;
-    [SerializeField] Transform spawnPoint;
     [SerializeField] float spawnDelay = 3.7f;
     [SerializeField] Transform spawnPrefab;
     [SerializeField] string respawnCountdownSoundName = "RespawnCountdown";
@@ -32,7 +31,8 @@ public class GameManager : MonoBehaviour, ISaveable
     public event Action<bool> onToggleMenu;
 
     [SerializeField] int startingCrystals;
-    public static int Crystals;   
+    public static int Crystals;
+    private Transform spawnPoint;
 
     private void Awake() 
     {
@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour, ISaveable
         yield return new WaitForSeconds(spawnDelay);
 
         AudioManager.Instance.PlaySound(spawnSoundName);
+        spawnPoint = GameObject.FindWithTag("SpawnPoint").transform;
         player.transform.position = spawnPoint.position;
         player.transform.rotation = spawnPoint.rotation;
         player.GetComponent<PlayerInput>().enabled = true;
