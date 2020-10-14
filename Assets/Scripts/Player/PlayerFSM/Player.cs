@@ -170,7 +170,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Useable")
+        if (collision.GetComponent<IUseable>() != null)
         {
             useable = collision.GetComponent<IUseable>();
             instructions.enabled = true;
@@ -179,7 +179,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Useable")
+        if (collision.GetComponent<IUseable>() != null)
         {
             useable = null;
             instructions.enabled = false;

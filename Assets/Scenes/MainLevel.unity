@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -233,7 +233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &122181026
 PrefabInstance:
@@ -456,6 +456,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1500615097, guid: 36a66d0f7d038ed4c9c0cc699a277ebe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5543880263021760744, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
         type: 3}
       propertyPath: m_Name
@@ -1357,7 +1361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913438004
 GameObject:
@@ -1475,8 +1479,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913438004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.407, y: -1.04, z: 0}
-  m_LocalScale: {x: 1, y: 4.7, z: 1}
+  m_LocalPosition: {x: -7.407, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -7933,12 +7937,12 @@ PrefabInstance:
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.19
+      value: -7.33
       objectReference: {fileID: 0}
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.24
+      value: -2.73
       objectReference: {fileID: 0}
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}

@@ -11,7 +11,6 @@ public class ParallaxLayer : MonoBehaviour {
 	private Transform _transform;
 	private Vector3 _offset;
 	private Vector3 _newPosition;
-	private Vector3 _roundedPosition;
 
 	private void Awake() {
 		_transform = GetComponent<Transform>();
@@ -21,9 +20,6 @@ public class ParallaxLayer : MonoBehaviour {
 
 	private void Update() {
 		_newPosition.x = _offset.x + BaseObject.position.x * ParallaxSpeed;
-		_roundedPosition = _newPosition;
-		_roundedPosition.x = _newPosition.x;
-		//_roundedPosition.x = Mathf.Floor (_newPosition.x * 32f) / 32f;
-		_transform.position = _roundedPosition;
+		_transform.position = _newPosition;
 	}
 }

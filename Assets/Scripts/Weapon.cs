@@ -21,17 +21,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] Transform hitPrefab;
     [SerializeField] float effectSpawnRate = 10f;
 
-    // Handle camera shaking
-    [SerializeField] float camShakeAmount = 0.05f;
-    [SerializeField] float camShakeLength = 0.1f;
-    //private CameraShake camShake;
-
     [SerializeField] string weaponShootSound = "DefaultShot";
 
     private float _currentLaserAmount;
 
     private Transform firePoint;
     private float timeToSpawnEffect = 2f;
+    private float maxLaserLength = 15f;
 
     private AudioManager audioManager;
     private Player player;
@@ -50,14 +46,6 @@ public class Weapon : MonoBehaviour
 
     private void Start() 
     {
-        //camShake = GameManager.Instance.GetComponent<CameraShake>();
-        //if (camShake == null)
-        //{
-        //    Debug.LogError("No CameraShake script found on GM object");
-        //}
-
-        DisableLaser();
-
         audioManager = AudioManager.Instance;
         if (audioManager == null) 
         {
@@ -72,13 +60,8 @@ public class Weapon : MonoBehaviour
         {
             Shoot();
         }
-        else if (player.InputHandler.ShootInput && currentLaserAmount <= Mathf.Epsilon)
-        {
-            DisableLaser();
-        }
         else if (!player.InputHandler.ShootInput && currentLaserAmount != maxLaserAmount)
         {
-            DisableLaser();
             currentLaserAmount += laserUseSpeed * Time.deltaTime;
             onLaserUsed?.Invoke(currentLaserAmount);
         }
@@ -86,15 +69,14 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        EnableLaser();
-
-        lineRenderer.SetPosition(0, firePoint.position);
+        LineRenderer laserBeam = Instantiate(lineRenderer, firePoint.position, firePoint.rotation);
+        laserBeam.SetPosition(0, firePoint.position);
 
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector2.right * player.FacingDirection, 100f, whatToHit);
 
-        if (hit)
+        if (hit && hit.distance < maxLaserLength)
         {
-            lineRenderer.SetPosition(1, hit.point);
+            laserBeam.SetPosition(1, hit.point);
             
             if (Time.time >= timeToSpawnEffect)
             {
@@ -108,21 +90,12 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            lineRenderer.SetPosition(1, new Vector2((30f * player.FacingDirection) + firePoint.position.x, firePoint.position.y));
+            laserBeam.SetPosition(1, new Vector2((maxLaserLength * player.FacingDirection) + firePoint.position.x, firePoint.position.y));
         }
 
         currentLaserAmount -= laserUseSpeed * Time.deltaTime;
-        onLaserUsed?.Invoke(currentLaserAmount);        
-    }
-
-    private void DisableLaser()
-    {
-        lineRenderer.enabled = false;
-    }
-
-    private void EnableLaser()
-    {
-        lineRenderer.enabled = true;
+        onLaserUsed?.Invoke(currentLaserAmount);
+        Destroy(laserBeam.gameObject, .02f);
     }
 
     private void SpawnImpactParticles(RaycastHit2D hit)
