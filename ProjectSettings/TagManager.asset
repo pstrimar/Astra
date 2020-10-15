@@ -50,8 +50,17 @@ TagManager:
   - name: Background
     uniqueID: 594588835
     locked: 0
+  - name: River
+    uniqueID: 807030313
+    locked: 0
+  - name: Waterfall
+    uniqueID: 1336126573
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Rocks
+    uniqueID: 3440128321
     locked: 0
   - name: Player
     uniqueID: 748583343

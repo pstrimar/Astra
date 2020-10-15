@@ -38,7 +38,12 @@ public class Crawler_Walk : StateMachineBehaviour
         Debug.DrawRay(enemy.wallCheck.position, Vector2.right * enemy.facingDirection * stats.aggroRange);
         Debug.DrawRay(enemy.wallCheck.position, -Vector2.right * enemy.facingDirection * stats.aggroRange);
 
-        if (!groundDetected || wallDetected)
+        
+        if (rb.velocity.y < -.1f)
+        {
+            animator.SetTrigger("falling");
+        }
+        else if (!groundDetected || wallDetected)
         {
             enemy.Flip();
         }
@@ -58,11 +63,5 @@ public class Crawler_Walk : StateMachineBehaviour
             enemy.Flip();
             animator.SetFloat("hSpeed", stats.runSpeed);
         }
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
     }
 }

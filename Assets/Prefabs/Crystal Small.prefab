@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1317692021343970279}
   - component: {fileID: 6136165780016663867}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 750730958899110453}
   - component: {fileID: 4010728466345205277}
   - component: {fileID: 340990069364697665}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crystal Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}

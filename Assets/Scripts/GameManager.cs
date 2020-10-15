@@ -143,16 +143,13 @@ public class GameManager : MonoBehaviour, ISaveable
     private void _KillEnemy(Enemy _enemy) 
     {
         // Play sounds
+        AudioManager.Instance.StopSound(_enemy.hurtSoundName);
         AudioManager.Instance.PlaySound(_enemy.deathSoundName);
         _enemy.isDead = true;
 
         // Add particles
         Transform _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
         Destroy(_clone.gameObject, 5f);
-
-        // Camera shake
-        //cameraShake.Shake(_enemy.shakeAmount, _enemy.shakeLength);
-        //Destroy(_enemy.gameObject);
     }
 
     [System.Serializable]

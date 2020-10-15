@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] float floatStrength = 1;
+    [SerializeField] float floatStrength = 1f;
+    [Range(0, 1)]
+    [SerializeField] float floatSpeed = 1f;
 
     private float originalY;
 
@@ -15,7 +17,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector2(transform.position.x, originalY + (Mathf.Sin(Time.time) * floatStrength));
+        transform.position = new Vector2(transform.position.x, originalY + (Mathf.Sin(Time.time * floatSpeed) * floatStrength));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

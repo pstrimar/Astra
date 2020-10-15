@@ -21,13 +21,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] Transform hitPrefab;
     [SerializeField] float effectSpawnRate = 10f;
 
-    [SerializeField] string weaponShootSound = "DefaultShot";
+    [SerializeField] string weaponShootSound = "LaserBeamSound";
+    [SerializeField] string weaponRechargeSound = "LaserRecharge";
 
     private float _currentLaserAmount;
 
     private Transform firePoint;
     private float timeToSpawnEffect = 2f;
-    private float maxLaserLength = 15f;
+    [SerializeField] float maxLaserLength = 15f;
 
     private AudioManager audioManager;
     private Player player;
@@ -62,6 +63,8 @@ public class Weapon : MonoBehaviour
         }
         else if (!player.InputHandler.ShootInput && currentLaserAmount != maxLaserAmount)
         {
+            audioManager.StopSound(weaponShootSound);
+            audioManager.PlaySoundOnce(weaponRechargeSound);
             currentLaserAmount += laserUseSpeed * Time.deltaTime;
             onLaserUsed?.Invoke(currentLaserAmount);
         }
@@ -69,6 +72,8 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        audioManager.PlaySoundOnce(weaponShootSound);
+
         LineRenderer laserBeam = Instantiate(lineRenderer, firePoint.position, firePoint.rotation);
         laserBeam.SetPosition(0, firePoint.position);
 

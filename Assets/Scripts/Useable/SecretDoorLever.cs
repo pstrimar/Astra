@@ -1,21 +1,18 @@
 ﻿using UnityEngine;
 
-public class SecretDoorLever : MonoBehaviour, IUseable, ISaveable
+public class SecretDoorLever : Lever, IUseable, ISaveable
 {
     [SerializeField] Transform moveableObject;
     [SerializeField] float speed = .5f;
-    private Player player;
     private Vector3 startingPos;
     private Vector3 endingPos;
     private float targetDistance = 1f;
-    private Animator anim;
-    private bool leverPosition = true;
     private string secretDoorSound = "SecretDoor";
 
-    private void Awake()
+    public override void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        anim = GetComponent<Animator>();
+        base.Awake();
+
         startingPos = moveableObject.position;
         endingPos = startingPos + Vector3.right * targetDistance;
     }
@@ -34,28 +31,14 @@ public class SecretDoorLever : MonoBehaviour, IUseable, ISaveable
         }
     }
 
-    public void Use()
+    public override void Use()
     {
-        player.IsUsingLever = true;
-        anim.SetBool("Switch", leverPosition);
-        leverPosition = !leverPosition;
+        base.Use();
         AudioManager.Instance.PlaySound(secretDoorSound);
     }
 
-    [System.Serializable]
-    struct LeverSaveData
+    public override object CaptureState()
     {
-        public bool leverPosition;
-        public float[] startingPos;
-        public float[] endingPos;
-        public float[] moveableObjectPosition;
-    }
-
-    public object CaptureState()
-    {
-        LeverSaveData data = new LeverSaveData();
-        data.leverPosition = leverPosition;
-
         data.startingPos = new float[2];
         data.startingPos[0] = startingPos.x;
         data.startingPos[1] = startingPos.y;
@@ -68,20 +51,18 @@ public class SecretDoorLever : MonoBehaviour, IUseable, ISaveable
         data.moveableObjectPosition[0] = moveableObject.position.x;
         data.moveableObjectPosition[1] = moveableObject.position.y;
 
-        return data;
+        base.CaptureState();
+        return data;        
     }
     
-    public void RestoreState(object state)
+    public override void RestoreState(object state)
     {
         LeverSaveData data = (LeverSaveData)state;
-
-        leverPosition = data.leverPosition;
-        GetComponent<Animator>().SetBool("Switch", !leverPosition);
-
         moveableObject.position = new Vector2(data.moveableObjectPosition[0], data.moveableObjectPosition[1]);
 
         startingPos = new Vector2(data.startingPos[0], data.startingPos[1]);
         endingPos = new Vector2(data.endingPos[0], data.endingPos[1]);
+        base.RestoreState(state);
     }
 }
 

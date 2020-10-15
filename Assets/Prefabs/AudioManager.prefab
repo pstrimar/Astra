@@ -181,6 +181,30 @@ MonoBehaviour:
     randomPitch: 0
     loop: 1
     source: {fileID: 0}
+  - name: LaserBeamSound
+    clip: {fileID: 8300000, guid: 4109aaeed70986f49a1bc8b529872111, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserRecharge
+    clip: {fileID: 8300000, guid: 62ef84f22f8e0d5489a62febde25375e, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SecretDoor
+    clip: {fileID: 8300000, guid: 070779cdcfbe3ff4688691fb33bc3e4e, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!114 &5676759395640995369
 MonoBehaviour:
   m_ObjectHideFlags: 0

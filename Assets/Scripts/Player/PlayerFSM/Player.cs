@@ -50,7 +50,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     [SerializeField] string damageSoundName = "Grunt";
 
     private Vector2 workspace;
-    private IUseable useable;
+    private IUseable[] useable;
 
     #endregion
 
@@ -170,16 +170,16 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<IUseable>() != null)
+        if (collision.GetComponents<IUseable>() != null)
         {
-            useable = collision.GetComponent<IUseable>();
+            useable = collision.GetComponents<IUseable>();
             instructions.enabled = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<IUseable>() != null)
+        if (collision.GetComponents<IUseable>() != null)
         {
             useable = null;
             instructions.enabled = false;
@@ -223,11 +223,6 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     }
 
-    public bool IsShooting()
-    {
-        return InputHandler.ShootInput;
-    }
-
     public void SlopeCheck(float xInput)
     {
         SlopeCheckHorizontal(groundCheck.position);
@@ -241,14 +236,20 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
         if (slopeHitFront)
         {
-            IsOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+            if (slopeSideAngle != 90)
+            {
+                IsOnSlope = true;
+            }
             Debug.DrawRay(slopeHitFront.point, transform.right * slopeCheckDistance, Color.green);
         }
         else if (slopeHitBack)
         {
-            IsOnSlope = true;
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+            if (slopeSideAngle != 90)
+            {
+                IsOnSlope = true;
+            }
             Debug.DrawRay(slopeHitBack.point, -transform.right * slopeCheckDistance, Color.red);
         }
         else
@@ -324,7 +325,10 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     {
         if (useable != null)
         {
-            useable.Use();
+            foreach (IUseable useableItem in useable)
+            {
+                useableItem.Use();
+            }
             instructions.enabled = false;
         }            
     }
