@@ -2,11 +2,14 @@
 
 public class Laser : MonoBehaviour
 {
+    public bool horizontal;
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] LayerMask whatToHit;
     [SerializeField] Transform hitPrefab;
     [SerializeField] float effectSpawnRate = 10f;
+    [SerializeField] string laserSparksName = "LaserSparks";
     private Transform firePoint;
+    private Vector2 direction;
     private float timeToSpawnEffect = 2f;
     private int damage = 9001;
 
@@ -19,7 +22,12 @@ public class Laser : MonoBehaviour
     {
         lineRenderer.SetPosition(0, firePoint.position);
 
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector2.right, 100f, whatToHit);
+        if (horizontal)
+            direction = Vector2.right;
+        else
+            direction = Vector2.down;
+
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, 100f, whatToHit);
 
         if (hit)
         {
@@ -37,7 +45,10 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            lineRenderer.SetPosition(1, new Vector2(30f + firePoint.position.x, firePoint.position.y));
+            if (horizontal)
+                lineRenderer.SetPosition(1, new Vector2(30f + firePoint.position.x, firePoint.position.y));
+            else
+                lineRenderer.SetPosition(1, new Vector2(firePoint.position.x, firePoint.position.y - 30f));
         }
     }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
@@ -10,17 +7,16 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Player player = other.collider.GetComponent<Player>();
-        if (player != null && !player.Invincible)
+        if (other.collider.GetComponent<IDamageable>() != null)
         {
-            player.Damage(damage);
-
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            Player player = other.collider.GetComponent<Player>();
+            if (player != null && player.isActiveAndEnabled && !player.Invincible)
             {
                 Vector2 direction = other.transform.position - transform.position;
-                player.AddKnockbackForce(knockbackStrength, direction);
-            }            
-        }
+                player.AddKnockbackForce(knockbackStrength, direction);                
+            }
+
+            other.collider.GetComponent<IDamageable>().Damage(damage);
+        }        
     }
 }

@@ -16,6 +16,8 @@ public class Crawler_Hatch : StateMachineBehaviour
         player = enemy.target;
         stats = enemy.stats;
         animator.gameObject.layer = Physics2D.IgnoreRaycastLayer;
+
+        enemy.invulnerable = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

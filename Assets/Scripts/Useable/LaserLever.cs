@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class LaserLever : Lever, IUseable, ISaveable
 {
-    private Laser laser;
-    private LineRenderer lineRenderer;
+    private GameObject laser;
 
     public override void Awake()
     {
         base.Awake();
-        laser = GameObject.FindGameObjectWithTag("LaserToBeTurnedOff").GetComponent<Laser>();
-        lineRenderer = laser.GetComponent<LineRenderer>();
+        laser = GameObject.FindGameObjectWithTag("LaserToBeTurnedOff");
     }
 
     public override void Use()
@@ -22,10 +20,8 @@ public class LaserLever : Lever, IUseable, ISaveable
 
     private IEnumerator TemporarilyDisableLaser()
     {
-        laser.enabled = false;
-        lineRenderer.enabled = false;
+        laser.SetActive(false);
         yield return new WaitForSeconds(3f);
-        laser.enabled = true;
-        lineRenderer.enabled = true;
+        laser.SetActive(true);
     }
 }

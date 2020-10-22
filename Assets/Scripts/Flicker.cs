@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Flicker : MonoBehaviour
 {
@@ -20,12 +18,14 @@ public class Flicker : MonoBehaviour
 
     private void SpriteBlinkingEffect()
     {
+        GameObject graphics = GetComponent<Player>().FindChildObject("Graphics");
+
         spriteBlinkingTotalTimer += Time.deltaTime;
         if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration)
         {
             startBlinking = false;
             spriteBlinkingTotalTimer = 0f;
-            GetComponentInChildren<SpriteRenderer>().enabled = true;
+            graphics.SetActive(true);
 
             return;
         }
@@ -34,14 +34,10 @@ public class Flicker : MonoBehaviour
         if (spriteBlinkingTimer >= spriteBlinkingMiniDuration)
         {
             spriteBlinkingTimer = 0.0f;
-            if (GetComponentInChildren<SpriteRenderer>().enabled == true)
-            {
-                GetComponentInChildren<SpriteRenderer>().enabled = false;
-            }
+            if (graphics.activeSelf)
+                graphics.SetActive(false);
             else
-            {
-                GetComponentInChildren<SpriteRenderer>().enabled = true;
-            }
+                graphics.SetActive(true);
         }
-    }
+    }    
 }

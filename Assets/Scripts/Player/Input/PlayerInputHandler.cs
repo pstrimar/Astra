@@ -51,4 +51,12 @@ public class PlayerInputHandler : MonoBehaviour
             ShootInput = false;
         }
     }
+
+    public void OnDialogueInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            DialogueManager.Instance.DisplayNextSentence();
+        }
+    }
 }

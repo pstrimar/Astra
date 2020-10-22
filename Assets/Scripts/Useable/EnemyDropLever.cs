@@ -7,7 +7,8 @@ public class EnemyDropLever : Lever, IUseable, ISaveable
 
     private void Start()
     {
-        enemyRB.gravityScale = 0f;
+        if (!enemyDropped)
+            enemyRB.gravityScale = 0f;
     }
 
     public override void Use()
@@ -17,7 +18,7 @@ public class EnemyDropLever : Lever, IUseable, ISaveable
         {
             enemyRB.gravityScale = 1f;
             enemyDropped = true;
-        }        
+        }
     }
 
     public override object CaptureState()

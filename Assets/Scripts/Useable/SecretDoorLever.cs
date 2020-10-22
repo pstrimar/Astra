@@ -4,9 +4,9 @@ public class SecretDoorLever : Lever, IUseable, ISaveable
 {
     [SerializeField] Transform moveableObject;
     [SerializeField] float speed = .5f;
+    [SerializeField] float targetDistance = 1f;
     private Vector3 startingPos;
-    private Vector3 endingPos;
-    private float targetDistance = 1f;
+    private Vector3 endingPos;    
     private string secretDoorSound = "SecretDoor";
 
     public override void Awake()

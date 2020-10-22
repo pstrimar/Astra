@@ -28,13 +28,15 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    public Transform deathParticles;
+    public Transform deathParticles;    
     public Weapon weapon;
 
-    [SerializeField] Text instructions;    
+    [SerializeField] Text instructions;
+    [SerializeField] Transform landingParticles;
+    [SerializeField] Transform landingPoint;
 
     private StatusIndicator statusIndicator;
-    private Transform playerGraphics;
+    private Transform playerGraphics;    
 
     #endregion
 
@@ -67,6 +69,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     [SerializeField] float maxSlopeAngle;
     [SerializeField] PhysicsMaterial2D playerFriction;
     [SerializeField] PhysicsMaterial2D fullFriction;
+    [SerializeField] PhysicsMaterial2D zeroFriction;
 
     private float slopeSideAngle;
     private float slopeDownAngleOld;    
@@ -170,7 +173,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponents<IUseable>() != null)
+        if (collision.GetComponent<IUseable>() != null)
         {
             useable = collision.GetComponents<IUseable>();
             instructions.enabled = true;
@@ -179,7 +182,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponents<IUseable>() != null)
+        if (collision.GetComponent<IUseable>() != null)
         {
             useable = null;
             instructions.enabled = false;
@@ -269,7 +272,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-            if (slopeDownAngle != slopeDownAngleOld)
+            if (slopeDownAngle != slopeDownAngleOld || slopeDownAngle > 0)
             {
                 IsOnSlope = true;
             }
@@ -293,6 +296,10 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         {
             RB.sharedMaterial = fullFriction;
         }
+        else if (IsOnSlope && slopeSideAngle == 90f)
+        {
+            RB.sharedMaterial = zeroFriction;
+        }
         else
         {
             RB.sharedMaterial = playerFriction;
@@ -315,10 +322,12 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
-    private void HandleDialogue(bool enabled)
+    private void HandleDialogue(bool dialogue)
     {
-        // Disables the PlayerController during dialogue and re-enables once complete
-        GetComponent<PlayerInput>().enabled = enabled;
+        if (dialogue)
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
+        else
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("Gameplay");
     }
 
     private void HandleAction()
@@ -368,11 +377,19 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         GetComponent<Flicker>().startBlinking = true;
     }
 
+    public void InstantiateLandingParticles()
+    {
+        Transform dustParticles = Instantiate(landingParticles, landingPoint.position, landingPoint.rotation);
+        Destroy(dustParticles.gameObject, 2f);
+    }
+
     private IEnumerator DisableMovementAndApplyForce(float force, Vector2 direction)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         GetComponent<PlayerInput>().enabled = false;
+
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+
         yield return new WaitForSeconds(.5f);
         GetComponent<PlayerInput>().enabled = true;
     }
@@ -421,6 +438,18 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
             statusIndicator.SetMaxLaser(weapon.maxLaserAmount);
         }
         yield return null;      
+    }
+
+    public GameObject FindChildObject(string name)
+    {
+        for (int i = 0; i < transform.childCount - 1; i++)
+        {
+            if (transform.GetChild(i).gameObject.name == name)
+            {
+                return transform.GetChild(i).gameObject;
+            }
+        }
+        return null;
     }
 
     private void Flip()

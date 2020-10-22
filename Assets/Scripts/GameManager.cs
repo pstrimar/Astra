@@ -19,9 +19,8 @@ public class GameManager : MonoBehaviour, ISaveable
     }
 
     [SerializeField] Transform playerPrefab;
-    [SerializeField] float spawnDelay = 3.7f;
+    [SerializeField] float spawnDelay = 2f;
     [SerializeField] Transform spawnPrefab;
-    [SerializeField] string respawnCountdownSoundName = "RespawnCountdown";
     [SerializeField] string spawnSoundName = "Spawn";
     [SerializeField] string gameOverSoundName = "GameOver";
     [SerializeField] CameraShake cameraShake;
@@ -107,7 +106,6 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public IEnumerator _RespawnPlayer(GameObject player) 
     {
-        AudioManager.Instance.PlaySound(respawnCountdownSoundName);
         yield return new WaitForSeconds(spawnDelay);
 
         AudioManager.Instance.PlaySound(spawnSoundName);
@@ -122,7 +120,9 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public static void KillPlayer(Player player) 
     {        
-        Instantiate(player.deathParticles, player.transform.position, Quaternion.identity);
+        Transform deathParticles = Instantiate(player.deathParticles, player.transform.position, Quaternion.identity);
+        Destroy(deathParticles.gameObject, 5f);
+
         player.gameObject.SetActive(false);
         _remainingLives --;
         if (_remainingLives <= 0)
@@ -145,11 +145,13 @@ public class GameManager : MonoBehaviour, ISaveable
         // Play sounds
         AudioManager.Instance.StopSound(_enemy.hurtSoundName);
         AudioManager.Instance.PlaySound(_enemy.deathSoundName);
+
         _enemy.isDead = true;
+        _enemy.GetComponent<Rigidbody2D>().sharedMaterial = _enemy.fullFriction;
 
         // Add particles
-        Transform _clone = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
-        Destroy(_clone.gameObject, 5f);
+        Transform deathParticles = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
+        Destroy(deathParticles.gameObject, 5f);
     }
 
     [System.Serializable]

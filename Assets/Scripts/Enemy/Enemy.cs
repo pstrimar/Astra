@@ -30,12 +30,16 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     public Transform deathParticles;
     public bool isDead;
+    public bool invulnerable;
 
     //What to chase
     public Transform target;
     public Transform groundCheck;
     public Transform wallCheck;
+    public Transform backCheck;
+    public Transform fallCheck;
     [SerializeField] bool searchingForPlayer = false;
+    public PhysicsMaterial2D fullFriction;
 
     public bool isFlipped = false;
     public float shakeAmount = 0.1f;
@@ -61,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     {
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
-        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), target.GetComponent<CapsuleCollider2D>());
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Player"));
 
         target = GameObject.FindWithTag("Player").transform;
     }
@@ -78,21 +82,24 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     public void Damage(int damage) 
     {
-        stats.currentHealth -= damage;
-
-        if (Time.time - hurtTimer > 1f)
+        if (!invulnerable)
         {
-            AudioManager.Instance.PlaySound(hurtSoundName);
-            GetComponent<Animator>().SetTrigger("hurt");
-        }            
+            stats.currentHealth -= damage;
 
-        if (stats.currentHealth <= 0 && !isDead) 
-        {
-            GameManager.KillEnemy(this);
-            GetComponent<Animator>().SetBool("dead", true);            
-        }
+            if (Time.time - hurtTimer > 1f)
+            {
+                AudioManager.Instance.PlaySound(hurtSoundName);
+                GetComponent<Animator>().SetTrigger("hurt");
+            }
 
-        hurtTimer = Time.time;
+            if (stats.currentHealth <= 0 && !isDead)
+            {
+                GameManager.KillEnemy(this);
+                GetComponent<Animator>().SetBool("dead", true);
+            }
+
+            hurtTimer = Time.time;
+        }        
     }
 
     public void Attack()
@@ -106,27 +113,6 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
             player.Damage(stats.damage);
         }
     }
-
-    //public void LookAtPlayer()
-    //{
-    //    if (target == null) return;
-
-    //    Vector2 flipped = transform.localScale;
-    //    flipped.x *= -1;
-
-    //    if (transform.position.x > target.position.x && !isFlipped)
-    //    {
-    //        transform.localScale = flipped;
-    //        isFlipped = true;
-    //        facingDirection *= -1;
-    //    }
-    //    else if (transform.position.x < target.position.x && isFlipped)
-    //    {
-    //        transform.localScale = flipped;
-    //        isFlipped = false;
-    //        facingDirection *= -1;
-    //    }
-    //}
 
     public void Flip()
     {
@@ -144,7 +130,6 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         public int currentHealth;
         public bool isDead;
         public float[] position;
-        public float gravityScale;
     }
 
     public object CaptureState()
@@ -155,7 +140,6 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         data.position = new float[2];
         data.position[0] = transform.position.x;
         data.position[1] = transform.position.y;
-        data.gravityScale = GetComponent<Rigidbody2D>().gravityScale;
 
         return data;
     }
@@ -166,11 +150,11 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         stats.currentHealth = data.currentHealth;
         isDead = data.isDead;
         transform.position = new Vector2(data.position[0], data.position[1]);
-        GetComponent<Rigidbody2D>().gravityScale = data.gravityScale;
 
         if (isDead)
         {
             GetComponent<Animator>().SetBool("dead", true);
-        }            
+            GetComponent<Rigidbody2D>().sharedMaterial = fullFriction;
+        }
     }
 }

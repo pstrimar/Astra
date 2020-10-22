@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         if (onDialogue != null)
         {
             // Disable any controller scripts
-            onDialogue(false);
+            onDialogue(true);
         }
 
         anim.SetBool("isOpen", true);
@@ -86,6 +86,6 @@ public class DialogueManager : MonoBehaviour
         anim.SetBool("isOpen", false);
 
         // Enable any controller scripts
-        onDialogue(true);
+        onDialogue(false);
     }
 }

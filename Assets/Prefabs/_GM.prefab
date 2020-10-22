@@ -49,17 +49,14 @@ MonoBehaviour:
   maxLives: 3
   playerPrefab: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
     type: 3}
-  spawnDelay: 3
+  spawnDelay: 2
   spawnPrefab: {fileID: 7557596285449408479, guid: 63e02fb15b85b7a45a48aa983593bff6,
     type: 3}
-  respawnCountdownSoundName: RespawnCountdown
   spawnSoundName: Spawn
   gameOverSoundName: GameOver
   cameraShake: {fileID: 414976523}
-  gameOverUI: {fileID: 3874661148877204268, guid: 778c178b621274f439cf9892c96e196a,
-    type: 3}
-  upgradeMenu: {fileID: 3568013182613385465, guid: d657e54f422d1b043ab51dec28db2232,
-    type: 3}
+  gameOverUI: {fileID: 0}
+  upgradeMenu: {fileID: 0}
   startingCrystals: 0
 --- !u!82 &414976519
 AudioSource:

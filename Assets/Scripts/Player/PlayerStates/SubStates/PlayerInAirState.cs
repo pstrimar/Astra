@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerAbilityState
 {
-    
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -26,6 +25,7 @@ public class PlayerInAirState : PlayerAbilityState
         else if (isGrounded && player.CurrentVelocity.y < Mathf.Epsilon)
         {
             AudioManager.Instance.PlaySound(landingSoundName);
+            player.InstantiateLandingParticles();
             stateMachine.ChangeState(player.IdleState);
         }            
         else
