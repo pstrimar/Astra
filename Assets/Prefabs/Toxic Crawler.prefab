@@ -381,7 +381,7 @@ Transform:
   - {fileID: 1551957613418634513}
   m_Father: {fileID: 1551957613325067431}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -118.94121}
 --- !u!1 &1551957613227920895
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +413,7 @@ Transform:
   - {fileID: 1551957614932944938}
   m_Father: {fileID: 1551957613647281242}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -78.41368}
 --- !u!1 &1551957613278905647
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +529,7 @@ Transform:
   - {fileID: 1551957613220756213}
   m_Father: {fileID: 4879587757253725768}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -93.532425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -93.64}
 --- !u!1 &1551957613418634526
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ Transform:
   - {fileID: 1551957614867017603}
   m_Father: {fileID: 1551957613325067431}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.244446}
 --- !u!1 &1551957613653013414
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +837,7 @@ Transform:
   - {fileID: 1551957614249442951}
   m_Father: {fileID: 1551957614813761420}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 114.24487}
 --- !u!1 &1551957613694281457
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +951,7 @@ Transform:
   - {fileID: 1551957613278905646}
   m_Father: {fileID: 1551957613325067431}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 121.76898}
 --- !u!1 &1551957613935750246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,7 @@ Transform:
   - {fileID: 1551957614728240425}
   m_Father: {fileID: 1551957613220756213}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 102.07652}
 --- !u!1 &1551957614249442948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1258,7 @@ Transform:
   - {fileID: 1551957613935750233}
   m_Father: {fileID: 1551957613785634004}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -112.07268}
 --- !u!1 &1551957614274198942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,7 +1615,7 @@ Transform:
   - {fileID: 1551957615008614610}
   m_Father: {fileID: 1551957613325067431}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -150.68307}
 --- !u!1 &1551957614728240438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1730,7 @@ Transform:
   - {fileID: 1551957614274198929}
   m_Father: {fileID: 1551957613325067431}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -129.27162}
 --- !u!1 &1551957614867017600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2587,7 @@ GameObject:
   - component: {fileID: 8275687245702711472}
   m_Layer: 15
   m_Name: Toxic Crawler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2681,6 +2681,7 @@ MonoBehaviour:
   deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
   isDead: 0
+  invulnerable: 0
   target: {fileID: 0}
   groundCheck: {fileID: 2410013730625748627}
   wallCheck: {fileID: 8427416598896328443}
@@ -2691,8 +2692,9 @@ MonoBehaviour:
   isFlipped: 0
   shakeAmount: 0.1
   shakeLength: 0.1
-  deathSoundName: EnemyDeath
-  hurtSoundName: EnemyHurt
+  deathSoundName: CrawlerDeath
+  hurtSoundName: CrawlerHurt
+  attackSoundName: EnemyAttack
   facingDirection: 1
 --- !u!114 &301820906
 MonoBehaviour:

@@ -5367,6 +5367,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1523b2e6-c08a-4f6a-ade9-5f7d35e23942
     m_ActionName: Gameplay/Shoot[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5543880263021760745}
+        m_MethodName: OnDialogueInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64e4dc9a-fce3-46c7-afc6-9bcecc4cef92
+    m_ActionName: Dialogue/Enter[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -5498,6 +5513,7 @@ MonoBehaviour:
   maxSlopeAngle: 70
   playerFriction: {fileID: 6200000, guid: 8c4a790a123ea3748bd1dacd1d4de2c3, type: 2}
   fullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
+  zeroFriction: {fileID: 6200000, guid: c46aafbc32c7174499fafb6797f09dd6, type: 2}
 --- !u!70 &2081770959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

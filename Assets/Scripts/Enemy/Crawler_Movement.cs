@@ -99,7 +99,7 @@ public class Crawler_Movement : StateMachineBehaviour
         }
         else if (crawler && playerOnEnemy)
         {
-            movement.Set(stats.runSpeed * enemy.facingDirection, rb.velocity.y);
+            movement.Set(stats.rollSpeed * enemy.facingDirection, rb.velocity.y);
             rb.velocity = movement;
             animator.SetTrigger("roll");
         }

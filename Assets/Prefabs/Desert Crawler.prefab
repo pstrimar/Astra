@@ -2178,7 +2178,7 @@ GameObject:
   - component: {fileID: 1531959621}
   m_Layer: 15
   m_Name: Desert Crawler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2241,7 +2241,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.4
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -2272,6 +2272,7 @@ MonoBehaviour:
   deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
   isDead: 0
+  invulnerable: 0
   target: {fileID: 0}
   groundCheck: {fileID: 8944902721391012961}
   wallCheck: {fileID: 3000674593907108873}
@@ -2284,6 +2285,7 @@ MonoBehaviour:
   shakeLength: 0.1
   deathSoundName: CrawlerDeath
   hurtSoundName: CrawlerHurt
+  attackSoundName: EnemyAttack
   facingDirection: 1
 --- !u!114 &717789129137638903
 MonoBehaviour:

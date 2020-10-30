@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         public int damage = 40;
         public float walkSpeed = 3f;
         public float runSpeed = 15f;
+        public float rollSpeed = 5f;
         public float aggroRange = 15f;
         public float attackRange = 2f;
         public float knockbackStrength = 2f;
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     public string deathSoundName = "EnemyDeath";
     public string hurtSoundName = "EnemyHurt";
+    public string attackSoundName = "EnemyAttack";
 
     public int facingDirection = 1;
     private float hurtTimer = 0f;
@@ -104,6 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     public void Attack()
     {
+        AudioManager.Instance.PlaySound(attackSoundName);
         Player player = target.GetComponent<Player>();
 
         if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))

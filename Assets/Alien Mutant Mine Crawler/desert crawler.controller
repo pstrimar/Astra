@@ -165,6 +165,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   groundCheckDistance: 0.85
+  landingSoundName: LandingFootsteps
+  landingParticles: {fileID: 5692949358441031945, guid: 45181915a1a424a4db81dd2b43eb3e69,
+    type: 3}
 --- !u!1101 &-5434273679639615470
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -675,6 +678,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   groundCheckDistance: 0.5
+  landingSoundName: LandingFootsteps
+  landingParticles: {fileID: 5692949358441031945, guid: 45181915a1a424a4db81dd2b43eb3e69,
+    type: 3}
 --- !u!1101 &2957419294746251610
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -825,9 +831,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da747981f5d8a04cad4ac77e90e03bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crawler: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 4096
   playerLayer:
     serializedVersion: 2
     m_Bits: 256

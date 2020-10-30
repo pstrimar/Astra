@@ -87,9 +87,9 @@ public class Weapon : MonoBehaviour
             {
                 SpawnImpactParticles(hit);
 
-                if (hit.collider.GetComponent<IDamageable>() != null && !hit.collider.GetComponent<Enemy>().isDead)
+                if (hit.collider.GetComponentInParent<IDamageable>() != null && !hit.collider.GetComponentInParent<Enemy>().isDead)
                 {
-                    hit.collider.GetComponent<IDamageable>().Damage(damage);
+                    hit.collider.GetComponentInParent<IDamageable>().Damage(damage);
                 }
             }
         }
