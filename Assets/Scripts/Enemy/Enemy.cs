@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable, ISaveable
 {
@@ -49,7 +51,11 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     public string deathSoundName = "EnemyDeath";
     public string hurtSoundName = "EnemyHurt";
     public string attackSoundName = "EnemyAttack";
+    [OptionalField]
+    [SerializeField] string landingSoundName = "LandingFootsteps";
 
+    [OptionalField]
+    [SerializeField] Transform landingParticles;
     public int facingDirection = 1;
     private float hurtTimer = 0f;
 
@@ -115,6 +121,39 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
             player.AddKnockbackForce(stats.knockbackStrength, direction);
             player.Damage(stats.damage);
         }
+    }
+
+    public void AttackLeft()
+    {        
+        AudioManager.Instance.PlaySound(attackSoundName);
+        Player player = target.GetComponent<Player>();
+
+        if (player.isActiveAndEnabled && !player.Invincible && GameObject.Find("LeftHitCheck").GetComponent<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
+        {
+            Vector2 direction = player.transform.position - transform.position;
+            player.AddKnockbackForce(stats.knockbackStrength, direction);
+            player.Damage(stats.damage);
+        }
+    }
+
+    public void AttackRight()
+    {
+        AudioManager.Instance.PlaySound(attackSoundName);
+        Player player = target.GetComponent<Player>();
+
+        if (player.isActiveAndEnabled && !player.Invincible && GameObject.Find("RightHitCheck").GetComponent<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
+        {
+            Vector2 direction = player.transform.position - transform.position;
+            player.AddKnockbackForce(stats.knockbackStrength, direction);
+            player.Damage(stats.damage);
+        }
+    }
+
+    public void Land()
+    {
+        AudioManager.Instance.PlaySound(landingSoundName);
+        Transform dustParticles = Instantiate(landingParticles, fallCheck.position, Quaternion.identity);
+        Destroy(dustParticles.gameObject, 1f);
     }
 
     public void Flip()

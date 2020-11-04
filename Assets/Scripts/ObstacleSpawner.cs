@@ -9,15 +9,17 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] float startTime;
     [SerializeField] float repeatRate = 3f;
     [SerializeField] float speed = 12;
+    [SerializeField] bool hideBeforeDestroy = true;
     [SerializeField] Transform impactParticles;
     [SerializeField] string impactSound = "Splash";
 
     void Start()
     {
-        InvokeRepeating("SpawnObstacle", startTime, repeatRate);
+        if (repeatRate > 0)
+            InvokeRepeating("SpawnObstacle", startTime, repeatRate);
     }
 
-    private void SpawnObstacle()
+    public void SpawnObstacle()
     {
         Rigidbody2D obstacle = Instantiate(obstaclePrefab, spawnPoint.position, obstaclePrefab.transform.rotation);
         if (!rotate)
@@ -29,6 +31,8 @@ public class ObstacleSpawner : MonoBehaviour
             obstacle.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
         else
             obstacle.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Ground"));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,7 +51,9 @@ public class ObstacleSpawner : MonoBehaviour
             {
                 collision.gameObject.GetComponent<AudioSource>().Play();
             }
-            collision.GetComponent<SpriteRenderer>().enabled = false;
+            if (hideBeforeDestroy)
+                collision.GetComponent<SpriteRenderer>().enabled = false;
+
             Destroy(collision.gameObject, 2f);
         }
     }

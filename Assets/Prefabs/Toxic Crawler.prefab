@@ -2675,6 +2675,7 @@ MonoBehaviour:
     damage: 40
     walkSpeed: 3
     runSpeed: 5
+    rollSpeed: 5
     aggroRange: 6
     attackRange: 0.4
     knockbackStrength: 4
@@ -2695,6 +2696,9 @@ MonoBehaviour:
   deathSoundName: CrawlerDeath
   hurtSoundName: CrawlerHurt
   attackSoundName: EnemyAttack
+  landingSoundName: LandingFootsteps
+  landingParticles: {fileID: 5692949358441031945, guid: 45181915a1a424a4db81dd2b43eb3e69,
+    type: 3}
   facingDirection: 1
 --- !u!114 &301820906
 MonoBehaviour:

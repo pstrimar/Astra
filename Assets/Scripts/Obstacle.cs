@@ -7,7 +7,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.GetComponent<IDamageable>() != null)
+        if (other.collider.GetComponentInParent<IDamageable>() != null)
         {
             Player player = other.collider.GetComponent<Player>();
             if (player != null && player.isActiveAndEnabled && !player.Invincible)
@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour
                 player.AddKnockbackForce(knockbackStrength, direction);                
             }
 
-            other.collider.GetComponent<IDamageable>().Damage(damage);
+            other.collider.GetComponentInParent<IDamageable>().Damage(damage);
         }        
     }
 }

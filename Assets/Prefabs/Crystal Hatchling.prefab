@@ -1028,8 +1028,9 @@ MonoBehaviour:
     damage: 15
     walkSpeed: 1
     runSpeed: 4
+    rollSpeed: 5
     aggroRange: 5
-    attackRange: 2
+    attackRange: 0.6
     knockbackStrength: 2
   deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
@@ -1048,6 +1049,8 @@ MonoBehaviour:
   deathSoundName: HatchlingDeath
   hurtSoundName: HatchlingHurt
   attackSoundName: EnemyAttack
+  landingSoundName: LandingFootsteps
+  landingParticles: {fileID: 0}
   facingDirection: 1
 --- !u!1 &5801103304460086218
 GameObject:
@@ -1091,7 +1094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2937536639928661108}
   - component: {fileID: 4740344622976468308}
-  m_Layer: 15
+  m_Layer: 2
   m_Name: SlashCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}

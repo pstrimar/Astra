@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Poisonous Cave.unity
     guid: 88d67c028daa46b49a1b46133b80c8ea
+  - enabled: 1
+    path: Assets/Scenes/Crystal Cave.unity
+    guid: 97e130e402b6aca44bdb98ba9f518e4c
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

@@ -101,6 +101,7 @@ public class Crawler_Movement : StateMachineBehaviour
         {
             movement.Set(stats.rollSpeed * enemy.facingDirection, rb.velocity.y);
             rb.velocity = movement;
+            AudioManager.Instance.PlaySound("Roll");
             animator.SetTrigger("roll");
         }
 
