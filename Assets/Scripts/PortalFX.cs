@@ -12,7 +12,7 @@ public class PortalFX : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().FindChildObject("Graphics").SetActive(false);
 
-            Instantiate(portalFX, transform.position, portalFX.rotation);
+            Instantiate(portalFX, this.transform.position, portalFX.rotation);
         }
     }
 }

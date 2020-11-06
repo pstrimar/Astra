@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -98,8 +96,6 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     private void OnEnable()
     {
-        Debug.Log("Player enabled");
-
         StartCoroutine(SearchForStatusIndicator());
         StartCoroutine(SearchForGameManager());
         StartCoroutine(SearchForDialogueManager());
@@ -469,7 +465,8 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     {
         public int currentHealth;
         public int maxHealth;
-        public float fuel;
+        public float currentFuel;
+        public float maxFuel;
         public float[] position;
     }
 
@@ -479,7 +476,8 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
         data.currentHealth = playerData.currentHealth;
         data.maxHealth = playerData.maxHealth;
-        data.fuel = playerData.currentFuelAmount;
+        data.currentFuel = playerData.currentFuelAmount;
+        data.maxFuel = playerData.maxFuelAmount;
         data.position = new float[2];
         data.position[0] = transform.position.x;
         data.position[1] = transform.position.y;
@@ -493,7 +491,8 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
         playerData.currentHealth = data.currentHealth;
         playerData.maxHealth = data.maxHealth;
-        playerData.currentFuelAmount = data.fuel;
+        playerData.currentFuelAmount = data.currentFuel;
+        playerData.maxFuelAmount = data.maxFuel;
         transform.position = new Vector2(data.position[0], data.position[1]);
     }
 

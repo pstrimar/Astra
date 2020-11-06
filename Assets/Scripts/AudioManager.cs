@@ -35,6 +35,11 @@ public class Sound
         source.Play();
     }
 
+    public void Pause()
+    {
+        source.Pause();
+    }
+
     public void PlayOneShot()
     {
         source.volume = volume * (1 + Random.Range(-randomVolume / 2f, randomVolume / 2f));
@@ -118,6 +123,21 @@ public class AudioManager : MonoBehaviour
         Debug.LogWarning("AudioManage: Sound not found in list: " + _name);
     }
 
+    public void PauseSound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                sounds[i].Pause();
+                return;
+            }
+        }
+
+        // no sound with _name
+        Debug.LogWarning("AudioManage: Sound not found in list: " + _name);
+    }
+
     public void PlaySoundOnce(string _name)
     {
         for (int i = 0; i < sounds.Length; i++)
@@ -175,7 +195,7 @@ public class AudioManager : MonoBehaviour
                 break;
             case 3:
                 StopAllSounds();
-                PlaySound("BasicCave");
+                PlaySound("PoisonousCave");
                 break;
             case 4:
                 StopAllSounds();

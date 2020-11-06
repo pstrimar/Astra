@@ -12,7 +12,7 @@ public class PlayerData : SingletonScriptableObject<PlayerData>
     public float thrusterFuelRegenSpeed = 0.3f;
 
     [Header("Check Variables")]
-    public float groundCheckRadius = 0.3f;
+    public float groundCheckRadius = 0.25f;
     public LayerMask whatIsGround;
     public float currentFuelAmount
     {

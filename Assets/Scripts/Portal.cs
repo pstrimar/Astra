@@ -58,15 +58,16 @@ public class Portal : MonoBehaviour
         wrapper.AutoLoad();
 
         Portal otherPortal = GetOtherPortal();
-        UpdatePlayer(otherPortal);
-
+        
         wrapper.AutoSave();
+
+        UpdatePlayer(otherPortal);
 
         yield return new WaitForSeconds(fadeWaitTime);
 
         onSceneLoaded?.Invoke(sceneToLoad);
-
-        fader.FadeIn(fadeInTime);
+        
+        yield return fader.FadeIn(fadeInTime);
 
         newPlayerInputHandler.enabled = true;
         Destroy(gameObject);

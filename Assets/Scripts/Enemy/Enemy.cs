@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     public Transform deathParticles;
     public bool isDead;
     public bool invulnerable;
+    public event Action<int> onHealthChanged;
 
     //What to chase
     public Transform target;
@@ -107,7 +109,9 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
             }
 
             hurtTimer = Time.time;
-        }        
+        }
+
+        onHealthChanged?.Invoke(stats.currentHealth);
     }
 
     public void Attack()

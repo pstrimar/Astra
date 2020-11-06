@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeMenu : MonoBehaviour
@@ -9,11 +7,11 @@ public class UpgradeMenu : MonoBehaviour
 
     [SerializeField] Text fuelText;
 
-    [SerializeField] float healthMultiplier = 1.3f;
+    [SerializeField] int healthUpgrade = 10;
 
-    [SerializeField] float fuelAmountMultiplier = 1.2f;
+    [SerializeField] float fuelAmountUpgrade = 0.2f;
 
-    [SerializeField] int upgradeCost = 50;
+    [SerializeField] int upgradeCost = 5;
 
     private PlayerData stats;
 
@@ -26,7 +24,7 @@ public class UpgradeMenu : MonoBehaviour
     void UpdateValues()
     {
         healthText.text = "Health: " + stats.maxHealth;
-        fuelText.text = "Fuel: " + stats.currentFuelAmount;
+        fuelText.text = "Fuel: " + stats.maxFuelAmount;
     }
 
     public void UpgradeHealth() 
@@ -37,7 +35,9 @@ public class UpgradeMenu : MonoBehaviour
             return;
         }
 
-        stats.maxHealth = (int)(stats.maxHealth * healthMultiplier);
+        stats.maxHealth += healthUpgrade;
+
+        StatusIndicator.Instance.SetMaxHealth(stats.maxHealth);
 
         GameManager.Crystals -= upgradeCost;
         AudioManager.Instance.PlaySound("Crystals");
@@ -53,12 +53,13 @@ public class UpgradeMenu : MonoBehaviour
             return;
         }
 
-        stats.currentFuelAmount *= fuelAmountMultiplier;
+        stats.maxFuelAmount += fuelAmountUpgrade;
+
+        StatusIndicator.Instance.SetMaxFuel(stats.maxFuelAmount);
 
         GameManager.Crystals -= upgradeCost;
         AudioManager.Instance.PlaySound("Crystals");
 
         UpdateValues();
-        Debug.Log("thruster fuel amount: " + stats.currentFuelAmount);
     }
 }

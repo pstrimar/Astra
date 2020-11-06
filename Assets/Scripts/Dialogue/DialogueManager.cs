@@ -37,12 +37,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Dialogue started");
-        if (onDialogue != null)
-        {
-            // Disable any controller scripts
-            onDialogue(true);
-        }
+        // Disable any controller scripts
+        onDialogue?.Invoke(true);
 
         anim.SetBool("isOpen", true);
         nameText.text = dialogue.name;

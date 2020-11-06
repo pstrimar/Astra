@@ -16,4 +16,20 @@ public class JumpSurprise : MonoBehaviour
     {
         spriteMask.enabled = false;
     }
+
+    public void PlaySurpriseSound()
+    {
+        AudioManager.Instance.PlaySound("Surprise");
+    }
+
+    public void PlayBossBattleMusic()
+    {
+        AudioManager.Instance.PauseSound("CrystalCave");
+        AudioManager.Instance.PlaySound("BossBattle");
+    }
+
+    public void ShowHealthBar()
+    {
+        GameManager.Instance.ShowBossHealthBar();
+    }
 }

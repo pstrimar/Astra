@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, ISaveable
 {
     public static GameManager Instance;
 
     [SerializeField] int maxLives = 3;
+    [SerializeField] int startingHealth = 100;
+    [SerializeField] float startingFuel = 1f;
 
     private static int _remainingLives;
 
@@ -23,9 +23,12 @@ public class GameManager : MonoBehaviour, ISaveable
     [SerializeField] Transform spawnPrefab;
     [SerializeField] string spawnSoundName = "Spawn";
     [SerializeField] string gameOverSoundName = "GameOver";
+    [SerializeField] string endingCreditsSoundName = "EndingCredits";
     [SerializeField] CameraShake cameraShake;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] GameObject winGameUI;
     [SerializeField] GameObject upgradeMenu;
+    [SerializeField] GameObject bossHealthBar;
 
     public event Action<bool> onToggleMenu;
 
@@ -95,13 +98,23 @@ public class GameManager : MonoBehaviour, ISaveable
         _remainingLives = maxLives;
 
         Crystals = startingCrystals;
+
+        PlayerData.Instance.maxFuelAmount = startingFuel;
+        PlayerData.Instance.maxHealth = startingHealth;
     }
 
     public void EndGame()
     {
+        AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(gameOverSoundName);
-        Debug.Log("GAME OVER");
         gameOverUI.SetActive(true);
+    }
+
+    public void WinGame()
+    {
+        AudioManager.Instance.StopAllSounds();
+        AudioManager.Instance.PlaySound(endingCreditsSoundName);
+        winGameUI.SetActive(true);
     }
 
     public IEnumerator _RespawnPlayer(GameObject player) 
@@ -124,7 +137,7 @@ public class GameManager : MonoBehaviour, ISaveable
         Destroy(deathParticles.gameObject, 5f);
 
         player.gameObject.SetActive(false);
-        _remainingLives --;
+        _remainingLives--;
         if (_remainingLives <= 0)
         {
             Instance.EndGame();
@@ -138,6 +151,11 @@ public class GameManager : MonoBehaviour, ISaveable
     public static void KillEnemy(Enemy enemy) 
     {
         Instance._KillEnemy(enemy);
+    }
+
+    public void ShowBossHealthBar()
+    {
+        bossHealthBar.SetActive(true);
     }
 
     private void _KillEnemy(Enemy _enemy) 
