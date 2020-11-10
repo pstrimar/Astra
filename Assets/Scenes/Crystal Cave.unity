@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1353,7 +1353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313900726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2400856, y: -5.8906136, z: 5.51}
+  m_LocalPosition: {x: -2.2146454, y: -5.8906136, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 842333728}
@@ -1567,7 +1567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327375208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.59, y: -0.97, z: 0}
+  m_LocalPosition: {x: 28.59, y: -0.699, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1278691224}
@@ -1610,15 +1610,22 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.43
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.37312317, y: -1.1172786, z: 0}
-  - {x: 0.40472794, y: -1.1031914, z: 0}
-  - {x: 0.38531876, y: 1.0188894, z: 0}
-  - {x: 0.32180786, y: 1.1220988, z: 0}
-  - {x: 0.21859741, y: 1.2729435, z: 0}
-  - {x: 0.09157181, y: 1.3920312, z: 0}
-  - {x: -0.067214966, y: 1.415849, z: 0}
-  - {x: -0.27363205, y: 1.1856126, z: 0}
-  - {x: -0.38091278, y: 0.99222994, z: 0}
+  - {x: -0.437088, y: -1.3959286, z: 0}
+  - {x: 0.3595028, y: -1.3962586, z: 0}
+  - {x: 0.3636093, y: 1.0966789, z: 0}
+  - {x: 0.265728, y: 1.1058173, z: 0}
+  - {x: 0.26020622, y: 1.3018885, z: 0}
+  - {x: 0.16417503, y: 1.2997653, z: 0}
+  - {x: 0.16031456, y: 1.3956493, z: 0}
+  - {x: 0.06105995, y: 1.3974545, z: 0}
+  - {x: 0.05580139, y: 1.4990656, z: 0}
+  - {x: -0.13071632, y: 1.4967706, z: 0}
+  - {x: -0.13793755, y: 1.4064999, z: 0}
+  - {x: -0.22658157, y: 1.4028817, z: 0}
+  - {x: -0.23924446, y: 1.3088107, z: 0}
+  - {x: -0.33146095, y: 1.299766, z: 0}
+  - {x: -0.34231377, y: 1.115242, z: 0}
+  - {x: -0.43518448, y: 1.0989645, z: 0}
 --- !u!4 &394671704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6131555087717862807, guid: e9f55f8e5a793d340af98a2a6855f247,
@@ -2566,7 +2573,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a250755ac1951bb4fa0ea9b06a3408a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3701,7 +3708,7 @@ PrefabInstance:
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.87000084
+      value: -0.5990008
       objectReference: {fileID: 0}
     - target: {fileID: 3930380546002618937, guid: 9867cf8ecd1b2ae4490feee5544e9ec4,
         type: 3}

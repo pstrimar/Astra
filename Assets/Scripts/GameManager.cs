@@ -61,31 +61,32 @@ public class GameManager : MonoBehaviour, ISaveable
         {
             Debug.LogError("No camera shake referenced in GameMaster.");
         }
-    }
+    }    
 
-    private void Update() 
+    private void OnEnable()
+    {
+        if (gameOverUI.GetComponent<GameOverUI>() != null)
+            gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
+
+        if (winGameUI.GetComponent<GameOverUI>() != null)
+            winGameUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
+    }    
+
+    private void OnDisable()
+    {
+        if (gameOverUI.GetComponent<GameOverUI>() != null)
+            gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
+
+        if (winGameUI.GetComponent<GameOverUI>() != null)
+            winGameUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
+    }
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.U) && !PlayerData.Instance.isDead)
         {
             ToggleUpgradeMenu();
         }
     }
-
-    private void OnEnable()
-    {
-        if (gameOverUI.GetComponent<GameOverUI>() != null)
-        {
-            gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
-        }
-    }    
-
-    private void OnDisable()
-    {
-        if (gameOverUI.GetComponent<GameOverUI>() != null)
-        {
-            gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
-        }
-    }    
 
     private void ToggleUpgradeMenu()
     {

@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     {
         [SerializeField] int maxHealth = 100;
         private int _currentHealth;
+
         public int damage = 40;
         public float walkSpeed = 3f;
         public float runSpeed = 15f;
@@ -43,7 +44,6 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     public Transform wallCheck;
     public Transform backCheck;
     public Transform fallCheck;
-    [SerializeField] bool searchingForPlayer = false;
     public PhysicsMaterial2D fullFriction;
 
     public bool isFlipped = false;

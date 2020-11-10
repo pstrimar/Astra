@@ -55,7 +55,7 @@ public class FixShip : MonoBehaviour
                 StartCoroutine(FixTheShip(newShipMedium));
                 return;
             } 
-            else if (GameManager.Crystals <= 54)
+            else if (GameManager.Crystals <= 55)
             {
                 StartCoroutine(FixTheShip(newShipLarge));
             }

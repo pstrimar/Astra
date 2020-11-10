@@ -158,7 +158,7 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
         if (transform.position.y <= fallBoundary)
         {
-            Damage(999999);
+            Damage(9001);
         }
     }
 
