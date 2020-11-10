@@ -1,53 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] Camera mainCam;
 
-    float shakeAmount = 0f;
+    public float ShakeDuration = 0.3f;          // Time the Camera Shake effect will last
+    public float ShakeAmplitude = 1.2f;         // Cinemachine Noise Profile Parameter
+    public float ShakeFrequency = 2.0f;         // Cinemachine Noise Profile Parameter
 
-    private void Awake() 
+    private float shakeElapsedTime = 0f;
+
+    public bool ShakeCamera;
+
+    // Cinemachine Shake
+    public CinemachineVirtualCamera VirtualCamera;
+    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
+
+    private void Start()
     {
-        if (mainCam == null) 
+        VirtualCamera = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
+
+        // Get Virtual Camera Noise Profile
+        if (VirtualCamera != null)
+            virtualCameraNoise = VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+    }
+
+    private void Update()
+    {
+        if (ShakeCamera)
         {
-            mainCam = Camera.main;
+            shakeElapsedTime = ShakeDuration;
         }
-    }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.T))
+        // If the Cinemachine componet is not set, avoid update
+        if (VirtualCamera != null && virtualCameraNoise != null)
         {
-            Shake(.1f, 0.2f);
+            // If Camera Shake effect is still playing
+            if (shakeElapsedTime > 0)
+            {
+                ShakeCamera = false;
+
+                // Set Cinemachine Camera Noise parameters
+                virtualCameraNoise.m_AmplitudeGain = ShakeAmplitude;
+                virtualCameraNoise.m_FrequencyGain = ShakeFrequency;
+
+                // Update Shake Timer
+                shakeElapsedTime -= Time.deltaTime;
+            }
+            else
+            {
+                // If Camera Shake effect is over, reset variables
+                virtualCameraNoise.m_AmplitudeGain = 0f;
+                shakeElapsedTime = 0f;
+            }
         }
-    }
-
-    public void Shake(float amount, float length)
-    {
-        shakeAmount = amount;
-        InvokeRepeating("BeginShake", 0, 0.01f);
-        Invoke("StopShake", length);
-    }
-
-    void BeginShake() 
-    {
-        if (shakeAmount > 0)
-        {
-            Vector3 camPos = mainCam.transform.position;
-
-            float offsetX = Random.value * shakeAmount * 2 - shakeAmount;
-            float offsetY = Random.value * shakeAmount * 2 - shakeAmount;
-            camPos.x += offsetX;
-            camPos.y += offsetY;
-
-            mainCam.transform.position = camPos;
-        }
-    }
-
-    void StopShake() 
-    {
-        CancelInvoke("BeginShake");
-        mainCam.transform.localPosition = Vector3.zero;
     }
 }

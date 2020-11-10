@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerAbilityState : PlayerState
+﻿public class PlayerAbilityState : PlayerState
 {
     protected new string landingSoundName = "LandingFootsteps";
     protected bool isAbilityDone;
@@ -29,11 +25,6 @@ public class PlayerAbilityState : PlayerState
         isAbilityDone = false;
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -49,10 +40,5 @@ public class PlayerAbilityState : PlayerState
             else
                 stateMachine.ChangeState(player.InAirState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 }

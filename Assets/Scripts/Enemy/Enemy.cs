@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -95,6 +94,8 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         if (!invulnerable)
         {
             stats.currentHealth -= damage;
+
+            GameManager.Instance.CamShake.ShakeCamera = true;
 
             if (Time.time - hurtTimer > 1f)
             {

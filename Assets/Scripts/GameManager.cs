@@ -18,13 +18,13 @@ public class GameManager : MonoBehaviour, ISaveable
         get { return _remainingLives; }
     }
 
+    public CameraShake CamShake;
     [SerializeField] Transform playerPrefab;
     [SerializeField] float spawnDelay = 2f;
     [SerializeField] Transform spawnPrefab;
     [SerializeField] string spawnSoundName = "Spawn";
     [SerializeField] string gameOverSoundName = "GameOver";
-    [SerializeField] string endingCreditsSoundName = "EndingCredits";
-    [SerializeField] CameraShake cameraShake;
+    [SerializeField] string endingCreditsSoundName = "EndingCredits";    
     [SerializeField] GameObject gameOverUI;
     [SerializeField] GameObject winGameUI;
     [SerializeField] GameObject upgradeMenu;
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
         Crystals = startingCrystals;
 
-        if (cameraShake == null) 
+        if (CamShake == null) 
         {
             Debug.LogError("No camera shake referenced in GameMaster.");
         }

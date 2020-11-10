@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,7 +38,6 @@ public class MenuManager : MonoBehaviour
     public void QuitGame() 
     {
         AudioManager.Instance.PlaySound(pressButtonSound);
-        Debug.Log("WE QUIT THE GAME!");
         Application.Quit();
     }
 

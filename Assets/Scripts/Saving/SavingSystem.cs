@@ -21,7 +21,6 @@ public class SavingSystem : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this);
         }
     }
 

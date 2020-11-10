@@ -15,7 +15,7 @@ MonoBehaviour:
   movementVelocity: 6
   thrusterForce: 400
   thrusterFuelBurnSpeed: 1
-  thrusterFuelRegenSpeed: 0.3
+  thrusterFuelRegenSpeed: 0.5
   groundCheckRadius: 0.25
   whatIsGround:
     serializedVersion: 2

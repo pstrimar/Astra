@@ -24,10 +24,4 @@ public class CircularMovement : MonoBehaviour
 
         transform.position = _center + offset;
     }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(_center, 0.1f);
-        Gizmos.DrawLine(_center, transform.position);
-    }
 }

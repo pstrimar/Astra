@@ -22,15 +22,14 @@ public class GameOverUI : MonoBehaviour
     public void Quit()
     {
         audioManager.PlaySound(buttonPressSoundName);
-
-        Debug.Log("APPLICATION QUIT!");
+        FindObjectOfType<SavingWrapper>().Delete();
         Application.Quit();
     }
 
     public void Retry()
     {
         audioManager.PlaySound(buttonPressSoundName);
-
+        FindObjectOfType<SavingWrapper>().Delete();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         onRetry?.Invoke();

@@ -23,7 +23,6 @@ public class StatusIndicator : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
     }
 

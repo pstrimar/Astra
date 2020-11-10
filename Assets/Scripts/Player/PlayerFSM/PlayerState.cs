@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerState
 {
@@ -30,7 +28,6 @@ public class PlayerState
         player.Anim.SetBool(animBoolName, true);            
 
         startTime = Time.time;
-        Debug.Log(animBoolName);
 
         isAnimationFinished = false;
     }

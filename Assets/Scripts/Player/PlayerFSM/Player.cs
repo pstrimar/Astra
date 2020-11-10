@@ -209,8 +209,11 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
 
     void RegenHealth()
     {
-        playerData.currentHealth += 1;
-        onHealthChanged?.Invoke(playerData.currentHealth);
+        if (playerData.currentHealth > 0)
+        {
+            playerData.currentHealth += 1;
+            onHealthChanged?.Invoke(playerData.currentHealth);
+        }        
     }
 
     #endregion
@@ -348,6 +351,8 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
     public void Damage(int damage)
     {
         playerData.currentHealth -= damage;
+
+        GameManager.Instance.CamShake.ShakeCamera = true;
 
         if (playerData.currentHealth <= 0)
         {
