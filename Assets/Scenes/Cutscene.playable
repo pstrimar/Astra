@@ -635,7 +635,6 @@ MonoBehaviour:
   m_Tracks:
   - {fileID: 566402186554601079}
   - {fileID: 6328288324992069609}
-  - {fileID: 125610242245924655}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -659,7 +658,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 566402186554601079}
   m_Children: []
   m_Clips:
   - m_Version: 1
@@ -916,6 +915,7 @@ MonoBehaviour:
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children:
+  - {fileID: 125610242245924655}
   - {fileID: -1960736680530597971}
   - {fileID: -8585576451567671240}
   - {fileID: 4574190292124286635}
@@ -1634,7 +1634,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 12.983334
+    m_StopTime: 13
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1764,7 +1764,14 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 13
+    functionName: ShipCrashed
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
 --- !u!114 &5528405329140261850
 MonoBehaviour:
   m_ObjectHideFlags: 1

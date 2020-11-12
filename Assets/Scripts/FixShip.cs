@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FixShip : MonoBehaviour
+public class FixShip : MonoBehaviour, ISaveable
 {
     [SerializeField] GameObject oldShip;
     [SerializeField] GameObject newShipMedium;
@@ -60,5 +60,38 @@ public class FixShip : MonoBehaviour
                 StartCoroutine(FixTheShip(newShipLarge));
             }
         }
+    }
+
+    [System.Serializable]
+    struct SpaceshipSaveData
+    {
+        public bool oldShip;
+        public bool newShipMedium;
+        public bool newShipLarge;
+        public bool smokeParticles;
+        public bool alien;
+    }
+
+    public object CaptureState()
+    {
+        SpaceshipSaveData data = new SpaceshipSaveData();
+        data.oldShip = oldShip.activeSelf;
+        data.newShipMedium = newShipMedium.activeSelf;
+        data.newShipLarge = newShipLarge.activeSelf;
+        data.smokeParticles = smokeParticles.activeSelf;
+        data.alien = alien.activeSelf;
+
+        return data;
+    }
+
+    public void RestoreState(object state)
+    {
+        SpaceshipSaveData data = (SpaceshipSaveData)state;
+
+        oldShip.SetActive(data.oldShip);
+        newShipMedium.SetActive(data.newShipMedium);
+        newShipLarge.SetActive(data.newShipLarge);
+        smokeParticles.SetActive(data.smokeParticles);
+        alien.SetActive(data.alien);
     }
 }

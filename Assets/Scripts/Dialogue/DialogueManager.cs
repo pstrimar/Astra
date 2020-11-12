@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        // Disable any controller scripts
+        // switch input action map to dialogue
         onDialogue?.Invoke(true);
 
         anim.SetBool("isOpen", true);
@@ -81,7 +81,7 @@ public class DialogueManager : MonoBehaviour
     {
         anim.SetBool("isOpen", false);
 
-        // Enable any controller scripts
-        onDialogue(false);
+        // switch input action map to gameplay
+        onDialogue?.Invoke(false);
     }
 }

@@ -513,16 +513,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 172144436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &172144438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +591,11 @@ PrefabInstance:
     - target: {fileID: 5543880263021760744, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543880263021760746, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+        type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
@@ -1433,7 +1457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5335312, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.5334473, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006315055}
@@ -1493,7 +1517,7 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
@@ -1543,7 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
+  m_ShowCameraFrustum: 0
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
@@ -9832,6 +9856,7 @@ GameObject:
   - component: {fileID: 1926388092}
   - component: {fileID: 1926388095}
   - component: {fileID: 1926388094}
+  - component: {fileID: 1926388097}
   - component: {fileID: 1926388096}
   m_Layer: 2
   m_Name: Kyp
@@ -9893,8 +9918,8 @@ MonoBehaviour:
       That's some tough luck, real tough luck...
     - But hey! You look like you can handle yourself in dangerous situations. Maybe
       hope is not all lost!
-    - I'll tell you what, if you bring me back some Xylopin crystals, I'm sure I
-      could repair your ship and get you on your way.
+    - I'll tell you what, if you bring me back some Sylux crystals, I'm sure I could
+      repair your ship and get you on your way.
     - Although, personally, I don't see why you'd ever want to leave. This is our
       most beautiful season!
 --- !u!58 &1926388095
@@ -9926,6 +9951,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueIdentifier: fac73839-dea3-42b1-aa8e-aa0e46be4dc8
+--- !u!114 &1926388097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926388091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726dd8c32b8697e4f9f316886b4d3781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1962799755
 GameObject:
   m_ObjectHideFlags: 0
@@ -10319,7 +10356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091043237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5335312, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.5334473, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 429645820}

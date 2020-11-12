@@ -9,6 +9,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] string buttonPressSoundName = "ButtonPress";
 
     public event Action onRetry;
+    public event Action onReplay;
 
     private void Start() 
     {
@@ -33,6 +34,16 @@ public class GameOverUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         onRetry?.Invoke();
+        gameObject.SetActive(false);
+    }
+
+    public void Replay()
+    {
+        audioManager.PlaySound(buttonPressSoundName);
+        FindObjectOfType<SavingWrapper>().Delete();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        onReplay?.Invoke();
         gameObject.SetActive(false);
     }
 

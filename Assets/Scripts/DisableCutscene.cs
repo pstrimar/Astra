@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
 
-public class DisableCutscene : MonoBehaviour, ISaveable
+public class DisableCutscene : MonoBehaviour
 {
     PlayableDirector director;
     GameObject SFX;
@@ -14,36 +14,44 @@ public class DisableCutscene : MonoBehaviour, ISaveable
 
     private void OnEnable()
     {
-        if (director != null)
+        //if (director != null)
+        //{
+        //    director.stopped += OnPlayableDirectorStopped;
+        //}
+
+        if (GameManager.Instance.playerHasCrashed)
         {
-            director.stopped += OnPlayableDirectorStopped;
+            director.enabled = false;
+            if (SFX != null)
+                SFX.SetActive(false);
         }
     }
 
-    private void OnDisable()
-    {
-        if (director != null)
-        {
-            director.stopped -= OnPlayableDirectorStopped;
-        }
-    }
+    //private void OnDisable()
+    //{
+    //    if (director != null)
+    //    {
+    //        director.stopped -= OnPlayableDirectorStopped;
+    //    }
+    //}
 
-    private void OnPlayableDirectorStopped(PlayableDirector obj)
-    {
-        obj.enabled = false;
+    //private void OnPlayableDirectorStopped(PlayableDirector obj)
+    //{
+    //    obj.enabled = false;
+    //    GameManager.Instance.playerHasCrashed = true;
 
-        if (SFX != null)
-            SFX.SetActive(false);
-    }
+    //    if (SFX != null)
+    //        SFX.SetActive(false);
+    //}
 
-    public object CaptureState()
-    {
-        return director.enabled;
-    }
+    //public object CaptureState()
+    //{
+    //    return director.enabled;
+    //}
 
-    public void RestoreState(object state)
-    {
-        director.enabled = (bool)state;
-        SFX.SetActive((bool)state);
-    }
+    //public void RestoreState(object state)
+    //{
+    //    director.enabled = (bool)state;
+    //    SFX.SetActive((bool)state);
+    //}
 }

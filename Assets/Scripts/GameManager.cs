@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour, ISaveable
     }
 
     public CameraShake CamShake;
-    [SerializeField] Transform playerPrefab;
     [SerializeField] float spawnDelay = 2f;
     [SerializeField] Transform spawnPrefab;
     [SerializeField] string spawnSoundName = "Spawn";
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
     [SerializeField] int startingCrystals;
     public static int Crystals;
+    public bool playerHasCrashed;
     private Transform spawnPoint;
 
     private void Awake() 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour, ISaveable
             gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
 
         if (winGameUI.GetComponent<GameOverUI>() != null)
-            winGameUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
+            winGameUI.GetComponent<GameOverUI>().onReplay += HandleReplay;
     }    
 
     private void OnDisable()
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour, ISaveable
             gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
 
         if (winGameUI.GetComponent<GameOverUI>() != null)
-            winGameUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
+            winGameUI.GetComponent<GameOverUI>().onReplay -= HandleReplay;
     }
     private void Update()
     {
@@ -100,12 +100,30 @@ public class GameManager : MonoBehaviour, ISaveable
 
         Crystals = startingCrystals;
 
+        playerHasCrashed = true;
+
+        PlayerData.Instance.maxFuelAmount = startingFuel;
+        PlayerData.Instance.maxHealth = startingHealth;
+    }
+
+    private void HandleReplay()
+    {
+        _remainingLives = maxLives;
+
+        Crystals = startingCrystals;
+
+        playerHasCrashed = false;
+
         PlayerData.Instance.maxFuelAmount = startingFuel;
         PlayerData.Instance.maxHealth = startingHealth;
     }
 
     public void EndGame()
     {
+        PlayerData.Instance.maxFuelAmount = startingFuel;
+        PlayerData.Instance.maxHealth = startingHealth;
+        playerHasCrashed = false;
+
         AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(gameOverSoundName);
         gameOverUI.SetActive(true);
@@ -113,6 +131,10 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public void WinGame()
     {
+        PlayerData.Instance.maxFuelAmount = startingFuel;
+        PlayerData.Instance.maxHealth = startingHealth;
+        playerHasCrashed = false;
+
         AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(endingCreditsSoundName);
         winGameUI.SetActive(true);
@@ -178,6 +200,7 @@ public class GameManager : MonoBehaviour, ISaveable
     {
         public int lives;
         public int crystals;
+        public bool playerHasCrashed;
     }
 
     public object CaptureState()
@@ -185,6 +208,7 @@ public class GameManager : MonoBehaviour, ISaveable
         GameData data = new GameData();
         data.lives = _remainingLives;
         data.crystals = Crystals;
+        data.playerHasCrashed = playerHasCrashed;
 
         return data;
     }
@@ -194,5 +218,6 @@ public class GameManager : MonoBehaviour, ISaveable
         GameData data = (GameData)state;
         _remainingLives = data.lives;
         Crystals = data.crystals;
+        playerHasCrashed = data.playerHasCrashed;
     }
 }

@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
         fader = FindObjectOfType<Fader>();
         fader.FadeIn(fadeInTime);
         AudioManager.Instance.PlaySound("AboveGround");
+        GameManager.Instance.playerHasCrashed = false;
         Destroy(gameObject);
     }
 

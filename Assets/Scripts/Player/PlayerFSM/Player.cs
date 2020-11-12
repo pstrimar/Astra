@@ -326,7 +326,10 @@ public class Player : MonoBehaviour, IDamageable, ISaveable
         if (dialogue)
             GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
         else
+        {
             GetComponent<PlayerInput>().SwitchCurrentActionMap("Gameplay");
+        }
+            
     }
 
     private void HandleAction()

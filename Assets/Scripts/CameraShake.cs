@@ -27,6 +27,11 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
+        if (VirtualCamera == null)
+        {
+            SetUpCameras();
+        }
+
         if (ShakeCamera)
         {
             shakeElapsedTime = ShakeDuration;
@@ -54,5 +59,14 @@ public class CameraShake : MonoBehaviour
                 shakeElapsedTime = 0f;
             }
         }
+    }
+
+    private void SetUpCameras()
+    {
+        VirtualCamera = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
+
+        // Get Virtual Camera Noise Profile
+        if (VirtualCamera != null)
+            virtualCameraNoise = VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
     }
 }

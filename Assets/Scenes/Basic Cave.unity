@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -12449,6 +12449,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stats.runSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306528901015320311, guid: 9e95fc5a5b3c4e94b9c49f2bd266de16,
+        type: 3}
+      propertyPath: stats.damage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e95fc5a5b3c4e94b9c49f2bd266de16, type: 3}
