@@ -73,7 +73,6 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     private void Start()
     {
         GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Player"));
 
         target = GameObject.FindWithTag("Player").transform;
