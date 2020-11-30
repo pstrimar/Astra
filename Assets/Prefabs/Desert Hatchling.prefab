@@ -347,25 +347,29 @@ MonoBehaviour:
     damage: 15
     walkSpeed: 1
     runSpeed: 4
+    rollSpeed: 5
     aggroRange: 5
     attackRange: 0.5
     knockbackStrength: 2
-  deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
+  DeathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
-  isDead: 0
-  target: {fileID: 0}
-  groundCheck: {fileID: 6778090398697706526}
-  wallCheck: {fileID: 261142685975383292}
-  backCheck: {fileID: 1784968549}
-  fallCheck: {fileID: 1753369904}
-  searchingForPlayer: 0
-  fullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
-  isFlipped: 0
-  shakeAmount: 0.1
-  shakeLength: 0.1
-  deathSoundName: HatchlingDeath
-  hurtSoundName: HatchlingHurt
-  facingDirection: 1
+  IsDead: 0
+  Invulnerable: 0
+  Target: {fileID: 0}
+  GroundCheck: {fileID: 6778090398697706526}
+  WallCheck: {fileID: 261142685975383292}
+  BackCheck: {fileID: 1784968549}
+  FallCheck: {fileID: 1753369904}
+  FullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
+  LeftHitCheck: {fileID: 0}
+  RightHitCheck: {fileID: 0}
+  IsFlipped: 0
+  DeathSoundName: HatchlingDeath
+  HurtSoundName: HatchlingHurt
+  AttackSoundName: EnemyAttack
+  landingSoundName: LandingFootsteps
+  landingParticles: {fileID: 0}
+  FacingDirection: 1
 --- !u!114 &6738264118778351867
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,11 +15,13 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
+        // Move platform up and down with sine function
         transform.position = new Vector2(transform.position.x, originalY + (Mathf.Sin(Time.time * floatSpeed) * floatStrength));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Make player a child of platform for smooth moving with player
         if (collision.collider.tag == "Player")
         {
             collision.collider.transform.SetParent(transform);

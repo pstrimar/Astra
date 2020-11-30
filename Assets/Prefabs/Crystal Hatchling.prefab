@@ -1032,26 +1032,25 @@ MonoBehaviour:
     aggroRange: 5
     attackRange: 0.6
     knockbackStrength: 2
-  deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
+  DeathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
-  isDead: 0
-  invulnerable: 0
-  target: {fileID: 0}
-  groundCheck: {fileID: 1050038722037061868}
-  wallCheck: {fileID: 5988980507695726606}
-  backCheck: {fileID: 4124604730489183949}
-  fallCheck: {fileID: 5898148606991147919}
-  searchingForPlayer: 0
-  fullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
-  isFlipped: 0
-  shakeAmount: 0.1
-  shakeLength: 0.1
-  deathSoundName: HatchlingDeath
-  hurtSoundName: HatchlingHurt
-  attackSoundName: EnemyAttack
+  IsDead: 0
+  Invulnerable: 0
+  Target: {fileID: 0}
+  GroundCheck: {fileID: 1050038722037061868}
+  WallCheck: {fileID: 5988980507695726606}
+  BackCheck: {fileID: 4124604730489183949}
+  FallCheck: {fileID: 5898148606991147919}
+  FullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
+  LeftHitCheck: {fileID: 0}
+  RightHitCheck: {fileID: 0}
+  IsFlipped: 0
+  DeathSoundName: HatchlingDeath
+  HurtSoundName: HatchlingHurt
+  AttackSoundName: EnemyAttack
   landingSoundName: LandingFootsteps
   landingParticles: {fileID: 0}
-  facingDirection: 1
+  FacingDirection: 1
 --- !u!1 &5801103304460086218
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Ladder : MonoBehaviour, IUseable
 {
-    Player player;
-
-    [SerializeField] Collider2D groundCollider;
+    public static event Action<bool> onUseLadder;
 
     public void Use()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
         // we need to start climbing
-        player.OnLadder = true;
+        onUseLadder?.Invoke(true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), true);
     }
 
@@ -19,8 +16,7 @@ public class Ladder : MonoBehaviour, IUseable
     {
         if (collision.tag == "Player")
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            player.OnLadder = false;
+            onUseLadder?.Invoke(false);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), false);
         }
     }

@@ -1,20 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIOverlay : MonoBehaviour
 {
-    private GameObject statusIndicators;
-    private GameObject upgradeMenuText;
-    private GameObject playerInfo;
     private GameObject player;
+    private CanvasGroup canvasGroup;
 
     void Start()
     {
-        statusIndicators = GameObject.Find("StatusIndicators");
-        upgradeMenuText = GameObject.Find("PressUForUpgradeMenu");
-        playerInfo = GameObject.Find("PlayerInfo");
         player = GameObject.FindWithTag("Player");
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     void Update()
@@ -24,8 +18,10 @@ public class UIOverlay : MonoBehaviour
             player = GameObject.FindWithTag("Player");
         }
 
-        statusIndicators.SetActive(player.activeSelf);
-        upgradeMenuText.SetActive(player.activeSelf);
-        playerInfo.SetActive(player.activeSelf);
+        // Hide UI Overlay if player is disabled
+        if (!player.activeSelf && GameManager.RemainingLives > 0)
+            canvasGroup.alpha = 0;
+        else
+            canvasGroup.alpha = 1;
     }
 }

@@ -73,6 +73,7 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         }
 
+        // Add all sounds as child gameobjects to audiomanager
         for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
@@ -82,29 +83,16 @@ public class AudioManager : MonoBehaviour
         PlaySound("MenuMusic");
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void OnEnable()
     {
-        Debug.Log("level " + level + " was loaded");
-        if (FindObjectOfType<Portal>() != null)
-        {
-            foreach (Portal portal in FindObjectsOfType<Portal>())
-            {
-                portal.onSceneLoaded -= PlaySceneMusic;
-                portal.onSceneLoaded += PlaySceneMusic;
-            }
-            PlaySceneMusic(level);
-        }
+        Portal.onSceneLoaded += PlaySceneMusic;
+        // Play level sound
+        PlaySceneMusic(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDisable()
     {
-        if (FindObjectOfType<Portal>() != null)
-        {
-            foreach (Portal portal in FindObjectsOfType<Portal>())
-            {
-                portal.onSceneLoaded -= PlaySceneMusic;
-            }
-        }
+        Portal.onSceneLoaded -= PlaySceneMusic;
         StopAllSounds();
     }
 
@@ -178,7 +166,6 @@ public class AudioManager : MonoBehaviour
 
     private void PlaySceneMusic(int scene)
     {
-        Debug.Log("PlaySceneMusic was called.");
         switch (scene)
         {
             case 0:

@@ -11,7 +11,23 @@ public class LivesCounterUI : MonoBehaviour
         livesText = GetComponent<Text>();
     }
 
-    void Update()
+    private void OnEnable()
+    {
+        GameManager.onLifeLost += HandleLifeLost;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onLifeLost -= HandleLifeLost;
+    }
+
+    private void Start()
+    {
+        livesText.text = "LIVES: " + GameManager.RemainingLives;
+    }
+
+    // Update Lives display when life lost
+    private void HandleLifeLost()
     {
         livesText.text = "LIVES: " + GameManager.RemainingLives;
     }

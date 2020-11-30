@@ -10,13 +10,17 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpInput { get; private set; }
     public bool ShootInput { get; private set; }
 
-    public event Action OnActionButtonPressed;
+    public static event Action OnActionButtonPressed;
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
+        // Read in movement data
         RawMovementInput = context.ReadValue<Vector2>();
 
+        // Normalized x component of movement vector
         NormalizedInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+
+        // Normalized y component of movement vector
         NormalizedInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
     }
 
@@ -36,6 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.performed)
         {
+            // Broadcast action button pressed
             OnActionButtonPressed();
         }
     }

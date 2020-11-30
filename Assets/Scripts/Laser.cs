@@ -20,6 +20,7 @@ public class Laser : MonoBehaviour
 
     void Update()
     {
+        // Set start position to firepoint
         lineRenderer.SetPosition(0, firePoint.position);
 
         if (horizontal)
@@ -31,18 +32,21 @@ public class Laser : MonoBehaviour
 
         if (hit)
         {
+            // Set end position to what we hit
             lineRenderer.SetPosition(1, hit.point);
 
             if (Time.time >= timeToSpawnEffect)
             {
                 SpawnImpactParticles(hit);
 
+                // Damage what we hit
                 if (hit.collider.GetComponent<IDamageable>() != null)
                 {
                     hit.collider.GetComponent<IDamageable>().Damage(damage);
                 }
             }
         }
+        // We hit nothing, so set end position off screen
         else
         {
             if (horizontal)
@@ -52,6 +56,7 @@ public class Laser : MonoBehaviour
         }
     }
 
+    // Spawn impact particles normal to what we hit
     private void SpawnImpactParticles(RaycastHit2D hit)
     {
         Transform hitParticles = Instantiate(hitPrefab, hit.point, Quaternion.FromToRotation(Vector3.right, hit.normal));

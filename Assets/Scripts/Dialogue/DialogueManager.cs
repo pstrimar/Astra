@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
     public Animator anim;
-    public event Action<bool> onDialogue;
+    public static event Action<bool> onDialogue;
 
     private Queue<string> sentences;
 
@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        // switch input action map to dialogue
+        // Switch input action map to dialogue
         onDialogue?.Invoke(true);
 
         anim.SetBool("isOpen", true);
@@ -81,7 +81,7 @@ public class DialogueManager : MonoBehaviour
     {
         anim.SetBool("isOpen", false);
 
-        // switch input action map to gameplay
+        // Switch input action map to gameplay
         onDialogue?.Invoke(false);
     }
 }

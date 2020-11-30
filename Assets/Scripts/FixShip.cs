@@ -13,18 +13,12 @@ public class FixShip : MonoBehaviour, ISaveable
 
     private void OnEnable()
     {
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.onDialogue += HandleDialogue;
-        }
+        DialogueManager.onDialogue += HandleDialogue;
     }
 
     private void OnDisable()
     {
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.onDialogue -= HandleDialogue;
-        }
+        DialogueManager.onDialogue -= HandleDialogue;
     }
 
     private IEnumerator FixTheShip(GameObject newShip)
@@ -33,6 +27,8 @@ public class FixShip : MonoBehaviour, ISaveable
 
         yield return fader.FadeOut(fadeOutTime);
         oldShip.SetActive(false);
+
+        // Hides "Kyp" on the other side of the ship from the beginning of the game
         alien.SetActive(false);
         smokeParticles.SetActive(false);
         newShip.SetActive(true);

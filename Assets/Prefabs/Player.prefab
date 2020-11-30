@@ -743,9 +743,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 666ed4c5cff667f4c8bc126c47213a4d, type: 2}
-  deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
+  DeathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
     type: 3}
-  weapon: {fileID: 577718076312505869}
+  Weapon: {fileID: 577718076312505869}
   instructions: {fileID: 2109577624}
   landingParticles: {fileID: 6502368863620938992, guid: f52b8fb36ffecd44cb6788f50bf3e1c0,
     type: 3}
@@ -902,6 +902,11 @@ PrefabInstance:
       propertyPath: maxLaserLength
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 577718078044432279, guid: ef947290a6ef849449814e9bd7352f2e,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 5543880263021760755}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef947290a6ef849449814e9bd7352f2e, type: 3}
 --- !u!4 &577718076312505871 stripped

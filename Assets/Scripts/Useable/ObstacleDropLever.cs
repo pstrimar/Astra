@@ -7,6 +7,8 @@ public class ObstacleDropLever : Lever, IUseable
     public override void Use()
     {
         base.Use();
+
+        // Drops obstacles when used
         foreach (ObstacleSpawner spawner in spawners)
         {
             spawner.SpawnObstacle();

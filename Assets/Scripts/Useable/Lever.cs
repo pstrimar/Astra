@@ -1,23 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Lever : MonoBehaviour, IUseable, ISaveable
 {
-    protected Player player;
+    public static event Action onUseLever;
     protected Animator anim;
     protected bool leverPosition = true;
     protected LeverSaveData data;
 
     public virtual void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         anim = GetComponent<Animator>();
 
         data = new LeverSaveData();
     }
 
+    // Switches lever position
     public virtual void Use()
     {
-        player.IsUsingLever = true;
+        onUseLever?.Invoke();
         anim.SetBool("Switch", leverPosition);
         leverPosition = !leverPosition;
     }

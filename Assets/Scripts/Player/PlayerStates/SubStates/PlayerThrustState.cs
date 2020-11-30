@@ -22,8 +22,11 @@ public class PlayerThrustState : PlayerAbilityState
     {
         base.LogicUpdate();
 
+        // Show shoot animation on top of regular animation
         if (shootInput)
             player.Anim.SetLayerWeight(1, 1);
+
+        // Hide shoot animation
         else if (!shootInput)
             player.Anim.SetLayerWeight(1, 0);
 
@@ -37,6 +40,7 @@ public class PlayerThrustState : PlayerAbilityState
 
         if (playerData.currentFuelAmount > 0f)
         {
+            // Use fuel while thrusting
             playerData.currentFuelAmount -= playerData.thrusterFuelBurnSpeed * Time.deltaTime;
 
             player.UseFuel(playerData.currentFuelAmount);
@@ -51,6 +55,7 @@ public class PlayerThrustState : PlayerAbilityState
     {
         base.PhysicsUpdate();
 
+        // Add thruster force
         player.RB.AddForce(Vector2.up * playerData.thrusterForce * Time.fixedDeltaTime);
     }
 }

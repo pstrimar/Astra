@@ -8,6 +8,7 @@ public class Trap : MonoBehaviour
 
     void Start()
     {
+        // Hide the boss and make it so he is not moving or able to be interacted with
         boss.transform.Find("b crawler").gameObject.SetActive(false);
         boss.GetComponent<Animator>().enabled = false;
         boss.GetComponent<Rigidbody2D>().gravityScale = 0f;

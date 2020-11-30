@@ -12,10 +12,10 @@ public class DialogueTrigger : MonoBehaviour, ISaveable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Start dialogue if it hasn't already happened
         if (collision.tag == "Player" && !dialogueAlreadyTriggered)
         {
             dialogueAlreadyTriggered = true;
-            GetComponent<CircleCollider2D>().enabled = false;
             TriggerDialogue();
         }
     }

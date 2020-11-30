@@ -26,6 +26,7 @@ public class PlayerLeverState : PlayerGroundedState
     {
         base.LogicUpdate();
 
+        // Show animation using lever for 1 second
         while (timer < exitTime)
         {
             timer += Time.deltaTime;

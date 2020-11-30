@@ -7,11 +7,14 @@
     public override void Enter()
     {
         base.Enter();
+
+        // Show shoot animation
         player.Anim.SetLayerWeight(1, 1);
     }
 
     public override void Exit()
     {
+        // Hide shoot animation
         player.Anim.SetLayerWeight(1, 0);
         base.Exit();
     }

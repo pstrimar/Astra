@@ -13,6 +13,7 @@ public class PlayerClimbState : PlayerAbilityState
     {
         base.Enter();
 
+        // Turn gravity off
         player.GetComponent<Rigidbody2D>().gravityScale = 0f;
         anim = player.GetComponent<Animator>();
     }
@@ -21,6 +22,7 @@ public class PlayerClimbState : PlayerAbilityState
     {
         base.Exit();
 
+        // Turn gravity back on
         player.GetComponent<Rigidbody2D>().gravityScale = 1f;
         anim.speed = 1f;
     }

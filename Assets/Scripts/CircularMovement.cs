@@ -7,21 +7,20 @@ public class CircularMovement : MonoBehaviour
     [Range(0, 5)]
     public float Radius = 1f;
 
-    private Vector2 _center;
-    private float _angle;
+    private Vector2 center;
+    private float angle;
 
     private void Start()
     {
-        _center = transform.position;
+        center = transform.position;
     }
 
     private void Update()
     {
+        angle += RotateSpeed * Time.deltaTime;
 
-        _angle += RotateSpeed * Time.deltaTime;
+        var offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * Radius;
 
-        var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
-
-        transform.position = _center + offset;
+        transform.position = center + offset;
     }
 }

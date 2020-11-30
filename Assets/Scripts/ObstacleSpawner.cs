@@ -6,11 +6,11 @@ public class ObstacleSpawner : MonoBehaviour
     public bool rotate;
     [SerializeField] Rigidbody2D obstaclePrefab;
     [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform impactParticles;
     [SerializeField] float startTime;
     [SerializeField] float repeatRate = 3f;
     [SerializeField] float speed = 12;
-    [SerializeField] bool hideBeforeDestroy = true;
-    [SerializeField] Transform impactParticles;
+    [SerializeField] bool hideBeforeDestroy = true;    
     [SerializeField] string impactSound = "Splash";
 
     void Start()
@@ -22,13 +22,16 @@ public class ObstacleSpawner : MonoBehaviour
     public void SpawnObstacle()
     {
         Rigidbody2D obstacle = Instantiate(obstaclePrefab, spawnPoint.position, obstaclePrefab.transform.rotation);
+        // Freeze rotation
         if (!rotate)
             obstacle.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         else
             obstacle.AddTorque(Random.Range(-20f, 20f));
 
+        // Add force in up direction
         if (spawnUp)
             obstacle.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+        // Add force in down direction
         else
             obstacle.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
 
@@ -39,6 +42,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstacle")
         {
+            // Splash particles for rocks falling in river
             if (impactParticles != null)
             {
                 Transform particles = Instantiate(impactParticles, 
@@ -47,6 +51,7 @@ public class ObstacleSpawner : MonoBehaviour
                 Destroy(particles.gameObject, 2f);
             }
 
+            // Splash sounds for rocks falling in river
             if (collision.gameObject.GetComponent<AudioSource>() != null)
             {
                 collision.gameObject.GetComponent<AudioSource>().Play();

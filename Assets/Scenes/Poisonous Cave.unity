@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -521,12 +521,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3216843877311627155, guid: 5a6681c9e2d580848a6893e781237948,
     type: 3}
   spawnPoint: {fileID: 2108533545}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 5.526
   repeatRate: 5.75
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &106018591
 Transform:
@@ -1251,12 +1251,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 2772150560645647588, guid: b1e14490b64b82c498bdca10a223fbc9,
     type: 3}
   spawnPoint: {fileID: 77596041}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 0
   repeatRate: 6
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &208680855
 Transform:
@@ -1432,12 +1432,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 4659654467509751158, guid: d5ddc4cc8a953f5409304b34c25f65c9,
     type: 3}
   spawnPoint: {fileID: 292423874}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 7.24
   repeatRate: 9.66
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &246905650
 Transform:
@@ -1818,6 +1818,11 @@ PrefabInstance:
       propertyPath: stats.maxHealth
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 1713131626379795474, guid: 11ce843a934890d4eb799b7a203127bb,
+        type: 3}
+      propertyPath: FullFriction
+      value: 
+      objectReference: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
     - target: {fileID: 4873840502322236490, guid: 11ce843a934890d4eb799b7a203127bb,
         type: 3}
       propertyPath: m_Name
@@ -2032,7 +2037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313900726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6017532, y: -5.6779604, z: 5.51}
+  m_LocalPosition: {x: -1.8817215, y: -5.67715, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 842333728}
@@ -2585,7 +2590,7 @@ PrefabInstance:
     - target: {fileID: 1072929981896150541, guid: 04fc591cda8054b458b129ddb3b61107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 97.71875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1072929981896150541, guid: 04fc591cda8054b458b129ddb3b61107,
         type: 3}
@@ -2647,6 +2652,11 @@ PrefabInstance:
       propertyPath: speed
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1072929981896150542, guid: 04fc591cda8054b458b129ddb3b61107,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 5543880261118648261}
     m_RemovedComponents:
     - {fileID: 1072929981896150543, guid: 04fc591cda8054b458b129ddb3b61107, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 04fc591cda8054b458b129ddb3b61107, type: 3}
@@ -2821,12 +2831,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 2236349651263517354, guid: f5e8058ab18f88749bf482a08251e494,
     type: 3}
   spawnPoint: {fileID: 1070722121}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 5
   repeatRate: 5
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &462735168
 Transform:
@@ -3125,7 +3135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634675912}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5999985, y: 4.6000013, z: 5.51}
+  m_LocalPosition: {x: -1.8799973, y: 4.580001, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 317284874}
@@ -3500,12 +3510,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 4659654467509751158, guid: d5ddc4cc8a953f5409304b34c25f65c9,
     type: 3}
   spawnPoint: {fileID: 2054382907}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 1.3
   repeatRate: 6.2
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &766961138
 Transform:
@@ -3619,7 +3629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775444996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.4915, y: 0, z: 0}
+  m_LocalPosition: {x: -39.7575, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6772488582443813777}
@@ -3905,7 +3915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844715401}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.157, y: 0, z: 0}
+  m_LocalPosition: {x: 4.187, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6772397422035429949}
@@ -4927,7 +4937,7 @@ PrefabInstance:
     - target: {fileID: 1072929981896150541, guid: 04fc591cda8054b458b129ddb3b61107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 97.71875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1072929981896150541, guid: 04fc591cda8054b458b129ddb3b61107,
         type: 3}
@@ -5289,12 +5299,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 2236349651263517354, guid: f5e8058ab18f88749bf482a08251e494,
     type: 3}
   spawnPoint: {fileID: 2035993392}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 7.87
   repeatRate: 6.78
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &1369684500
 Transform:
@@ -5794,12 +5804,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 1167134269336775857, guid: 5f78fa59d83f5334fa553463cf5b26c7,
     type: 3}
   spawnPoint: {fileID: 1883517095}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 2.174
   repeatRate: 7.48
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &1613469666
 Transform:
@@ -5970,7 +5980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694498539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.57, y: 0, z: 0}
+  m_LocalPosition: {x: -41.85, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6765089357296063251}
@@ -6089,7 +6099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733564990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.157, y: 0, z: 0}
+  m_LocalPosition: {x: 4.187, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6772397422035429949}
@@ -6220,7 +6230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845716049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.438834, y: 10.656941, z: -97.71875}
+  m_LocalPosition: {x: 9.438834, y: 10.656941, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422142460}
@@ -6295,12 +6305,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 4575490001344955701, guid: 36df41ab37d7f7d48b58f6f7b559b4ca,
     type: 3}
   spawnPoint: {fileID: 1592471866}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 2.89
   repeatRate: 4.59
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &1847684337
 Transform:
@@ -6444,12 +6454,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 2236349651263517354, guid: f5e8058ab18f88749bf482a08251e494,
     type: 3}
   spawnPoint: {fileID: 2453499}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 10.11
   repeatRate: 8.11
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &1947105042
 Transform:
@@ -6527,12 +6537,12 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3216843877311627155, guid: 5a6681c9e2d580848a6893e781237948,
     type: 3}
   spawnPoint: {fileID: 2047287286}
+  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
+    type: 3}
   startTime: 5
   repeatRate: 4.34
   speed: 0
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 493973468067657798, guid: f1c61d888260fe54bbb98b64ebdeca7b,
-    type: 3}
   impactSound: Splash
 --- !u!4 &1962834246
 Transform:
@@ -7561,12 +7571,12 @@ PrefabInstance:
     - target: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.57
+      value: -41.85
       objectReference: {fileID: 0}
     - target: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.11
+      value: 18.09
       objectReference: {fileID: 0}
     - target: {fileID: 5543880263021760747, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
         type: 3}
@@ -7615,6 +7625,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a66d0f7d038ed4c9c0cc699a277ebe, type: 3}
+--- !u!114 &5543880261118648261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543880263021760755, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5543880261118648260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd093876e7181c148ba312ae0beffc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6662356613225503709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7834,7 +7856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6766800725575028085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.57, y: 0, z: 0}
+  m_LocalPosition: {x: 41.85, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6772593593357699581}
@@ -7969,7 +7991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6767744286716843323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.157, y: 0, z: 0}
+  m_LocalPosition: {x: 4.187, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6772397422035429949}
@@ -8011,7 +8033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6766788239282210635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 83.14, y: 0, z: 0}
+  m_LocalPosition: {x: 83.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6772759993345401999}
@@ -9834,7 +9856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6766823520957507099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.157, y: 0, z: 0}
+  m_LocalPosition: {x: -4.185, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6765201730662819007}
@@ -9981,7 +10003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6768356931670652857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.157, y: 0, z: 0}
+  m_LocalPosition: {x: -4.185, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6765260225425460787}
@@ -10062,7 +10084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6767543052750616957}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.314, y: 0, z: 0}
+  m_LocalPosition: {x: -8.37, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6765208219363047661}
@@ -10199,7 +10221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6766816132609639109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.628, y: 0, z: 0}
+  m_LocalPosition: {x: -16.74, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6772369874388351453}
@@ -10236,7 +10258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6768457490248897611}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.3345, y: 0, z: 0}
+  m_LocalPosition: {x: -35.5725, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6772372518623175613}

@@ -4,51 +4,96 @@ using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
-    AudioManager audioManager;
     [SerializeField] string mouseHoverSoundName = "ButtonHover";
     [SerializeField] string buttonPressSoundName = "ButtonPress";
 
-    public event Action onRetry;
-    public event Action onReplay;
+    public static event Action onRetry;
+    public static event Action onReplay;
+    public SavingWrapper savingWrapper;
 
-    private void Start() 
+    private void Start()
     {
-        audioManager = AudioManager.Instance;
-        if (audioManager == null) 
+        if (AudioManager.Instance == null)
         {
             Debug.LogError("No AudioManager found!");
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.onGameOver += HandleGameOver;
+        GameManager.onWinGame += HandleWinGame;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onGameOver -= HandleGameOver;
+        GameManager.onWinGame -= HandleWinGame;
+    }
+
     public void Quit()
     {
-        audioManager.PlaySound(buttonPressSoundName);
-        FindObjectOfType<SavingWrapper>().Delete();
+        AudioManager.Instance.PlaySound(buttonPressSoundName);
+        savingWrapper.Delete();
         Application.Quit();
     }
 
     public void Retry()
     {
-        audioManager.PlaySound(buttonPressSoundName);
-        FindObjectOfType<SavingWrapper>().Delete();
+        AudioManager.Instance.PlaySound(buttonPressSoundName);
+        savingWrapper.Delete();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         onRetry?.Invoke();
-        gameObject.SetActive(false);
+        HideCanvasGroup();
     }
 
     public void Replay()
     {
-        audioManager.PlaySound(buttonPressSoundName);
-        FindObjectOfType<SavingWrapper>().Delete();
+        AudioManager.Instance.PlaySound(buttonPressSoundName);
+        savingWrapper.Delete();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         onReplay?.Invoke();
-        gameObject.SetActive(false);
+        HideCanvasGroup();
     }
 
-    public void OnMouseOver() 
+    public void OnMouseOver()
     {
-        audioManager.PlaySound(mouseHoverSoundName);
+        AudioManager.Instance.PlaySound(mouseHoverSoundName);
+    }
+
+    private void HandleGameOver()
+    {
+        if (gameObject.tag == "GameOverScreen")
+        {
+            ShowCanvasGroup();
+        }
+    }
+
+    private void HandleWinGame()
+    {
+        if (gameObject.tag == "WinScreen")
+        {
+            ShowCanvasGroup();
+        }
+    }
+
+    // Show canvasgroup and make interactable
+    private void ShowCanvasGroup()
+    {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    // Hide canvasgroup and make it not interactable
+    private void HideCanvasGroup()
+    {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 }

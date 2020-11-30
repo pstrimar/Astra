@@ -10,21 +10,16 @@ public class BossHealthBar : MonoBehaviour
     private void OnEnable()
     {
         boss = GameObject.Find("Crystal Crawler Boss").GetComponent<Enemy>();
-        if (boss != null)
-        {
-            boss.onHealthChanged += UpdateHealth;
-        }
+        boss.onHealthChanged += UpdateHealth;
     }
 
     private void OnDisable()
     {
-        if (boss != null)
-        {
-            boss.onHealthChanged -= UpdateHealth;
-        }
+        boss.onHealthChanged -= UpdateHealth;
     }
     private void Update()
     {
+        // Hide boss health bar if player has lost the game
         if (GameManager.RemainingLives == 0)
         {
             transform.gameObject.SetActive(false);

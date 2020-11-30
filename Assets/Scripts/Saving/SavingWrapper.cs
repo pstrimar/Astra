@@ -12,14 +12,6 @@ public class SavingWrapper : MonoBehaviour
         StartCoroutine(LoadLastScene());
     }
 
-    IEnumerator LoadLastScene()
-    {
-        yield return GetComponent<SavingSystem>().LoadLastScene(playerSaveFile);
-        Fader fader = FindObjectOfType<Fader>();
-        fader.FadeOutImmediate();
-        yield return fader.FadeIn(fadeInTime);
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Delete))
@@ -52,5 +44,13 @@ public class SavingWrapper : MonoBehaviour
     {
         GetComponent<SavingSystem>().Delete(defaultSaveFile);
         GetComponent<SavingSystem>().Delete(playerSaveFile);
+    }
+
+    IEnumerator LoadLastScene()
+    {
+        yield return GetComponent<SavingSystem>().LoadLastScene(playerSaveFile);
+        Fader fader = FindObjectOfType<Fader>();
+        fader.FadeOutImmediate();
+        yield return fader.FadeIn(fadeInTime);
     }
 }

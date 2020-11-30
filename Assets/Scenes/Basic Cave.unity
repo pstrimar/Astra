@@ -2318,7 +2318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313900726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1895752, y: -5.342311, z: 5.51}
+  m_LocalPosition: {x: 0.18959427, y: -5.350789, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 842333728}
@@ -3245,6 +3245,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stats.maxHealth
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374763826345905888, guid: 4466373b8c303ee4b9dfb4aaec302a1a,
+        type: 3}
+      propertyPath: FacingDirection
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4466373b8c303ee4b9dfb4aaec302a1a, type: 3}
@@ -4407,7 +4412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5228bcba97f74464886c0b5b9d7567fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 2069891503}
+  player: {fileID: 5543880261118648261}
 --- !u!212 &700788630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12368,6 +12373,18 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: c46aafbc32c7174499fafb6797f09dd6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a66d0f7d038ed4c9c0cc699a277ebe, type: 3}
+--- !u!114 &5543880261118648261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543880263021760755, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5543880261118648260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd093876e7181c148ba312ae0beffc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6988328817010030377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12455,6 +12472,12 @@ PrefabInstance:
       propertyPath: stats.damage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4306528901015320311, guid: 9e95fc5a5b3c4e94b9c49f2bd266de16,
+        type: 3}
+      propertyPath: DeathParticles
+      value: 
+      objectReference: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e95fc5a5b3c4e94b9c49f2bd266de16, type: 3}
 --- !u!1001 &7562358117383613869

@@ -1,5 +1,4 @@
-﻿
-public interface ISaveable
+﻿public interface ISaveable
 {
     object CaptureState();
 

@@ -2,30 +2,28 @@
 
 public class JumpSurprise : MonoBehaviour
 {
-    private SpriteMask spriteMask;
+    public SpriteMask spriteMask;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        spriteMask = FindObjectOfType<SpriteMask>();        
-    }
-
+    // Event called by animation
     public void DisableSpriteMask()
     {
         spriteMask.enabled = false;
     }
 
+    // Event called by animation
     public void PlaySurpriseSound()
     {
         AudioManager.Instance.PlaySound("Surprise");
     }
 
+    // Event called by animation
     public void PlayBossBattleMusic()
     {
         AudioManager.Instance.PauseSound("CrystalCave");
         AudioManager.Instance.PlaySound("BossBattle");
     }
 
+    // Event called by animation
     public void ShowHealthBar()
     {
         GameManager.Instance.ShowBossHealthBar();

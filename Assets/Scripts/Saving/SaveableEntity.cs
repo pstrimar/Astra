@@ -5,8 +5,8 @@ using UnityEditor;
 [ExecuteAlways]
 public class SaveableEntity : MonoBehaviour
 {
-    [SerializeField] string uniqueIdentifier = "";
-    static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
+    [SerializeField] string uniqueIdentifier = string.Empty;
+    private static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
     public string GetUniqueIdentifier()
     {

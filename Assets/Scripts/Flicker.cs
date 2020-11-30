@@ -18,8 +18,9 @@ public class Flicker : MonoBehaviour
 
     private void SpriteBlinkingEffect()
     {
-        GameObject graphics = GetComponent<Player>().FindChildObject("Graphics");
+        GameObject graphics = transform.Find("Graphics").gameObject;
 
+        // Once timer has elapsed, stop blinking and turn player graphics on
         spriteBlinkingTotalTimer += Time.deltaTime;
         if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration)
         {
@@ -30,6 +31,7 @@ public class Flicker : MonoBehaviour
             return;
         }
 
+        // Flicker player graphics on and off
         spriteBlinkingTimer += Time.deltaTime;
         if (spriteBlinkingTimer >= spriteBlinkingMiniDuration)
         {

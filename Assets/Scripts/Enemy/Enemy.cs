@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable, ISaveable
 {
     [System.Serializable]
-    public class EnemyStats 
+    public class EnemyStats
     {
         [SerializeField] int maxHealth = 100;
         private int _currentHealth;
@@ -20,11 +20,11 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
         public int currentHealth
         {
-            get {return _currentHealth;}
+            get { return _currentHealth; }
             set { _currentHealth = Mathf.Clamp(value, 0, maxHealth); }
         }
 
-        public void Init() 
+        public void Init()
         {
             currentHealth = maxHealth;
         }
@@ -32,39 +32,40 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     public EnemyStats stats = new EnemyStats();
 
-    public Transform deathParticles;
-    public bool isDead;
-    public bool invulnerable;
+    public Transform DeathParticles;
+    public bool IsDead;
+    public bool Invulnerable;
     public event Action<int> onHealthChanged;
+    public static event Action onHit;
 
     //What to chase
-    public Transform target;
-    public Transform groundCheck;
-    public Transform wallCheck;
-    public Transform backCheck;
-    public Transform fallCheck;
-    public PhysicsMaterial2D fullFriction;
+    public Transform Target;
+    public Transform GroundCheck;
+    public Transform WallCheck;
+    public Transform BackCheck;
+    public Transform FallCheck;
+    public PhysicsMaterial2D FullFriction;
+    public CircleCollider2D LeftHitCheck;           // Used for boss only
+    public CircleCollider2D RightHitCheck;          // Used for boss only
 
-    public bool isFlipped = false;
-    public float shakeAmount = 0.1f;
-    public float shakeLength = 0.1f;
+    public bool IsFlipped = false;
 
-    public string deathSoundName = "EnemyDeath";
-    public string hurtSoundName = "EnemyHurt";
-    public string attackSoundName = "EnemyAttack";
+    public string DeathSoundName = "EnemyDeath";
+    public string HurtSoundName = "EnemyHurt";
+    public string AttackSoundName = "EnemyAttack";
     [OptionalField]
     [SerializeField] string landingSoundName = "LandingFootsteps";
 
     [OptionalField]
     [SerializeField] Transform landingParticles;
-    public int facingDirection = 1;
+    public int FacingDirection = 1;
     private float hurtTimer = 0f;
 
-    private void Awake() 
+    private void Awake()
     {
-        stats.Init();       
+        stats.Init();
 
-        if (deathParticles == null)
+        if (DeathParticles == null)
         {
             Debug.LogError("No deathParticles referenced on Enemy.");
         }
@@ -72,37 +73,42 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
 
     private void Start()
     {
-        GameManager.Instance.onToggleMenu += OnUpgradeMenuToggle;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Player"));
-
-        target = GameObject.FindWithTag("Player").transform;
+        Target = GameObject.FindWithTag("Player").transform;
     }
 
-    private void OnDisable() 
+    private void OnEnable()
     {
-        GameManager.Instance.onToggleMenu -= OnUpgradeMenuToggle;
+        GameManager.onToggleMenu += OnUpgradeMenuToggle;
     }
 
+    private void OnDisable()
+    {
+        GameManager.onToggleMenu -= OnUpgradeMenuToggle;
+    }
+
+    // Disable animation while menu is active
     void OnUpgradeMenuToggle(bool active)
     {
         GetComponent<Animator>().enabled = !active;
     }
 
-    public void Damage(int damage) 
+    public void Damage(int damage)
     {
-        if (!invulnerable)
+        if (!Invulnerable)
         {
             stats.currentHealth -= damage;
 
-            GameManager.Instance.CamShake.ShakeCamera = true;
+            // Broadcast hit
+            onHit?.Invoke();
 
+            // Show hurt animation every second while being damaged
             if (Time.time - hurtTimer > 1f)
             {
-                AudioManager.Instance.PlaySound(hurtSoundName);
+                AudioManager.Instance.PlaySound(HurtSoundName);
                 GetComponent<Animator>().SetTrigger("hurt");
             }
 
-            if (stats.currentHealth <= 0 && !isDead)
+            if (stats.currentHealth <= 0 && !IsDead)
             {
                 GameManager.KillEnemy(this);
                 GetComponent<Animator>().SetBool("dead", true);
@@ -111,28 +117,32 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
             hurtTimer = Time.time;
         }
 
+        // Broadcast health after damage
         onHealthChanged?.Invoke(stats.currentHealth);
     }
 
     public void Attack()
     {
-        AudioManager.Instance.PlaySound(attackSoundName);
-        Player player = target.GetComponent<Player>();
+        AudioManager.Instance.PlaySound(AttackSoundName);
+        Player player = Target.GetComponent<Player>();
 
-        if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
+        // If player is active, not invincible and within our slash radius
+        if (player.isActiveAndEnabled && !player.Invincible && GetComponentInChildren<CircleCollider2D>().IsTouching(Target.GetComponent<CapsuleCollider2D>()))
         {
+            // Direction to knock player back
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
             player.Damage(stats.damage);
         }
     }
 
+    // For boss only, make an attack with left arm
     public void AttackLeft()
-    {        
-        AudioManager.Instance.PlaySound(attackSoundName);
-        Player player = target.GetComponent<Player>();
+    {
+        AudioManager.Instance.PlaySound(AttackSoundName);
+        Player player = Target.GetComponent<Player>();
 
-        if (player.isActiveAndEnabled && !player.Invincible && GameObject.Find("LeftHitCheck").GetComponent<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
+        if (player.isActiveAndEnabled && !player.Invincible && LeftHitCheck.IsTouching(Target.GetComponent<CapsuleCollider2D>()))
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
@@ -140,12 +150,13 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
         }
     }
 
+    // For boss only, make an attack with right arm
     public void AttackRight()
     {
-        AudioManager.Instance.PlaySound(attackSoundName);
-        Player player = target.GetComponent<Player>();
+        AudioManager.Instance.PlaySound(AttackSoundName);
+        Player player = Target.GetComponent<Player>();
 
-        if (player.isActiveAndEnabled && !player.Invincible && GameObject.Find("RightHitCheck").GetComponent<CircleCollider2D>().IsTouching(target.GetComponent<CapsuleCollider2D>()))
+        if (player.isActiveAndEnabled && !player.Invincible && RightHitCheck.IsTouching(Target.GetComponent<CapsuleCollider2D>()))
         {
             Vector2 direction = player.transform.position - transform.position;
             player.AddKnockbackForce(stats.knockbackStrength, direction);
@@ -156,14 +167,14 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     public void Land()
     {
         AudioManager.Instance.PlaySound(landingSoundName);
-        Transform dustParticles = Instantiate(landingParticles, fallCheck.position, Quaternion.identity);
+        Transform dustParticles = Instantiate(landingParticles, FallCheck.position, Quaternion.identity);
         Destroy(dustParticles.gameObject, 1f);
     }
 
     public void Flip()
     {
-        facingDirection *= -1;
-        isFlipped = !isFlipped;
+        FacingDirection *= -1;
+        IsFlipped = !IsFlipped;
 
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
@@ -182,7 +193,7 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     {
         EnemySaveData data = new EnemySaveData();
         data.currentHealth = stats.currentHealth;
-        data.isDead = isDead;
+        data.isDead = IsDead;
         data.position = new float[2];
         data.position[0] = transform.position.x;
         data.position[1] = transform.position.y;
@@ -194,13 +205,13 @@ public class Enemy : MonoBehaviour, IDamageable, ISaveable
     {
         EnemySaveData data = (EnemySaveData)state;
         stats.currentHealth = data.currentHealth;
-        isDead = data.isDead;
+        IsDead = data.isDead;
         transform.position = new Vector2(data.position[0], data.position[1]);
 
-        if (isDead)
+        if (IsDead)
         {
             GetComponent<Animator>().SetBool("dead", true);
-            GetComponent<Rigidbody2D>().sharedMaterial = fullFriction;
+            GetComponent<Rigidbody2D>().sharedMaterial = FullFriction;
         }
     }
 }

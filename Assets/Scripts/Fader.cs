@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fader : MonoBehaviour
@@ -15,14 +14,6 @@ public class Fader : MonoBehaviour
     public void FadeOutImmediate()
     {
         canvasGroup.alpha = 1;
-    }
-
-    IEnumerator FadeOutIn()
-    {
-        yield return FadeOut(3f);
-        print("faded out");
-        yield return FadeIn(1f);
-        print("faded in");
     }
 
     public Coroutine FadeOut(float time)

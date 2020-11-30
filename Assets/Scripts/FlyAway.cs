@@ -6,13 +6,14 @@ public class FlyAway : MonoBehaviour
     [SerializeField] Transform spaceshipFlyAwayPoint;
     [SerializeField] Cinemachine.CinemachineVirtualCamera cinemachineCam;
     [SerializeField] Transform rocketTrailParticles;
+    [SerializeField] GameObject[] firePoints;
     private float fadeOutTime = 1f;
     private float fadeInTime = 2f;
     private bool sceneStarted;
-    private GameObject[] firePoints;
 
     void Update()
     {
+        // Translate ship up after scene starts
         if (sceneStarted)
         {
             transform.Translate(Vector2.up * Time.deltaTime);
@@ -35,16 +36,18 @@ public class FlyAway : MonoBehaviour
 
         yield return fader.FadeOut(fadeOutTime);
 
+        // Sets the transform to the spaceship in the sky
         this.transform.position = spaceshipFlyAwayPoint.position;
 
+        // Sets the camera to follow this transform
         cinemachineCam.m_Follow = this.transform;
 
-        firePoints = GameObject.FindGameObjectsWithTag("FirePoint");
-
+        // Instantiates rocket trail particles at each engine
         foreach (GameObject firePoint in firePoints)
         {
             Instantiate(rocketTrailParticles, firePoint.transform.position, Quaternion.identity).SetParent(transform);
         }
+
         fader.FadeIn(fadeInTime);
         GameManager.Instance.WinGame();
     }

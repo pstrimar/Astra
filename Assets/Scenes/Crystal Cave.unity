@@ -155,11 +155,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 12593428}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &12593428
 Transform:
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12593426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2300005, y: 10.762806, z: 29.644743}
+  m_LocalPosition: {x: 0.2300005, y: 10.762806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -1066,11 +1066,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 213459326}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &213459326
 Transform:
@@ -1080,7 +1080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213459324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9300005, y: 12.082806, z: 29.644743}
+  m_LocalPosition: {x: 1.9300005, y: 12.082806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -1353,7 +1353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313900726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.239025, y: -5.8906136, z: 5.51}
+  m_LocalPosition: {x: -2.211876, y: -5.8906136, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 842333728}
@@ -1673,6 +1673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0162ddaae0f9be4d9d78ce4d99e57e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 5543880261118648261}
   spawners:
   - {fileID: 1738731105}
   - {fileID: 1122632213}
@@ -1791,7 +1792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569606023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.138854, y: 12.497194, z: -29.644743}
+  m_LocalPosition: {x: -10.138854, y: 12.497194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1738731106}
@@ -2332,11 +2333,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 639804013}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &639804013
 Transform:
@@ -2346,7 +2347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639804011}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6199999, y: 7.4928055, z: 29.644743}
+  m_LocalPosition: {x: 0.6199999, y: 7.4928055, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -2636,11 +2637,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 796458150}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &796458150
 Transform:
@@ -2650,7 +2651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796458148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.58, y: 4.9528065, z: 29.644743}
+  m_LocalPosition: {x: 3.58, y: 4.9528065, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -3049,11 +3050,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 1122632214}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &1122632214
 Transform:
@@ -3063,7 +3064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122632212}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 7.552805, z: 29.644743}
+  m_LocalPosition: {x: 3.5, y: 7.552805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -3196,6 +3197,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1591420301}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &1260701349 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 353458806, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1591420301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1277694887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5087731867551328049, guid: 05570abd5e418624b83a7a706ecc3997,
@@ -3242,6 +3249,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6131555087717862807, guid: e9f55f8e5a793d340af98a2a6855f247,
     type: 3}
   m_PrefabInstance: {fileID: 224169670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1286304363 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8418660435104356061, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1591420301}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1306018085
 PrefabInstance:
@@ -6315,6 +6328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 976260112}
     m_Modifications:
+    - target: {fileID: 1207981346, guid: 2b7b0c9082a9c604cbfec34d301310bf, type: 3}
+      propertyPath: spriteMask
+      value: 
+      objectReference: {fileID: 1838812331}
     - target: {fileID: 1562471089, guid: 2b7b0c9082a9c604cbfec34d301310bf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -6455,6 +6472,32 @@ PrefabInstance:
       propertyPath: stats.aggroRange
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 7100031897457768904, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+        type: 3}
+      propertyPath: DeathParticles
+      value: 
+      objectReference: {fileID: 1993407331383851070, guid: d1416c695c37e0b47b6b6b58582acbef,
+        type: 3}
+    - target: {fileID: 7100031897457768904, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+        type: 3}
+      propertyPath: RightHitCheck
+      value: 
+      objectReference: {fileID: 1286304363}
+    - target: {fileID: 7100031897457768904, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+        type: 3}
+      propertyPath: LeftHitCheck
+      value: 
+      objectReference: {fileID: 1260701349}
+    - target: {fileID: 7100031897457768904, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+        type: 3}
+      propertyPath: IsFlipped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100031897457768904, guid: 2b7b0c9082a9c604cbfec34d301310bf,
+        type: 3}
+      propertyPath: FacingDirection
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b7b0c9082a9c604cbfec34d301310bf, type: 3}
 --- !u!4 &1598255255 stripped
@@ -6498,11 +6541,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 1738731106}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &1738731106
 Transform:
@@ -6512,7 +6555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738731104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 9.442806, z: 29.644743}
+  m_LocalPosition: {x: 2.5, y: 9.442806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -7137,11 +7180,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 2125987390}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 0
   speed: 12
   hideBeforeDestroy: 0
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &2125987390
 Transform:
@@ -7151,7 +7194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125987388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6999998, y: 13.932806, z: 29.644743}
+  m_LocalPosition: {x: 2.6999998, y: 13.932806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 569606024}
@@ -7403,3 +7446,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a66d0f7d038ed4c9c0cc699a277ebe, type: 3}
+--- !u!114 &5543880261118648261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543880263021760755, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5543880261118648260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd093876e7181c148ba312ae0beffc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

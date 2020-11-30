@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class CrystalPickup : MonoBehaviour, ISaveable
 {
+    public static event Action<int> onCrystalPickedUp;
     [SerializeField] int crystalAmount = 1;
     private bool pickedUp;
 
@@ -14,7 +14,9 @@ public class CrystalPickup : MonoBehaviour, ISaveable
             pickedUp = true;
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponentInChildren<SpriteRenderer>().enabled = false;
-            GameManager.Crystals += crystalAmount;
+
+            // Broadcast crystal pickup and amount
+            onCrystalPickedUp?.Invoke(crystalAmount);
             AudioManager.Instance.PlaySound("Crystals");
         }
     }

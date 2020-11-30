@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
-public class BattleOverPlatform : MonoBehaviour
+public class BattleEndPlatform : MonoBehaviour
 {
     [SerializeField] Enemy boss;
 
-    // Start is called before the first frame update
+    // Hide the platform
     void Start()
     {
         transform.GetComponent<SpriteRenderer>().enabled = false;
         transform.GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (boss.isDead)
+        // Reveal the platform out of the pit
+        if (boss.IsDead)
         {
             transform.GetComponent<SpriteRenderer>().enabled = true;
             transform.GetComponent<BoxCollider2D>().enabled = true;

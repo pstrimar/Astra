@@ -6,7 +6,9 @@ public class ParallaxLayer : MonoBehaviour {
 	public float relativeMove = 1f;
 	public Transform cam;
 
-	private void Update() {
+	private void Update() 
+	{
+		// Move transform x position relative to camera x position
 		transform.position = new Vector2(cam.position.x * relativeMove, transform.position.y);
 	}
 }

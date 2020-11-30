@@ -2680,27 +2680,25 @@ MonoBehaviour:
     aggroRange: 24
     attackRange: 1
     knockbackStrength: 4
-  deathParticles: {fileID: 1993407331383851070, guid: 838bbbf6f23ca924587e58a90c3bd5d4,
-    type: 3}
-  isDead: 0
-  invulnerable: 0
-  target: {fileID: 0}
-  groundCheck: {fileID: 6069783570311912265}
-  wallCheck: {fileID: 124438296062417697}
-  backCheck: {fileID: 101124555}
-  fallCheck: {fileID: 883730782}
-  searchingForPlayer: 0
-  fullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
-  isFlipped: 0
-  shakeAmount: 0.1
-  shakeLength: 0.1
-  deathSoundName: CrawlerDeath
-  hurtSoundName: CrawlerHurt
-  attackSoundName: EnemyAttack
+  DeathParticles: {fileID: 0}
+  IsDead: 0
+  Invulnerable: 0
+  Target: {fileID: 0}
+  GroundCheck: {fileID: 6069783570311912265}
+  WallCheck: {fileID: 124438296062417697}
+  BackCheck: {fileID: 101124555}
+  FallCheck: {fileID: 883730782}
+  FullFriction: {fileID: 6200000, guid: a100cf906b56a7c4685f6901cd80a4a8, type: 2}
+  LeftHitCheck: {fileID: 353458806}
+  RightHitCheck: {fileID: 8418660435104356061}
+  IsFlipped: 0
+  DeathSoundName: CrawlerDeath
+  HurtSoundName: CrawlerHurt
+  AttackSoundName: EnemyAttack
   landingSoundName: LandingFootsteps
   landingParticles: {fileID: 2156995742736527901, guid: 282c5b9a95bab754ebdffc42238baf81,
     type: 3}
-  facingDirection: -1
+  FacingDirection: 1
 --- !u!61 &1562471089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2739,6 +2737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d25bb585eb079448ca86060a232c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteMask: {fileID: 0}
 --- !u!1 &3958352835274516632
 GameObject:
   m_ObjectHideFlags: 0

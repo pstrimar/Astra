@@ -23,18 +23,19 @@ public class GameManager : MonoBehaviour, ISaveable
     [SerializeField] Transform spawnPrefab;
     [SerializeField] string spawnSoundName = "Spawn";
     [SerializeField] string gameOverSoundName = "GameOver";
-    [SerializeField] string endingCreditsSoundName = "EndingCredits";    
-    [SerializeField] GameObject gameOverUI;
-    [SerializeField] GameObject winGameUI;
-    [SerializeField] GameObject upgradeMenu;
+    [SerializeField] string endingCreditsSoundName = "EndingCredits";
     [SerializeField] GameObject bossHealthBar;
 
-    public event Action<bool> onToggleMenu;
+    public static event Action<bool> onToggleMenu;
+    public static event Action onLifeLost;
+    public static event Action onGameOver;
+    public static event Action onWinGame;
 
     [SerializeField] int startingCrystals;
     public static int Crystals;
     public bool playerHasCrashed;
     private Transform spawnPoint;
+    private bool upgradeMenuVisible;
 
     private void Awake() 
     {
@@ -59,27 +60,24 @@ public class GameManager : MonoBehaviour, ISaveable
 
         if (CamShake == null) 
         {
-            Debug.LogError("No camera shake referenced in GameMaster.");
+            Debug.LogError("No camera shake referenced in GameManager.");
         }
     }    
 
     private void OnEnable()
     {
-        if (gameOverUI.GetComponent<GameOverUI>() != null)
-            gameOverUI.GetComponent<GameOverUI>().onRetry += HandleRetry;
-
-        if (winGameUI.GetComponent<GameOverUI>() != null)
-            winGameUI.GetComponent<GameOverUI>().onReplay += HandleReplay;
+        GameOverUI.onRetry += HandleRetry;
+        GameOverUI.onReplay += HandleReplay;
+        CrystalPickup.onCrystalPickedUp += HandleCrystalPickup;
     }    
 
     private void OnDisable()
     {
-        if (gameOverUI.GetComponent<GameOverUI>() != null)
-            gameOverUI.GetComponent<GameOverUI>().onRetry -= HandleRetry;
-
-        if (winGameUI.GetComponent<GameOverUI>() != null)
-            winGameUI.GetComponent<GameOverUI>().onReplay -= HandleReplay;
+        GameOverUI.onRetry -= HandleRetry;
+        GameOverUI.onReplay -= HandleReplay;
+        CrystalPickup.onCrystalPickedUp -= HandleCrystalPickup;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.U) && !PlayerData.Instance.isDead)
@@ -90,8 +88,8 @@ public class GameManager : MonoBehaviour, ISaveable
 
     private void ToggleUpgradeMenu()
     {
-        upgradeMenu.SetActive(!upgradeMenu.activeSelf);
-        onToggleMenu?.Invoke(upgradeMenu.activeSelf);
+        upgradeMenuVisible = !upgradeMenuVisible;
+        onToggleMenu?.Invoke(upgradeMenuVisible);
     }
 
     private void HandleRetry()
@@ -100,6 +98,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
         Crystals = startingCrystals;
 
+        // Do not show the opening cinematic again
         playerHasCrashed = true;
 
         PlayerData.Instance.maxFuelAmount = startingFuel;
@@ -112,10 +111,16 @@ public class GameManager : MonoBehaviour, ISaveable
 
         Crystals = startingCrystals;
 
+        // Will trigger the opening cinematic
         playerHasCrashed = false;
 
         PlayerData.Instance.maxFuelAmount = startingFuel;
         PlayerData.Instance.maxHealth = startingHealth;
+    }
+
+    private void HandleCrystalPickup(int crystalAmount)
+    {
+        Crystals += crystalAmount;
     }
 
     public void EndGame()
@@ -126,7 +131,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
         AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(gameOverSoundName);
-        gameOverUI.SetActive(true);
+        onGameOver?.Invoke();
     }
 
     public void WinGame()
@@ -137,9 +142,10 @@ public class GameManager : MonoBehaviour, ISaveable
 
         AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(endingCreditsSoundName);
-        winGameUI.SetActive(true);
+        onWinGame?.Invoke();
     }
 
+    // Moves player to spawn point
     public IEnumerator _RespawnPlayer(GameObject player) 
     {
         yield return new WaitForSeconds(spawnDelay);
@@ -156,11 +162,16 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public static void KillPlayer(Player player) 
     {        
-        Transform deathParticles = Instantiate(player.deathParticles, player.transform.position, Quaternion.identity);
+        Transform deathParticles = Instantiate(player.DeathParticles, player.transform.position, Quaternion.identity);
         Destroy(deathParticles.gameObject, 5f);
 
         player.gameObject.SetActive(false);
         _remainingLives--;
+
+        // Broadcast life lost
+        onLifeLost?.Invoke();
+
+        // Game over
         if (_remainingLives <= 0)
         {
             Instance.EndGame();
@@ -184,14 +195,14 @@ public class GameManager : MonoBehaviour, ISaveable
     private void _KillEnemy(Enemy _enemy) 
     {
         // Play sounds
-        AudioManager.Instance.StopSound(_enemy.hurtSoundName);
-        AudioManager.Instance.PlaySound(_enemy.deathSoundName);
+        AudioManager.Instance.StopSound(_enemy.HurtSoundName);
+        AudioManager.Instance.PlaySound(_enemy.DeathSoundName);
 
-        _enemy.isDead = true;
-        _enemy.GetComponent<Rigidbody2D>().sharedMaterial = _enemy.fullFriction;
+        _enemy.IsDead = true;
+        _enemy.GetComponent<Rigidbody2D>().sharedMaterial = _enemy.FullFriction;
 
         // Add particles
-        Transform deathParticles = Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
+        Transform deathParticles = Instantiate(_enemy.DeathParticles, _enemy.transform.position, Quaternion.identity);
         Destroy(deathParticles.gameObject, 5f);
     }
 

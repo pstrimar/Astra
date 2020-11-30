@@ -10,11 +10,13 @@
 
         player.CheckIfShouldFlip(xInput);
 
+        // Move only in x direction
         if (!player.IsOnSlope)
-        {            
+        {
             player.SetVelocityX(playerData.movementVelocity * xInput);
             player.SetVelocityY(0f);
         }
+        // Set x and y velocity based on slope angle
         else if (player.IsOnSlope && player.CanWalkOnSlope)
         {
             player.SetVelocityX(playerData.movementVelocity * xInput * -player.SlopeNormalPerp.x);

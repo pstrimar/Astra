@@ -19,11 +19,13 @@ public class SecretDoorLever : Lever, IUseable, ISaveable
 
     private void Update()
     {
+        // If lever is switched, move object towards ending position
         if (!leverPosition && endingPos.x - moveableObject.position.x >= 0)
         {
             Vector2 dir = (endingPos - startingPos);
             moveableObject.transform.Translate(dir * speed * Time.deltaTime);
         }
+        // If lever is switched, move object towards starting position
         else if (leverPosition && moveableObject.position.x - startingPos.x >= 0)
         {
             Vector2 dir = (startingPos - endingPos);

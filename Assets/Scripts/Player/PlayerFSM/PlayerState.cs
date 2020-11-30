@@ -25,6 +25,8 @@ public class PlayerState
     public virtual void Enter()
     {
         DoChecks();
+
+        // Set animation of current state
         player.Anim.SetBool(animBoolName, true);            
 
         startTime = Time.time;

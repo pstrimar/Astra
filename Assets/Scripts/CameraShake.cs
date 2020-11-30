@@ -1,19 +1,17 @@
-﻿using UnityEngine;
-using Cinemachine;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-
     public float ShakeDuration = 0.3f;          // Time the Camera Shake effect will last
     public float ShakeAmplitude = 1.2f;         // Cinemachine Noise Profile Parameter
     public float ShakeFrequency = 2.0f;         // Cinemachine Noise Profile Parameter
+    public bool ShakeCamera;
 
     private float shakeElapsedTime = 0f;
 
-    public bool ShakeCamera;
-
     // Cinemachine Shake
-    public CinemachineVirtualCamera VirtualCamera;
+    private CinemachineVirtualCamera VirtualCamera;
     private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
 
     private void Start()
@@ -23,6 +21,18 @@ public class CameraShake : MonoBehaviour
         // Get Virtual Camera Noise Profile
         if (VirtualCamera != null)
             virtualCameraNoise = VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+    }
+
+    private void OnEnable()
+    {
+        Player.onHit += HandleHit;
+        Enemy.onHit += HandleHit;
+    }
+
+    private void OnDisable()
+    {
+        Player.onHit -= HandleHit;
+        Enemy.onHit -= HandleHit;
     }
 
     private void Update()
@@ -68,5 +78,10 @@ public class CameraShake : MonoBehaviour
         // Get Virtual Camera Noise Profile
         if (VirtualCamera != null)
             virtualCameraNoise = VirtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+    }
+
+    private void HandleHit()
+    {
+        ShakeCamera = true;
     }
 }

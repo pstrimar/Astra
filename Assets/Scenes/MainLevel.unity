@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -661,6 +661,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 225558970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &225558972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5543880263021760755, guid: 36a66d0f7d038ed4c9c0cc699a277ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 225558970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73240499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd093876e7181c148ba312ae0beffc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &237715172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5334473, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.5334778, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006315055}
@@ -2420,7 +2432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5228bcba97f74464886c0b5b9d7567fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 0}
+  player: {fileID: 225558972}
 --- !u!61 &913438006
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2778,6 +2790,10 @@ MonoBehaviour:
   cinemachineCam: {fileID: 2091043239}
   rocketTrailParticles: {fileID: 1482414095818579219, guid: 183c9eae9a2b13042befc4ffb3aa2600,
     type: 3}
+  firePoints:
+  - {fileID: 1417533438}
+  - {fileID: 267730273}
+  - {fileID: 1301426464}
 --- !u!61 &934140438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3076,7 +3092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1033908295}
   m_Layer: 0
-  m_Name: FirePoint (5)
+  m_Name: FirePoint
   m_TagString: FirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3498,6 +3514,9 @@ MonoBehaviour:
   cinemachineCam: {fileID: 2091043239}
   rocketTrailParticles: {fileID: 1482414095818579219, guid: 183c9eae9a2b13042befc4ffb3aa2600,
     type: 3}
+  firePoints:
+  - {fileID: 1522280190}
+  - {fileID: 1061566851}
 --- !u!61 &1125039057
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3627,6 +3646,8 @@ MonoBehaviour:
   cinemachineCam: {fileID: 2091043239}
   rocketTrailParticles: {fileID: 1482414095818579219, guid: 183c9eae9a2b13042befc4ffb3aa2600,
     type: 3}
+  firePoints:
+  - {fileID: 1033908294}
 --- !u!61 &1155108423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10356,7 +10377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091043237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5334473, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.5334778, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 429645820}
@@ -10561,6 +10582,11 @@ PrefabInstance:
       propertyPath: moveableObject
       value: 
       objectReference: {fileID: 1363720250}
+    - target: {fileID: 1072929981896150542, guid: 04fc591cda8054b458b129ddb3b61107,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 225558972}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04fc591cda8054b458b129ddb3b61107, type: 3}
 --- !u!1001 &3930380545951237558

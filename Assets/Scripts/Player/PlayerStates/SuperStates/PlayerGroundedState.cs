@@ -29,8 +29,11 @@
         if (jumpInput)
             stateMachine.ChangeState(player.ThrustState);
 
+        // Show shooting animation on top of regular animation
         if (shootInput)
             player.Anim.SetLayerWeight(1, 1);
+
+        // Hide shooting animation
         else if (!shootInput)
             player.Anim.SetLayerWeight(1, 0);
 

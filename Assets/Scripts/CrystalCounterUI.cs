@@ -11,7 +11,23 @@ public class CrystalCounterUI : MonoBehaviour
         crystalCount = GetComponent<Text>();
     }
 
-    void Update()
+    private void OnEnable()
+    {
+        CrystalPickup.onCrystalPickedUp += HandleCrystalPickup;
+    }
+
+    private void OnDisable()
+    {
+        CrystalPickup.onCrystalPickedUp -= HandleCrystalPickup;
+    }
+
+    private void Start()
+    {
+        crystalCount.text = "CRYSTALS: " + GameManager.Crystals;
+    }
+
+    // Update crystal text when crystal picked up
+    private void HandleCrystalPickup(int obj)
     {
         crystalCount.text = "CRYSTALS: " + GameManager.Crystals;
     }

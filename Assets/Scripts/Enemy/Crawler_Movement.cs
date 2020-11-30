@@ -6,7 +6,7 @@ public class Crawler_Movement : StateMachineBehaviour
     private Enemy enemy;
     private Enemy.EnemyStats stats;
 
-    [SerializeField] bool crawler = true;
+    [SerializeField] bool crawler = true;           // If hatchling instead, no falling, jumping or rolling
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] float groundCheckDistance = .5f;
@@ -31,20 +31,22 @@ public class Crawler_Movement : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         stats = enemy.stats;
 
-        enemy.invulnerable = false;
+        enemy.Invulnerable = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        groundDetected = Physics2D.Raycast(enemy.groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-        shouldFall = !Physics2D.Raycast(enemy.fallCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-        wallDetected = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right, wallCheckDistance, whatIsGround);
-        playerDetectedAhead = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.aggroRange, playerLayer);
-        playerDetectedBehind = Physics2D.Raycast(enemy.backCheck.position, -Vector2.right * enemy.facingDirection, stats.aggroRange / 2f, playerLayer);
-        playerOnEnemy = Physics2D.Raycast(enemy.backCheck.position, Vector2.right * enemy.facingDirection, Vector2.Distance(enemy.wallCheck.position, enemy.backCheck.position), playerLayer);
-        playerInAttackRange = Physics2D.Raycast(enemy.wallCheck.position, Vector2.right * enemy.facingDirection, stats.attackRange, playerLayer);
-        canJump = Physics2D.Raycast(enemy.groundCheck.position, Vector2.down, jumpCheckDistance, whatIsGround);
+        groundDetected = Physics2D.Raycast(enemy.GroundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        // If ground is not detected directly under enemy
+        shouldFall = !Physics2D.Raycast(enemy.FallCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        wallDetected = Physics2D.Raycast(enemy.WallCheck.position, Vector2.right, wallCheckDistance, whatIsGround);
+        playerDetectedAhead = Physics2D.Raycast(enemy.WallCheck.position, Vector2.right * enemy.FacingDirection, stats.aggroRange, playerLayer);
+        playerDetectedBehind = Physics2D.Raycast(enemy.BackCheck.position, -Vector2.right * enemy.FacingDirection, stats.aggroRange / 2f, playerLayer);
+        // Check if player is within the space of the enemy
+        playerOnEnemy = Physics2D.Raycast(enemy.BackCheck.position, Vector2.right * enemy.FacingDirection, Vector2.Distance(enemy.WallCheck.position, enemy.BackCheck.position), playerLayer);
+        playerInAttackRange = Physics2D.Raycast(enemy.WallCheck.position, Vector2.right * enemy.FacingDirection, stats.attackRange, playerLayer);
+        canJump = Physics2D.Raycast(enemy.GroundCheck.position, Vector2.down, jumpCheckDistance, whatIsGround);
 
         if (crawler && shouldFall)
         {
@@ -55,10 +57,14 @@ public class Crawler_Movement : StateMachineBehaviour
         {
             enemy.Flip();
         }
+
+        // If coming up to a ledge
         if (!groundDetected && animator.GetFloat("hSpeed") != 0f)
         {
+            // If walking, flip
             if (animator.GetFloat("hSpeed") == stats.walkSpeed)
                 enemy.Flip();
+            // If running, stop
             else if (animator.GetFloat("hSpeed") == stats.runSpeed)
             {
                 rb.velocity = Vector2.zero;
@@ -67,7 +73,7 @@ public class Crawler_Movement : StateMachineBehaviour
         }
         else
         {
-            movement.Set(stats.walkSpeed * enemy.facingDirection, rb.velocity.y);
+            movement.Set(stats.walkSpeed * enemy.FacingDirection, rb.velocity.y);
             rb.velocity = movement;
             animator.SetFloat("hSpeed", stats.walkSpeed);
         }
@@ -75,12 +81,13 @@ public class Crawler_Movement : StateMachineBehaviour
         if (playerDetectedAhead)
         {
             animator.SetFloat("hSpeed", stats.runSpeed);
-            movement.Set(stats.runSpeed * enemy.facingDirection, rb.velocity.y);
+            movement.Set(stats.runSpeed * enemy.FacingDirection, rb.velocity.y);
             rb.velocity = movement;
 
+            // If enemy is a crawler, and ground is detected further below ledge
             if (crawler && !groundDetected && canJump)
             {
-                rb.AddForce(new Vector2(jumpDirection.x * enemy.facingDirection, jumpDirection.y), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(jumpDirection.x * enemy.FacingDirection, jumpDirection.y), ForceMode2D.Impulse);
                 animator.SetTrigger("jump");
             }
             else if ((!groundDetected && !canJump) || wallDetected)
@@ -93,13 +100,14 @@ public class Crawler_Movement : StateMachineBehaviour
         {
             enemy.Flip();
             animator.SetFloat("hSpeed", stats.runSpeed);
-            movement.Set(stats.runSpeed * enemy.facingDirection, rb.velocity.y);
+            movement.Set(stats.runSpeed * enemy.FacingDirection, rb.velocity.y);
             rb.velocity = movement;
 
         }
+        // Roll out of the way of the player
         else if (crawler && playerOnEnemy)
         {
-            movement.Set(stats.rollSpeed * enemy.facingDirection, rb.velocity.y);
+            movement.Set(stats.rollSpeed * enemy.FacingDirection, rb.velocity.y);
             rb.velocity = movement;
             AudioManager.Instance.PlaySound("Roll");
             animator.SetTrigger("roll");

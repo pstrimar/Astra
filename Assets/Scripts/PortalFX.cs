@@ -8,8 +8,10 @@ public class PortalFX : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().FindChildObject("Graphics").SetActive(false);
+            // Turn player graphics off when entering portal
+            collision.transform.Find("Graphics").gameObject.SetActive(false);
 
+            // Create portal effects
             Instantiate(portalFX, this.transform.position, portalFX.rotation);
         }
     }
