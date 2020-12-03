@@ -295,9 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e949abc4bed424cbbb0dae990973f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusIndicators: {fileID: 3747243996051242891}
-  upgradeMenuText: {fileID: 1403401589}
-  playerInfo: {fileID: 1283859790}
 --- !u!225 &2479716571311909102
 CanvasGroup:
   m_ObjectHideFlags: 0
