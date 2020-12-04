@@ -18,8 +18,8 @@ public class UIOverlay : MonoBehaviour
             player = GameObject.FindWithTag("Player");
         }
 
-        // Hide UI Overlay if player is disabled
-        if (!player.activeSelf && GameManager.RemainingLives > 0)
+        // Hide UI Overlay if player is disabled, but not if we won the game
+        if (!player.activeSelf && GameManager.RemainingLives > 0 && !GameManager.Instance.playerWonGame)
             canvasGroup.alpha = 0;
         else
             canvasGroup.alpha = 1;

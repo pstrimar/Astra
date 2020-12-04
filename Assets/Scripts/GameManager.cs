@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour, ISaveable
     [SerializeField] int startingCrystals;
     public static int Crystals;
     public bool playerHasCrashed;
+    public bool playerWonGame;
     private Transform spawnPoint;
     private bool upgradeMenuVisible;
 
@@ -114,8 +115,12 @@ public class GameManager : MonoBehaviour, ISaveable
         // Will trigger the opening cinematic
         playerHasCrashed = false;
 
+        playerWonGame = false;
+
         PlayerData.Instance.maxFuelAmount = startingFuel;
         PlayerData.Instance.maxHealth = startingHealth;
+
+        AudioManager.Instance.StopSound(endingCreditsSoundName);
     }
 
     private void HandleCrystalPickup(int crystalAmount)
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour, ISaveable
         PlayerData.Instance.maxFuelAmount = startingFuel;
         PlayerData.Instance.maxHealth = startingHealth;
         playerHasCrashed = false;
+        playerWonGame = true;
 
         AudioManager.Instance.StopAllSounds();
         AudioManager.Instance.PlaySound(endingCreditsSoundName);

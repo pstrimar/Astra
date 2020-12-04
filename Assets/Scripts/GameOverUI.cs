@@ -51,6 +51,7 @@ public class GameOverUI : MonoBehaviour
     public void Replay()
     {
         AudioManager.Instance.PlaySound(buttonPressSoundName);
+        AudioManager.Instance.PlaySound("AboveGround");
         savingWrapper.Delete();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
