@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
@@ -13,21 +14,25 @@ public class LivesCounterUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onLifeLost += HandleLifeLost;
+        GameManager.onLifeLost += HandleLifeCount;
+        GameOverUI.onReplay += HandleLifeCount;
+        GameOverUI.onRetry += HandleLifeCount;
     }
 
     private void OnDisable()
     {
-        GameManager.onLifeLost -= HandleLifeLost;
+        GameManager.onLifeLost -= HandleLifeCount;
+        GameOverUI.onReplay -= HandleLifeCount;
+        GameOverUI.onRetry -= HandleLifeCount;
     }
 
     private void Start()
     {
-        livesText.text = "LIVES: " + GameManager.RemainingLives;
+        HandleLifeCount();
     }
 
-    // Update Lives display when life lost
-    private void HandleLifeLost()
+    // Update Lives display when life lost or retry/replay
+    private void HandleLifeCount()
     {
         livesText.text = "LIVES: " + GameManager.RemainingLives;
     }

@@ -13,30 +13,30 @@ public class CrystalCounterUI : MonoBehaviour
 
     private void OnEnable()
     {
-        CrystalPickup.onCrystalPickedUp += HandleCrystalPickup;
-        GameOverUI.onReplay += HandleCrystalCount;
-        GameOverUI.onRetry += HandleCrystalCount;
+        CrystalPickup.onCrystalPickedUp += HandleCrystalCount;
+        GameOverUI.onReplay += HandleCrystalCountReset;
+        GameOverUI.onRetry += HandleCrystalCountReset;
     }
 
     private void OnDisable()
     {
-        CrystalPickup.onCrystalPickedUp -= HandleCrystalPickup;
-        GameOverUI.onReplay -= HandleCrystalCount;
-        GameOverUI.onRetry -= HandleCrystalCount;
+        CrystalPickup.onCrystalPickedUp -= HandleCrystalCount;
+        GameOverUI.onReplay -= HandleCrystalCountReset;
+        GameOverUI.onRetry -= HandleCrystalCountReset;
     }
 
     private void Start()
     {
-        crystalCount.text = "CRYSTALS: " + GameManager.Crystals;
+        HandleCrystalCountReset();
     }
 
     // Update crystal text when crystal picked up
-    private void HandleCrystalPickup(int obj)
+    private void HandleCrystalCount(int obj)
     {
         crystalCount.text = "CRYSTALS: " + GameManager.Crystals;
     }
 
-    private void HandleCrystalCount()
+    private void HandleCrystalCountReset()
     {
         crystalCount.text = "CRYSTALS: " + GameManager.Crystals;
     }
