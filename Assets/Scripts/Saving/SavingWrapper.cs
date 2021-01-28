@@ -22,7 +22,7 @@ public class SavingWrapper : MonoBehaviour
 
     public void AutoLoad()
     {
-        GetComponent<SavingSystem>().Load(defaultSaveFile);
+        SavingSystem.Instance.Load(defaultSaveFile);
     }
 
     public void PlayerLoad()
@@ -32,23 +32,23 @@ public class SavingWrapper : MonoBehaviour
 
     public void AutoSave()
     {
-        GetComponent<SavingSystem>().Save(defaultSaveFile);
+        SavingSystem.Instance.Save(defaultSaveFile);
     }
 
     public void PlayerSave()
     {
-        GetComponent<SavingSystem>().playerSave(playerSaveFile);
+        SavingSystem.Instance.playerSave(playerSaveFile);
     }
 
     public void Delete()
     {
-        GetComponent<SavingSystem>().Delete(defaultSaveFile);
-        GetComponent<SavingSystem>().Delete(playerSaveFile);
+        SavingSystem.Instance.Delete(defaultSaveFile);
+        SavingSystem.Instance.Delete(playerSaveFile);
     }
 
     IEnumerator LoadLastScene()
     {
-        yield return GetComponent<SavingSystem>().LoadLastScene(playerSaveFile);
+        yield return SavingSystem.Instance.LoadLastScene(playerSaveFile);
         Fader fader = FindObjectOfType<Fader>();
         fader.FadeOutImmediate();
         yield return fader.FadeIn(fadeInTime);

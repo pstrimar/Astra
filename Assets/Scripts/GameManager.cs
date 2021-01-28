@@ -3,10 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour, ISaveable
+public class GameManager : Singleton<GameManager>, ISaveable
 {
-    public static GameManager Instance;
-
     [SerializeField] int maxLives = 3;
     [SerializeField] int startingHealth = 100;
     [SerializeField] float startingFuel = 1f;
@@ -37,21 +35,6 @@ public class GameManager : MonoBehaviour, ISaveable
     public bool playerWonGame;
     private Transform spawnPoint;
     private bool upgradeMenuVisible;
-
-    private void Awake() 
-    {
-        if (Instance != null)
-        {
-            if (Instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Instance = this;
-        }
-    }    
 
     private void Start() 
     {

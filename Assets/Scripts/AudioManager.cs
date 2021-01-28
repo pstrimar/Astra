@@ -53,25 +53,13 @@ public class Sound
     }
 }
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    public static AudioManager Instance;
-
     [SerializeField] Sound[] sounds;
 
-    private void Awake() 
+    public override void Awake() 
     {
-        if (Instance != null) 
-        {
-            if (Instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Instance = this;
-        }
+        base.Awake();
 
         // Add all sounds as child gameobjects to audiomanager
         for (int i = 0; i < sounds.Length; i++)

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1469,7 +1469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5334778, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.547615, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1006315055}
@@ -2432,7 +2432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5228bcba97f74464886c0b5b9d7567fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 225558972}
 --- !u!61 &913438006
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3272,11 +3271,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 280584726}
+  impactParticles: {fileID: 0}
   startTime: 2
   repeatRate: 3.2
   speed: 15
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &1078749562
 Transform:
@@ -4015,11 +4014,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 1710533024}
+  impactParticles: {fileID: 0}
   startTime: 0
   repeatRate: 3.2
   speed: 15
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &1359482699
 Transform:
@@ -4854,7 +4853,7 @@ TerrainCollider:
   m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: d8a58b85829580d42a8105d04c87db54, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &1751347954
 Terrain:
   m_ObjectHideFlags: 0
@@ -10045,11 +10044,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3930828813874410241, guid: 6b52dcb5ebbc968479f14e25af95d46f,
     type: 3}
   spawnPoint: {fileID: 1622657185}
+  impactParticles: {fileID: 0}
   startTime: 1
   repeatRate: 3.2
   speed: 15
   hideBeforeDestroy: 1
-  impactParticles: {fileID: 0}
   impactSound: Splash
 --- !u!4 &1962799758
 Transform:
@@ -10377,7 +10376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091043237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5334778, y: 2.5251431, z: 3.517439}
+  m_LocalPosition: {x: -1.547615, y: 2.5251431, z: 3.517439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 429645820}

@@ -5,25 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SavingSystem : MonoBehaviour
+public class SavingSystem : Singleton<SavingSystem>
 {
-    public static SavingSystem instance;
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            if (instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            instance = this;
-        }
-    }
-
     public IEnumerator LoadLastScene(string saveFile)
     {
         Dictionary<string, object> state = LoadFile(saveFile);

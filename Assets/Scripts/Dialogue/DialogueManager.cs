@@ -4,31 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
-    public static DialogueManager Instance;
-
     public Text nameText;
     public Text dialogueText;
     public Animator anim;
     public static event Action<bool> onDialogue;
 
     private Queue<string> sentences;
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            if (Instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     void Start()
     {
